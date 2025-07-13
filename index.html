@@ -17,8 +17,8 @@
     <link rel="manifest" href="manifest.json">
     
     <!-- Theme Color für mobile Browser -->
-    <meta name="theme-color" content="#2c3e50">
-    <meta name="msapplication-TileColor" content="#2c3e50">
+    <meta name="theme-color" content="#0f0f11">
+    <meta name="msapplication-TileColor" content="#0f0f11">
     
     <style>
         * {
@@ -33,16 +33,39 @@
             color: #333;
             min-height: 100vh;
             
-            /* Fallback-Hintergrund falls Bild nicht lädt */
-            background-color: #2c3e50;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            
-            /* Hintergrundbild Einstellungen */
-            background-image: url('Images/Placeholder.bg.png');
+            /* Hintergrundfarbe */
+            background-color: #0f0f11;
+            background-attachment: scroll;
+            position: relative;
+        }
+
+        /* Seitenbilder */
+        .side-image-left {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 100vh;
+            background-image: url('images/BGleft.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-attachment: scroll; /* Fixed kann auf mobilen Geräten Probleme machen */
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .side-image-right {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 100vh;
+            background-image: url('images/BGrightPlaceholder.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+            pointer-events: none;
         }
 
         /* Overlay für bessere Lesbarkeit */
@@ -51,44 +74,9 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-        }
-
-        header {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 1rem 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #2c3e50;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #3498db;
+            margin: 0 220px; /* Platz für die Seitenbilder */
+            position: relative;
+            z-index: 2;
         }
 
         main {
@@ -100,7 +88,7 @@
         }
 
         .content {
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: #0f0f0f;
             padding: 3rem;
             border-radius: 10px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -138,18 +126,15 @@
             box-shadow: 0 8px 25px rgba(52, 152, 219, 0.6);
         }
 
-        footer {
-            background-color: rgba(44, 62, 80, 0.9);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            margin-top: auto;
-        }
-
         /* Responsive Design */
         @media (max-width: 768px) {
-            .nav-links {
+            .side-image-left,
+            .side-image-right {
                 display: none;
+            }
+            
+            .overlay {
+                margin: 0;
             }
             
             h1 {
@@ -165,69 +150,21 @@
                 background-attachment: scroll;
             }
         }
-        
-        /* Debug-Styles für GitHub Pages */
-        .debug-info {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            z-index: 1000;
-            display: none;
-        }
     </style>
-    
-    <script>
-        // Debug-Script für GitHub Pages
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Website geladen');
-            console.log('URL:', window.location.href);
-            
-            // Überprüfe ob Hintergrundbild geladen wird
-            const testImg = new Image();
-            testImg.onload = function() {
-                console.log('Hintergrundbild erfolgreich geladen');
-            };
-            testImg.onerror = function() {
-                console.log('Hintergrundbild konnte nicht geladen werden');
-                document.body.style.backgroundImage = 'none';
-            };
-            testImg.src = './Placeholder.bg.png';
-        });
-    </script>
 </head>
 <body>
-    <div class="debug-info" id="debugInfo">
-        Debug-Modus aktiviert
-    </div>
+    <!-- Seitenbilder -->
+    <div class="side-image-left"></div>
+    <div class="side-image-right"></div>
     
     <div class="overlay">
-        <header>
-            <nav>
-                <div class="logo">MeineLogo</div>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">Über uns</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#contact">Kontakt</a></li>
-                </ul>
-            </nav>
-        </header>
-
         <main>
             <div class="content">
-                <h1>Willkommen auf meiner Website</h1>
+                <h1>Willkommen bei BeyondTheCover</h1>
                 <p>Diese Website verwendet Ihr Hintergrundbild "Placeholder.bg.png". Das Bild wird als Vollbild-Hintergrund angezeigt und passt sich automatisch der Bildschirmgröße an.</p>
                 <a href="#" class="cta-button">Mehr erfahren</a>
             </div>
         </main>
-
-        <footer>
-            <p>&copy; 2025 Meine Website. Alle Rechte vorbehalten.</p>
-        </footer>
     </div>
 </body>
 </html>
