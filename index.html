@@ -59,26 +59,21 @@
             padding: 1rem 0;
         }
 
-        .logo-area img {
-            height: 2em; /* Passt sich der Schriftgröße an */
-            width: auto; /* Bleibt im richtigen Seitenverhältnis */
-            display: inline-block;
-            vertical-align: middle;
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            padding-left: 0;
         }
 
-
-        .logo {
-            font-family: HeadlineFont;
-            font-size: clamp(1rem, 1.2vw, 1.3rem);
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-decoration: none;
-            color: inherit;
+        .logo img {
+            height: clamp(1.2rem, 1.5vw, 1.5rem);
+            display: block;
         }
 
         @media (max-width: 480px) {
-            .logo {
-                font-size: clamp(0.9rem, 3vw, 1.1rem);
+            .logo img {
+                height: clamp(1rem, 3vw, 1.2rem);
             }
         }
         
@@ -746,11 +741,10 @@
 </head>
 <body>
     <header>
-        <nav class="container">
-            <div class="logo-area">
-                <a href="#"><img src="images/SubMarkLogo.png" alt="Logo"></a>
-                <a href="#" class="logo">BeyondTheCover</a>
-            </div>
+        <nav>
+            <a href="#" class="logo">
+                <img src="images/MainLogo.png" alt="Main Logo">
+            </a>
 
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
