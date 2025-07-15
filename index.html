@@ -167,6 +167,14 @@
             top: 105%;
        }
 
+       .btn-cart[data-quantity="0"] .quantity {
+            display: none;
+       }
+
+       .btn-cart:not([data-quantity="0"]) .quantity {
+            display: flex;
+       }
+
 
 
         /* Hero Section */
