@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINIMAL STORE</title>
+    <title>BTC</title>
     <style>
 
         @font-face {
@@ -56,11 +56,23 @@
             padding: 1rem 0;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: #fff;
+
+        /* Logo */
+        .mobile {
+            display: none;
+        }
+
+        .desktop {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .mobile {
+                display: block;
+            }
+            .desktop {
+                display: none;
+            }
         }
 
         .nav-links {
@@ -728,7 +740,8 @@
 <body>
     <header>
         <nav class="container">
-            <div class="logo">MINIMAL</div>
+            <img src="images/logos/SimplifiedLogo.png" class="mobile" />
+            <img src="images/logos/MainLogo.png" class="desktop" />
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#products">Products</a></li>
