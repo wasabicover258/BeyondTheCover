@@ -167,14 +167,7 @@
             top: 105%;
        }
 
-       .btn-cart[data-quantity="0"] .quantity {
-            display: none;
-       }
-
-       .btn-cart:not([data-quantity="0"]) .quantity {
-            display: flex;
-       }
-
+       
 
 
         /* Hero Section */
@@ -1171,7 +1164,7 @@
             
             cartCount += quantity;
             document.getElementById('cart-count').textContent = cartCount;
-            document,getElementById('btn-cart').setAttribute('data-quantity', cartCount);
+            document.getElementById('btn-cart').setAttribute('data-quantity', cartCount);
             
             // Success feedback
             const button = document.querySelector('.add-to-cart-modal');
