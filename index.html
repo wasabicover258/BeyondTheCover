@@ -54,13 +54,6 @@
             box-sizing: border-box; /* Damit das Padding nicht die Höhe aufbläht */
         }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
 
         /* Logo */
         .logo {
@@ -84,6 +77,15 @@
             .desktop {
                 display: none;
             }
+        }
+
+        nav {
+            height: 100%;
+            display: flex;
+            justify-content: space between;
+            align-items: center;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
 
         .nav-links {
@@ -750,7 +752,7 @@
 </head>
 <body>
     <header>
-        <nav class="header">
+        <nav class="navigation">
             <img src="images/logos/SimplifiedLogo.png" class="logo mobile" />
             <img src="images/logos/MainLogo.png" class="logo desktop" />
             <ul class="nav-links">
