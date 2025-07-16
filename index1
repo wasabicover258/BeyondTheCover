@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BTC</title>
+    
+    <link rel="icon" type="image/x-icon" href="images/favicons/Favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/Fav32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/Fav16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/FavAppleTouch.png">
+    <link rel="android-chrome-icon" sizes="192x192" href="images/favicons/Fav192.png">
+    <link rel="android-chrome-icon" sizes="512x512" href="images/favicons/Fav512.png">
+    
     <style>
 
         @font-face {
@@ -13,9 +21,21 @@
         }
 
         @font-face {
-           font-family: 'MainFont';
+           font-family: 'MainFont1';
            src: url('fonts/Mavoble.ttf') format('truetype');
            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'GoofyFont';
+            src: url('fonts/Iceland-Regular.ttf') format('truetype');
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'MainFont';
+            src: url('fonts/Relevance-trial-Regular.ttf') format('truetype');
+            font-weight: 400;
         }
 
         * {
@@ -30,12 +50,39 @@
             color: #ffffff;
             min-height: 100vh;
             line-height: 1.6;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
 
         .container {
-            max-width: 1200px;
+            width: 70vw;
+            max-width: 70vw;
+            overflow-x: hidden;
+            box-sizing: border-box;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 20px 20px;
+            font-size: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 100vw;
+                max-width: 100vw;
+            }
+        }
+
+        .container * {
+            box-sizing: border-box;
+            word-break: break-word;
+        }
+
+        .container h2 {
+            font-family: 'HeadlineFont';
+            font-size: 30%;
+        }
+
+        .container p {
+            font-family: 'MainFont';
         }
 
         /* Header */
@@ -113,33 +160,62 @@
             color: #fff;
         }
 
-        .cart-icon {
+        .btn-cart {
             position: relative;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 50%;
-            transition: background 0.3s ease;
-        }
-
-        .cart-icon:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #ff6b6b;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 0.8rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            border: none;
+            background-color: transparent;
         }
+
+        .btn-cart::after {
+            content: attr(data-quantity);
+            position: absolute;
+            font-size: 12px;
+            color: white;
+            font-family: 'Lucida Sans', sans-serif;
+            opacity: 0;
+            visibility: hidden;
+            transition: .2s linear;
+            top: 115%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2px 5px;
+            border-radius: 5px;
+       }
+
+       .icon-cart {
+            width: 24px;
+            height: 30px;
+            transition: .2s linear;
+       }
+
+       .icon-cart path {
+            fill: #005F4E;
+            transition: .2s linear;
+       }
+
+       .btn-cart:hover > .icon-cart {
+            transform: scale(1.2);
+       }
+
+       .btn-cart:hover > .icon-cart path {
+            fill: white;
+       }
+
+       .btn-cart:hover::after {
+            visibility: visible;
+            opacity: 1;
+            top: 105%;
+       }
+
+       
+
 
         /* Hero Section */
         .hero {
@@ -149,8 +225,8 @@
             background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
         }
 
-        .hero h1 {
-            font-size: 3rem;
+        .hero h2 {
+            font-size: 2vw;
             font-weight: 300;
             margin-bottom: 1rem;
             letter-spacing: 3px;
@@ -161,9 +237,17 @@
         }
 
         .hero p {
-            font-size: 1.2rem;
-            color: #888;
+            font-size: 1vw;
+            color: #005F4E;
             margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero p {
+                font-size: 3vw;
+                color: #005F4E;
+                margin-bottom: 2rem;
+            }
         }
 
         /* Info Sections */
@@ -202,13 +286,14 @@
 
         .info-text p {
             font-size: 1.1rem;
-            color: #ccc;
+            font-family: 'MainFont';
+            color: white;
             margin-bottom: 1.5rem;
             line-height: 1.8;
         }
 
         .info-text .highlight {
-            color: #fff;
+            color: #005F4E;
             font-weight: 600;
         }
 
@@ -266,7 +351,7 @@
         .stat-number {
             font-size: 3rem;
             font-weight: 700;
-            color: #fff;
+            color: #005F4E;
             margin-bottom: 0.5rem;
         }
 
@@ -284,10 +369,22 @@
 
         .products h2 {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 3vw;
             font-weight: 300;
             margin-bottom: 3rem;
             color: #fff;
+        }
+
+        @media (max-width: 768px) {
+            .products h2 {
+                font-size: 5vw;
+            }
+
+            .products {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
         }
 
         .product-grid {
@@ -295,6 +392,11 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 3rem;
             margin-top: 3rem;
+        }
+
+        .product-grid h3 {
+            font-family: 'HeadlineFont';
+            font-size: 40%;
         }
 
         .product-card {
@@ -395,11 +497,13 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(10px);
+            box-sizing: border-box;
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 2000;
             opacity: 0;
+            overflow-x: hidden;
             transition: opacity 0.3s ease;
         }
 
@@ -411,14 +515,35 @@
         .modal-content {
             background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
             border-radius: 20px;
-            max-width: 900px;
-            width: 90%;
+            max-width: 100%;
+            width: 60%;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             animation: modalSlideIn 0.3s ease;
+            scrollbar-width: none;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+                border-radius: 20px;
+                max-width: 100%;
+                width: 100%;
+                max-height: 90vh;
+                overflow-y: auto;
+                position: relative;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+                animation: modalSlideIn 0.3s ease;
+                scrollbar-width: none;
+            }
+        }
+
+        .modal-content::-webkit-scrollbar{
+            display: none;
         }
 
         @keyframes modalSlideIn {
@@ -454,16 +579,52 @@
         }
 
         .modal-body {
-            display: grid;
+            display: flex;
+            flex-direction: column;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
             padding: 2rem;
+            box-sizing: border-box;
         }
 
-        .modal-images {
+        @media (max-width: 768px) {
+            .modal-body * {
+                max-width: 100%;
+                box-sizing: border-box;
+                word-break: break-word;
+            }
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-colums: 1fr 1fr;
+            gap: 0.5rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .modal-images img,
+        .quantity-input {
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            max-width: 100%;
+            height: auto;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 100%
+                max-width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .main-image {
@@ -526,6 +687,16 @@
             padding: 1rem 0;
         }
 
+        .modal-info h2 {
+            font-family: 'HeadlineFont';
+        }
+
+        @media (max-width: 768px) {
+            .modal-info h2 {
+                font-size: 5vw;
+            }
+        }
+
         .modal-title {
             font-size: 2.5rem;
             font-weight: 300;
@@ -563,7 +734,7 @@
             content: '✓';
             position: absolute;
             left: 0;
-            color: #4CAF50;
+            color: #005F4E;
             font-weight: bold;
         }
 
@@ -679,6 +850,14 @@
             color: #666;
         }
 
+        @media (max-width: 768px) {
+            .btn-cart .quantity {
+                color: #005F4E !important;
+                -webkit-text-fill-color: #005F4E !important;
+                text-decoration: none !important;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -770,8 +949,13 @@
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="cart-icon" onclick="toggleCart()">
-                🛒
-                <span class="cart-count" id="cart-count">0</span>
+                <button data-quantity="0" class="btn-cart">
+                          <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="30.52" width="24.38" xmlns="http://www.w3.org/2000/svg">
+                            <title>icon-cart</title>
+                            <path transform="translate(-3.62 -0.85)" d="M28,27.3,26.24,7.51a.75.75,0,0,0-.76-.69h-3.7a6,6,0,0,0-12,0H6.13a.76.76,0,0,0-.76.69L3.62,27.3v.07a4.29,4.29,0,0,0,4.52,4H23.48a4.29,4.29,0,0,0,4.52-4ZM15.81,2.37a4.47,4.47,0,0,1,4.46,4.45H11.35a4.47,4.47,0,0,1,4.46-4.45Zm7.67,27.48H8.13a2.79,2.79,0,0,1-3-2.45L6.83,8.34h3V11a.76.76,0,0,0,1.52,0V8.34h8.92V11a.76.76,0,0,0,1.52,0V8.34h3L26.48,27.4a2.79,2.79,0,0,1-3,2.44Zm0,0"></path>
+                          </svg>
+                          <span class="quantity" id="cart-count">0</span>
+                 </button>
             </div>
         </nav>
     </header>
@@ -779,8 +963,8 @@
     <main>
         <section class="hero" id="home">
             <div class="container">
-                <h1>MINIMAL STORE</h1>
-                <p>Entdecke unsere kuratierte Auswahl an Premium-Produkten</p>
+                <h2>BeyondTheCover</h2>
+                <p>Eyes on power, profits by the hour!</p>
             </div>
         </section>
 
@@ -798,20 +982,20 @@
 
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-number">50k+</div>
-                        <div class="stat-label">Zufriedene Kunden</div>
+                        <div class="stat-number">126+</div>
+                        <div class="stat-label">Persons of interest</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">99%</div>
-                        <div class="stat-label">Kundenzufriedenheit</div>
+                        <div class="stat-number">5 years</div>
+                        <div class="stat-label">of experience</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">24/7</div>
-                        <div class="stat-label">Premium Support</div>
+                        <div class="stat-label">Whale Tracking</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">48h</div>
-                        <div class="stat-label">Schneller Versand</div>
+                        <div class="stat-label">Delivery</div>
                     </div>
                 </div>
             </div>
@@ -819,12 +1003,12 @@
 
         <section class="info-section">
             <div class="container">
-                <div class="info-content reverse">
+                <div class="info-content">
                     <div class="info-text">
                         <h3>Nachhaltigkeit im Fokus</h3>
-                        <p>Wir glauben an <span class="highlight">verantwortungsvolles Handeln</span> und setzen auf nachhaltige Materialien und faire Produktionsbedingungen. Jeder Kauf unterstützt unsere Mission für eine bessere Zukunft.</p>
-                        <p>Unsere Verpackungen sind zu 100% recycelbar und wir arbeiten nur mit Partnern zusammen, die unsere <span class="highlight">Werte teilen</span>.</p>
-                        <p>Qualität bedeutet für uns auch Langlebigkeit – Produkte, die ein Leben lang halten.</p>
+                        <p>Wir kuratieren nur die <span class="highlight">besten Produkte</span> für anspruchsvolle Kunden. Jedes Produkt wird sorgfältig ausgewählt und getestet, um höchste Qualitätsstandards zu gewährleisten.</p>
+                        <p>Unsere Philosophie basiert auf <span class="highlight">Minimalismus, Funktionalität und zeitlosem Design</span>. Weniger ist mehr – aber das Wenige muss perfekt sein.</p>
+                        <p>Entdecken Sie, wie unsere Produkte Ihren Alltag bereichern und vereinfachen können.</p>
                     </div>
                     <div class="info-image">🌱</div>
                 </div>
@@ -836,9 +1020,9 @@
                 <div class="info-content">
                     <div class="info-text">
                         <h3>Premium Experience</h3>
-                        <p>Von der ersten Berührung bis zum letzten Detail – wir schaffen <span class="highlight">unvergessliche Erlebnisse</span>. Unser Kundenservice ist rund um die Uhr für Sie da.</p>
-                        <p>Kostenloser Versand, 30 Tage Rückgaberecht und eine <span class="highlight">lebenslange Garantie</span> auf alle unsere Produkte zeigen unser Vertrauen in die Qualität.</p>
-                        <p>Werden Sie Teil unserer exklusiven Community und erhalten Sie Zugang zu limitierten Editionen und besonderen Angeboten.</p>
+                        <p>Wir kuratieren nur die <span class="highlight">besten Produkte</span> für anspruchsvolle Kunden. Jedes Produkt wird sorgfältig ausgewählt und getestet, um höchste Qualitätsstandards zu gewährleisten.</p>
+                        <p>Unsere Philosophie basiert auf <span class="highlight">Minimalismus, Funktionalität und zeitlosem Design</span>. Weniger ist mehr – aber das Wenige muss perfekt sein.</p>
+                        <p>Entdecken Sie, wie unsere Produkte Ihren Alltag bereichern und vereinfachen können.</p>
                     </div>
                     <div class="info-image">✨</div>
                 </div>
@@ -847,16 +1031,16 @@
 
         <section class="products" id="products">
             <div class="container">
-                <h2>Unsere Produkte</h2>
+                <h2>Our products</h2>
                 <div class="product-grid">
                     <div class="product-card">
                         <div class="product-image">📱</div>
                         <div class="product-info">
-                            <h3 class="product-name">Premium Smartphone</h3>
-                            <p class="product-description">Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle.</p>
-                            <div class="product-price">€899</div>
+                            <h3 class="product-name">Diver</h3>
+                            <p class="product-description">Dip your toe through the surface.</p>
+                            <div class="product-price">€2</div>
                             <button class="view-product" onclick="openProductModal('premium-smartphone')">
-                                Details anzeigen
+                                Show details
                             </button>
                         </div>
                     </div>
@@ -864,11 +1048,11 @@
                     <div class="product-card">
                         <div class="product-image">🎧</div>
                         <div class="product-info">
-                            <h3 class="product-name">Wireless Headphones</h3>
-                            <p class="product-description">Kristallklarer Sound mit aktiver Geräuschunterdrückung. Für das ultimative Hörerlebnis.</p>
-                            <div class="product-price">€299</div>
+                            <h3 class="product-name">Submarine</h3>
+                            <p class="product-description">Dive right in and follow the whales.</p>
+                            <div class="product-price">€10</div>
                             <button class="view-product" onclick="openProductModal('wireless-headphones')">
-                                Details anzeigen
+                                Show details
                             </button>
                         </div>
                     </div>
@@ -876,11 +1060,11 @@
                     <div class="product-card">
                         <div class="product-image">⌚</div>
                         <div class="product-info">
-                            <h3 class="product-name">Smart Watch</h3>
-                            <p class="product-description">Fitness-Tracking und Smart-Features in einem stilvollen, minimalistischen Design.</p>
-                            <div class="product-price">€399</div>
+                            <h3 class="product-name">Moses</h3>
+                            <p class="product-description">Coming soon!</p>
+                            <div class="product-price">€ ~</div>
                             <button class="view-product" onclick="openProductModal('smart-watch')">
-                                Details anzeigen
+                                Show details
                             </button>
                         </div>
                     </div>
@@ -891,7 +1075,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 MINIMAL STORE. Alle Rechte vorbehalten.</p>
+            <p>&copy; 2025 BEYONDTHECOVER. All rights preserved.</p>
         </div>
     </footer>
 
@@ -926,7 +1110,7 @@
                     </ul>
                     
                     <div class="quantity-selector">
-                        <span class="quantity-label">Menge:</span>
+                        <span class="quantity-label">Quantity:</span>
                         <div class="quantity-controls">
                             <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
                             <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="10">
@@ -935,7 +1119,7 @@
                     </div>
                     
                     <button class="add-to-cart-modal" onclick="addToCartFromModal()">
-                        In den Warenkorb
+                        Add to cart
                     </button>
                     
                     <div class="product-specs">
@@ -1130,12 +1314,13 @@
             
             cartCount += quantity;
             document.getElementById('cart-count').textContent = cartCount;
+            document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
             
             // Success feedback
             const button = document.querySelector('.add-to-cart-modal');
             const originalText = button.textContent;
             button.textContent = `${quantity}x Hinzugefügt!`;
-            button.style.background = 'linear-gradient(45deg, #27ae60, #2ecc71)';
+            button.style.background = 'linear-gradient(#005F4E)';
             
             setTimeout(() => {
                 button.textContent = originalText;
