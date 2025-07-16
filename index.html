@@ -525,6 +525,21 @@
             animation: modalSlideIn 0.3s ease;
         }
 
+        @media (max-width: 768px) {
+            .modal-content {
+                background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+                border-radius: 20px;
+                max-width: 100%;
+                width: 60%;
+                max-height: 90vh;
+                overflow-y: auto;
+                position: relative;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+                animation: modalSlideIn 0.3s ease;
+            }
+        }
+
         @keyframes modalSlideIn {
             from {
                 transform: translateY(50px);
