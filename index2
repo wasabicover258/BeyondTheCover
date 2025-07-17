@@ -81,9 +81,6 @@
             font-size: 30%;
         }
 
-        .container p {
-            font-family: 'MainFont';
-        }
 
         /* Header */
         header {
@@ -311,6 +308,16 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        .info-igae img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 0;
+        }
+
         .info-image::before {
             content: '';
             position: absolute;
@@ -458,6 +465,7 @@
             color: #aaa;
             margin-bottom: 1rem;
             font-size: 0.9rem;
+            font-family: 'MainFont';
         }
 
         .product-price {
@@ -516,13 +524,34 @@
             background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
             border-radius: 20px;
             max-width: 100%;
-            width: 90%;
+            width: 60%;
             max-height: 90vh;
             overflow-y: auto;
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             animation: modalSlideIn 0.3s ease;
+            scrollbar-width: none;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+                border-radius: 20px;
+                max-width: 100%;
+                width: 100%;
+                max-height: 90vh;
+                overflow-y: auto;
+                position: relative;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+                animation: modalSlideIn 0.3s ease;
+                scrollbar-width: none;
+            }
+        }
+
+        .modal-content::-webkit-scrollbar{
+            display: none;
         }
 
         @keyframes modalSlideIn {
@@ -666,6 +695,16 @@
             padding: 1rem 0;
         }
 
+        .modal-info h2 {
+            font-family: 'HeadlineFont';
+        }
+
+        @media (max-width: 768px) {
+            .modal-info h2 {
+                font-size: 5vw;
+            }
+        }
+
         .modal-title {
             font-size: 2.5rem;
             font-weight: 300;
@@ -703,7 +742,7 @@
             content: '✓';
             position: absolute;
             left: 0;
-            color: #4CAF50;
+            color: #005F4E;
             font-weight: bold;
         }
 
@@ -817,6 +856,14 @@
             padding: 2rem 0;
             text-align: center;
             color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .btn-cart .quantity {
+                color: #005F4E !important;
+                -webkit-text-fill-color: #005F4E !important;
+                text-decoration: none !important;
+            }
         }
 
         /* Responsive */
@@ -938,7 +985,13 @@
                         <p>Unsere Philosophie basiert auf <span class="highlight">Minimalismus, Funktionalität und zeitlosem Design</span>. Weniger ist mehr – aber das Wenige muss perfekt sein.</p>
                         <p>Entdecken Sie, wie unsere Produkte Ihren Alltag bereichern und vereinfachen können.</p>
                     </div>
-                    <div class="info-image">🎯</div>
+                    <div class="info-image">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="images/Image1.2.png">
+                            <source media="(min-width: 769px)" srcset="images/Image1.1.png">
+                            <img src="images/Image1.1.png"> alt="Your Browser doesnt fit">
+                        </picture>
+                    </div>
                 </div>
 
                 <div class="stats-grid">
@@ -999,7 +1052,7 @@
                         <div class="product-info">
                             <h3 class="product-name">Diver</h3>
                             <p class="product-description">Dip your toe through the surface.</p>
-                            <div class="product-price">€2</div>
+                            <div class="product-price">€2/mo</div>
                             <button class="view-product" onclick="openProductModal('premium-smartphone')">
                                 Show details
                             </button>
@@ -1011,7 +1064,7 @@
                         <div class="product-info">
                             <h3 class="product-name">Submarine</h3>
                             <p class="product-description">Dive right in and follow the whales.</p>
-                            <div class="product-price">€10</div>
+                            <div class="product-price">€10/mo</div>
                             <button class="view-product" onclick="openProductModal('wireless-headphones')">
                                 Show details
                             </button>
@@ -1057,7 +1110,7 @@
                 
                 <div class="modal-info">
                     <h2 class="modal-title" id="modal-title">Premium Smartphone</h2>
-                    <div class="modal-price" id="modal-price">€899</div>
+                    <div class="modal-price" id="modal-price">€ ~</div>
                     <p class="modal-description" id="modal-description">
                         Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle.
                     </p>
@@ -1117,7 +1170,7 @@
         const products = {
             'premium-smartphone': {
                 name: 'Premium Smartphone',
-                price: 899,
+                price: 2,
                 icon: '📱',
                 description: 'Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle. Dieses Premium-Smartphone vereint innovative Features mit zeitlosem Design und bietet eine unvergleichliche Benutzererfahrung.',
                 features: [
@@ -1139,7 +1192,7 @@
             },
             'wireless-headphones': {
                 name: 'Wireless Headphones',
-                price: 299,
+                price: 10,
                 icon: '🎧',
                 description: 'Kristallklarer Sound mit aktiver Geräuschunterdrückung. Für das ultimative Hörerlebnis. Diese Premium-Kopfhörer bieten studioqualitativen Sound und modernste Noise-Cancelling-Technologie.',
                 features: [
@@ -1161,7 +1214,7 @@
             },
             'smart-watch': {
                 name: 'Smart Watch',
-                price: 399,
+                price: 0,
                 icon: '⌚',
                 description: 'Fitness-Tracking und Smart-Features in einem stilvollen, minimalistischen Design. Diese Smartwatch ist der perfekte Begleiter für Sport, Gesundheit und den digitalen Alltag.',
                 features: [
@@ -1189,7 +1242,7 @@
 
             // Update modal content
             document.getElementById('modal-title').textContent = currentProduct.name;
-            document.getElementById('modal-price').textContent = '€' + currentProduct.price;
+            document.getElementById('modal-price').innerHTML = '€' + currentProduct.price + '<small>/mo</small>';
             document.getElementById('modal-description').textContent = currentProduct.description;
             document.getElementById('main-image').textContent = currentProduct.icon;
 
@@ -1281,7 +1334,7 @@
             const button = document.querySelector('.add-to-cart-modal');
             const originalText = button.textContent;
             button.textContent = `${quantity}x Hinzugefügt!`;
-            button.style.background = 'linear-gradient(45deg, #27ae60, #2ecc71)';
+            button.style.background = 'linear-gradient(#005F4E)';
             
             setTimeout(() => {
                 button.textContent = originalText;
