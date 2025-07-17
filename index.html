@@ -1226,7 +1226,7 @@
 
             // Update modal content
             document.getElementById('modal-title').textContent = currentProduct.name;
-            document.getElementById('modal-price').textContent = '€' + currentProduct.price + '/mo';
+            document.getElementById('modal-price').innerHTML = '€' + currentProduct.price + '<small>/mo</small>';
             document.getElementById('modal-description').textContent = currentProduct.description;
             document.getElementById('main-image').textContent = currentProduct.icon;
 
