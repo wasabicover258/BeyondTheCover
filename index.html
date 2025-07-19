@@ -1438,9 +1438,9 @@
                 e.preventDefault();
                 const href = this.getAttribute('href');
                 const target = document.querySelector(href);
-                if (target) {
-                    target.scrollTo({
-                        top: 0;
+                if (href === 'home') {
+                    window.scrollto({
+                        top: 0,
                         behavior: 'smooth',
                         block: 'start'
                      });
