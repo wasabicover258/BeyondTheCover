@@ -81,65 +81,6 @@
             font-size: 30%;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            header {
-                padding: 0 10px;
-                height: 60px; /* ggf. etwas kleiner */
-                display: flex;
-                justify-content: space-between; /* gleichmäßige Verteilung */
-                align-items: center;
-            }
-
-            /* Logo links fixieren */
-            .logo.mobile {
-                display: block; /* Mobile Logo anzeigen */
-                max-height: 40px;
-                width: auto;
-                flex: 0 0 auto; /* keine Vergrößerung */
-            }
-
-            .logo.desktop {
-                display: none; /* Desktop Logo ausblenden */
-            }
-
-            /* Navigation neben Logo */
-            nav.navigation {
-                flex: 1 1 auto; /* Nav nimmt den freien Raum zwischen Logo und Cart */
-                display: flex;
-                justify-content: center; /* Navigation zentrieren */
-                align-items: center;
-                padding: 0; 
-            }
-
-            /* Nav-Links kleiner und kompakter */
-            .nav-links {
-                gap: 1rem; /* etwas enger */
-                font-size: 0.8rem; /* Schriftgröße kleiner */
-                flex-wrap: nowrap;
-                overflow-x: auto; /* Scrollbar falls zu lang */
-            }
-
-            /* Links im Nav etwas kleiner */
-            .nav-links a {
-                font-size: 0.85rem;
-                white-space: nowrap;
-            }
-
-            /* Warenkorb rechts fixieren */
-            .btn-cart {
-                flex: 0 0 auto;
-                width: 40px;
-                height: 40px;
-            }
-
-            /* Falls nötig, Icon etwas kleiner */
-            .icon-cart {
-                width: 20px;
-                height: 25px;
-            }
-        }
-
 
         /* Header */
         header {
@@ -172,6 +113,105 @@
         .desktop {
             display: block;
         }
+
+        @media (max-width: 768px) {
+            .mobile {
+                display: block;
+            }
+            .desktop {
+                display: none;
+            }
+        }
+
+        nav {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .navigation {
+            width: 100%;
+            max-width: none;
+            margin: 0;
+            padding 0 20px;
+            box-sizing: border-box;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .btn-cart {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            border: none;
+            background-color: transparent;
+        }
+
+        .btn-cart::after {
+            content: attr(data-quantity);
+            position: absolute;
+            font-size: 12px;
+            color: white;
+            font-family: 'Lucida Sans', sans-serif;
+            opacity: 0;
+            visibility: hidden;
+            transition: .2s linear;
+            top: 115%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2px 5px;
+            border-radius: 5px;
+       }
+
+       .icon-cart {
+            width: 24px;
+            height: 30px;
+            transition: .2s linear;
+       }
+
+       .icon-cart path {
+            fill: #005F4E;
+            transition: .2s linear;
+       }
+
+       .btn-cart:hover > .icon-cart {
+            transform: scale(1.2);
+       }
+
+       .btn-cart:hover > .icon-cart path {
+            fill: white;
+       }
+
+       .btn-cart:hover::after {
+            visibility: visible;
+            opacity: 1;
+            top: 105%;
+       }
+
+       
 
 
         /* Hero Section */
@@ -838,6 +878,10 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
             .hero h1 {
                 font-size: 2rem;
             }
