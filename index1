@@ -153,7 +153,8 @@
 
         @media (max-width: 768px) {
             .nav-links {
-                gap: 5px;
+                row-gap: 7px;
+                column-gap: 15px;
                 font-size: 3vw;
                 display: grid;
                 grid-template-columns: repeat(2, 1fr);
@@ -976,8 +977,8 @@
             <img src="images/logos/MainLogo.png" class="logo desktop" />
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#products">Products</a></li>
                 <li><a href="about.html#about">About</a></li>
+                <li><a href="#products">Products</a></li>
                 <li><a href="contact.html#contact">Contact</a></li>
             </ul>
             <div class="cart-icon" onclick="toggleCart()">
