@@ -211,6 +211,66 @@
             top: 105%;
        }
 
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 0 10px;
+                height: 60px; /* ggf. etwas kleiner */
+                display: flex;
+                justify-content: space-between; /* gleichmäßige Verteilung */
+                align-items: center;
+            }
+
+            /* Logo links fixieren */
+            .logo.mobile {
+                display: block; /* Mobile Logo anzeigen */
+                max-height: 40px;
+                width: auto;
+                flex: 0 0 auto; /* keine Vergrößerung */
+            }
+
+            .logo.desktop {
+                display: none; /* Desktop Logo ausblenden */
+            }
+
+            /* Navigation neben Logo */
+            nav.navigation {
+                flex: 1 1 auto; /* Nav nimmt den freien Raum zwischen Logo und Cart */
+                display: flex;
+                justify-content: center; /* Navigation zentrieren */
+                align-items: center;
+                padding: 0; 
+            }
+
+            /* Nav-Links kleiner und kompakter */
+            .nav-links {
+                gap: 1rem; /* etwas enger */
+                font-size: 0.8rem; /* Schriftgröße kleiner */
+                flex-wrap: nowrap;
+                overflow-x: auto; /* Scrollbar falls zu lang */
+            }
+
+            /* Links im Nav etwas kleiner */
+            .nav-links a {
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+
+            /* Warenkorb rechts fixieren */
+            .btn-cart {
+                flex: 0 0 auto;
+                width: 40px;
+                height: 40px;
+            }
+
+            /* Falls nötig, Icon etwas kleiner */
+            .icon-cart {
+                width: 20px;
+                height: 25px;
+            }
+        }
+
+
        
 
 
