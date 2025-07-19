@@ -211,6 +211,66 @@
             top: 105%;
        }
 
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 0 10px;
+                height: 60px; /* ggf. etwas kleiner */
+                display: flex;
+                justify-content: space-between; /* gleichmäßige Verteilung */
+                align-items: center;
+            }
+
+            /* Logo links fixieren */
+            .logo.mobile {
+                display: block; /* Mobile Logo anzeigen */
+                max-height: 40px;
+                width: auto;
+                flex: 0 0 auto; /* keine Vergrößerung */
+            }
+
+            .logo.desktop {
+                display: none; /* Desktop Logo ausblenden */
+            }
+
+            /* Navigation neben Logo */
+            nav.navigation {
+                flex: 1 1 auto; /* Nav nimmt den freien Raum zwischen Logo und Cart */
+                display: flex;
+                justify-content: center; /* Navigation zentrieren */
+                align-items: center;
+                padding: 0; 
+            }
+
+            /* Nav-Links kleiner und kompakter */
+            .nav-links {
+                gap: 1rem; /* etwas enger */
+                font-size: 0.8rem; /* Schriftgröße kleiner */
+                flex-wrap: nowrap;
+                overflow-x: auto; /* Scrollbar falls zu lang */
+            }
+
+            /* Links im Nav etwas kleiner */
+            .nav-links a {
+                font-size: 0.85rem;
+                white-space: nowrap;
+            }
+
+            /* Warenkorb rechts fixieren */
+            .btn-cart {
+                flex: 0 0 auto;
+                width: 40px;
+                height: 40px;
+            }
+
+            /* Falls nötig, Icon etwas kleiner */
+            .icon-cart {
+                width: 20px;
+                height: 25px;
+            }
+        }
+
+
        
 
 
@@ -339,7 +399,16 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 3rem;
-            margin-top: 4rem;
+            margin-top: 1rem;
+            padding-left: 100px;
+            padding-right: 100px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                padding-left: 0px;
+                padding-right: 0px;
+            }
         }
 
         .stat-card {
@@ -954,8 +1023,8 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#products">Products</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="about.html#about">About</a></li>
+                <li><a href="contact.html#contact">Contact</a></li>
             </ul>
             <div class="cart-icon" onclick="toggleCart()">
                 <button data-quantity="0" class="btn-cart">
@@ -968,6 +1037,9 @@
             </div>
         </nav>
     </header>
+
+    <div id="aboutOverlay" class="overlay">About Content</div>
+    <div id="contactOverlay" class="overlay">Contact Content</div>
 
     <main>
         <section class="hero" id="home">
@@ -985,18 +1057,54 @@
                         <p>You're meant to believe the richest, most powerful people are brilliant traders  who just live a wealthy lifestyle.</p>
                         <p>History <span class="highlight">disproves</span> this. <br>It shows the opposite:</p>
                         <p>Great power <span class="highlight">always corrupts</span>. Take Julius Caesar for example. His wealth and ambition crushed the Republic for personal glory.</p>
-                        <p>Today's billionaire elites are <span class="highlight"> no different</span>, rigging systems against you for <span class="highlight"> their own profit.</span>. <br>And why wouldn't they?</p>
+                        <p>Today's billionaire elites are <span class="highlight"> no different</span>, rigging systems against you for <span class="highlight"> their own profit.<br>And why wouldn't they?</span>.</p>
                     </div>
                     <div class="info-image">
                         <picture>
                             <source media="(max-width: 768px)" srcset="images/Image1.2.png">
                             <source media="(min-width: 769px)" srcset="images/Image1.1.png">
-                            <img src="images/Image1.1.png"> alt="Your Browser doesnt fit">
+                            <img src="images/Image1.1.png"> alt="Your Browser doesn't fit">
                         </picture>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="stats-grid">
+        <section class="info-section">
+            <div class="container">
+                <div class="info-content">
+                    <div class="info-text">
+                        <h3>What actually happens</h3>
+                        <p>Their trading models, courses, indicators, strategies, and even technical analysis itself are carefully crafted <span class="highlight">fictions</span> designed and implemented to generate <span class="highlight">liquidity</span>.</p>
+                        <p>To them, you are nothing more than <span class="highlight">liquidity</span> — a mere cog in their profit machine.</p>
+                        <p>They care <span class="highlight">nothing</span> for your dreams, your family, or your wealth. And why would they? <br>Your orders fuel their game.</p>
+                        <p>The stock market? <span class="highlight">Rigged!</span> <br>It's a grand charade, orchestrated to enrich the few while exploiting the hopes of the many.</p>
+                    </div>
+                    <div class="info-image"</div>
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="images/Image2.2.png">
+                            <source media="(max-width: 768px)" srcset="images/Image2.1.png">
+                            <img src="images/Image2.1.png"> alt="Your Browser doesn't fit">
+                        </picture>
+    
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="container">
+                <div class="info-content">
+                    <div class="info-text">
+                        <h3>Our service</h3>
+                        <p>Wir kuratieren nur die <span class="highlight">besten Produkte</span> für anspruchsvolle Kunden. Jedes Produkt wird sorgfältig ausgewählt und getestet, um höchste Qualitätsstandards zu gewährleisten.</p>
+                        <p>Unsere Philosophie basiert auf <span class="highlight">Minimalismus, Funktionalität und zeitlosem Design</span>. Weniger ist mehr – aber das Wenige muss perfekt sein.</p>
+                        <p>Entdecken Sie, wie unsere Produkte Ihren Alltag bereichern und vereinfachen können.</p>
+                    </div>
+                    <div class="info-image">✨</div>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
                     <div class="stat-card">
                         <div class="stat-number">126</div>
                         <div class="stat-label">Persons of interest</div>
@@ -1014,18 +1122,382 @@
                         <div class="stat-label">Delivery</div>
                     </div>
                 </div>
-            </div>
         </section>
 
-        <section class="info-section">
+        <section class="products" id="products">
             <div class="container">
-                <div class="info-content">
-                    <div class="info-text">
-                        <h3>What actually happens</h3>
-                        <p>Their trading models, courses, indicators, strategies, and even technical analysis itself are carefully crafted <span class="highlight">fictions</span> designed and implemented to generate <span class="highlight">liquidity</span>.</p>
-                        <p>To them, you are nothing more than <span class="highlight">liquidity</span> — a mere cog in their profit machine.</p>
-                        <p>They care nothing for your dreams, your family, or your wealth. And why would they? <br>Your orders fuel their game.</p>
-                        <p>The stock market? <span class="highlight">Rigged!</span> <br>It's a grand charade, orchestrated to enrich the few while exploiting the hopes of the many.</p>
+                <h2>Our products</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">📱</div>
+                        <div class="product-info">
+                            <h3 class="product-name">Diver</h3>
+                            <p class="product-description">Dip your toe through the surface.</p>
+                            <div class="product-price">€2/mo</div>
+                            <button class="view-product" onclick="openProductModal('premium-smartphone')">
+                                Show details
+                            </button>
+                        </div>
                     </div>
-                    <div class="info-image">🌱</div>
+
+                    <div class="product-card">
+                        <div class="product-image">🎧</div>
+                        <div class="product-info">
+                            <h3 class="product-name">Submarine</h3>
+                            <p class="product-description">Dive right in and follow the whales.</p>
+                            <div class="product-price">€10/mo</div>
+                            <button class="view-product" onclick="openProductModal('wireless-headphones')">
+                                Show details
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">⌚</div>
+                        <div class="product-info">
+                            <h3 class="product-name">Moses</h3>
+                            <p class="product-description">Coming soon!</p>
+                            <div class="product-price">€ ~</div>
+                            <button class="view-product" onclick="openProductModal('smart-watch')">
+                                Show details
+                            </button>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 BEYONDTHECOVER. All rights preserved.</p>
+        </div>
+    </footer>
+
+    <!-- Product Modals -->
+    <div class="product-modal" id="product-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProductModal()">×</button>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <div class="main-image" id="main-image">📱</div>
+                    <div class="image-thumbnails">
+                        <div class="thumbnail active" onclick="changeMainImage('📱')">📱</div>
+                        <div class="thumbnail" onclick="changeMainImage('📷')">📷</div>
+                        <div class="thumbnail" onclick="changeMainImage('🔋')">🔋</div>
+                        <div class="thumbnail" onclick="changeMainImage('📡')">📡</div>
+                    </div>
+                </div>
+                
+                <div class="modal-info">
+                    <h2 class="modal-title" id="modal-title">Premium Smartphone</h2>
+                    <div class="modal-price" id="modal-price">€ ~</div>
+                    <p class="modal-description" id="modal-description">
+                        Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle.
+                    </p>
+                    
+                    <ul class="features-list" id="features-list">
+                        <li>6.7" OLED Display mit 120Hz</li>
+                        <li>Triple-Kamera System</li>
+                        <li>5G Konnektivität</li>
+                        <li>Wasserdicht nach IP68</li>
+                        <li>Wireless Charging</li>
+                    </ul>
+                    
+                    <div class="quantity-selector">
+                        <span class="quantity-label">Quantity:</span>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
+                            <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="10">
+                            <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+                        </div>
+                    </div>
+                    
+                    <button class="add-to-cart-modal" onclick="addToCartFromModal()">
+                        Add to cart
+                    </button>
+                    
+                    <div class="product-specs">
+                        <div class="specs-title">Technische Daten</div>
+                        <div class="specs-grid" id="specs-grid">
+                            <div class="spec-item">
+                                <span class="spec-label">Display:</span>
+                                <span class="spec-value">6.7" OLED</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Speicher:</span>
+                                <span class="spec-value">256GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">RAM:</span>
+                                <span class="spec-value">8GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Akku:</span>
+                                <span class="spec-value">4500mAh</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+        let cartCount = 0;
+        let currentProduct = null;
+
+        const products = {
+            'premium-smartphone': {
+                name: 'Premium Smartphone',
+                price: 2,
+                icon: '📱',
+                description: 'Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle. Dieses Premium-Smartphone vereint innovative Features mit zeitlosem Design und bietet eine unvergleichliche Benutzererfahrung.',
+                features: [
+                    '6.7" OLED Display mit 120Hz',
+                    'Triple-Kamera System mit 108MP',
+                    '5G Konnektivität',
+                    'Wasserdicht nach IP68',
+                    'Wireless Charging & Reverse Charging'
+                ],
+                specs: {
+                    'Display': '6.7" OLED',
+                    'Speicher': '256GB',
+                    'RAM': '8GB',
+                    'Akku': '4500mAh',
+                    'Kamera': '108MP Triple',
+                    'OS': 'Android 14'
+                },
+                images: ['📱', '📷', '🔋', '📡']
+            },
+            'wireless-headphones': {
+                name: 'Wireless Headphones',
+                price: 10,
+                icon: '🎧',
+                description: 'Kristallklarer Sound mit aktiver Geräuschunterdrückung. Für das ultimative Hörerlebnis. Diese Premium-Kopfhörer bieten studioqualitativen Sound und modernste Noise-Cancelling-Technologie.',
+                features: [
+                    'Active Noise Cancelling',
+                    '30h Akkulaufzeit',
+                    'Hi-Res Audio Zertifizierung',
+                    'Schnellladung (15min = 3h)',
+                    'Multipoint Bluetooth Verbindung'
+                ],
+                specs: {
+                    'Akkulaufzeit': '30h',
+                    'Ladezeit': '2h',
+                    'Bluetooth': '5.2',
+                    'Frequenzbereich': '20Hz-40kHz',
+                    'Gewicht': '250g',
+                    'Noise Cancelling': 'Aktiv'
+                },
+                images: ['🎧', '🔊', '🔋', '📶']
+            },
+            'smart-watch': {
+                name: 'Smart Watch',
+                price: 0,
+                icon: '⌚',
+                description: 'Fitness-Tracking und Smart-Features in einem stilvollen, minimalistischen Design. Diese Smartwatch ist der perfekte Begleiter für Sport, Gesundheit und den digitalen Alltag.',
+                features: [
+                    'GPS + Cellular',
+                    'Gesundheits-Monitoring',
+                    'Wasserdicht bis 50m',
+                    '7 Tage Akkulaufzeit',
+                    'Always-On Display'
+                ],
+                specs: {
+                    'Display': '1.9" AMOLED',
+                    'Akkulaufzeit': '7 Tage',
+                    'Wasserdicht': '50m',
+                    'GPS': 'Integriert',
+                    'Sensoren': 'Herz, SpO2, Stress',
+                    'Kompatibilität': 'iOS & Android'
+                },
+                images: ['⌚', '💓', '🏃', '💧']
+            }
+        };
+
+        function openProductModal(productId) {
+            currentProduct = products[productId];
+            if (!currentProduct) return;
+
+            // Update modal content
+            document.getElementById('modal-title').textContent = currentProduct.name;
+            document.getElementById('modal-price').innerHTML = '€' + currentProduct.price + '<small>/mo</small>';
+            document.getElementById('modal-description').textContent = currentProduct.description;
+            document.getElementById('main-image').textContent = currentProduct.icon;
+
+            // Update features
+            const featuresList = document.getElementById('features-list');
+            featuresList.innerHTML = '';
+            currentProduct.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                featuresList.appendChild(li);
+            });
+
+            // Update specs
+            const specsGrid = document.getElementById('specs-grid');
+            specsGrid.innerHTML = '';
+            Object.entries(currentProduct.specs).forEach(([key, value]) => {
+                const specItem = document.createElement('div');
+                specItem.className = 'spec-item';
+                specItem.innerHTML = `
+                    <span class="spec-label">${key}:</span>
+                    <span class="spec-value">${value}</span>
+                `;
+                specsGrid.appendChild(specItem);
+            });
+
+            // Update thumbnails
+            const thumbnails = document.querySelector('.image-thumbnails');
+            thumbnails.innerHTML = '';
+            currentProduct.images.forEach((image, index) => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
+                thumbnail.textContent = image;
+                thumbnail.onclick = () => changeMainImage(image);
+                thumbnails.appendChild(thumbnail);
+            });
+
+            // Reset quantity
+            document.getElementById('quantity').value = 1;
+
+            // Show modal
+            const modal = document.getElementById('product-modal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('product-modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            currentProduct = null;
+        }
+
+        function changeMainImage(imageIcon) {
+            document.getElementById('main-image').textContent = imageIcon;
+            
+            // Update active thumbnail
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+                if (thumb.textContent === imageIcon) {
+                    thumb.classList.add('active');
+                }
+            });
+        }
+
+        function changeQuantity(change) {
+            const quantityInput = document.getElementById('quantity');
+            let newValue = parseInt(quantityInput.value) + change;
+            newValue = Math.max(1, Math.min(10, newValue));
+            quantityInput.value = newValue;
+        }
+
+        function addToCartFromModal() {
+            if (!currentProduct) return;
+            
+            const quantity = parseInt(document.getElementById('quantity').value);
+            
+            for (let i = 0; i < quantity; i++) {
+                cart.push({
+                    name: currentProduct.name,
+                    price: currentProduct.price
+                });
+            }
+            
+            cartCount += quantity;
+            document.getElementById('cart-count').textContent = cartCount;
+            document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
+            
+            // Success feedback
+            const button = document.querySelector('.add-to-cart-modal');
+            const originalText = button.textContent;
+            button.textContent = `${quantity}x Hinzugefügt!`;
+            button.style.background = 'linear-gradient(#005F4E)';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = 'linear-gradient(45deg, #333, #555)';
+            }, 1500);
+            
+            console.log(`${quantity}x ${currentProduct.name} hinzugefügt`);
+        }
+
+        // Close modal on outside click
+        document.getElementById('product-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProductModal();
+            }
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProductModal();
+            }
+        });
+
+        function handleHashChange() {
+            const hash = window.location.hash.toLowerCase();
+            const aboutOverlay = document.getElementById('aboutOverlay');
+            const contactOverlay = document.getElementById('contactOverlay');
+  
+            aboutOverlay.classList.remove('active');
+            contactOverlay.classList.remove('active');
+
+            if (hash === '#about') {
+                aboutOverlay.classList.add('active');
+            } else if (hash === '#contact') {
+                contactOverlay.classList.add('active');
+            }
+            // #home und #products schließen alles
+        }
+
+        window.addEventListener('hashchange', handleHashChange);
+        window.addEventListener('load', handleHashChange);
+
+
+        function toggleCart() {
+            if (cart.length === 0) {
+                alert('Ihr Warenkorb ist leer!');
+                return;
+            }
+            
+            let cartSummary = 'Warenkorb:\n\n';
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                cartSummary += `${index + 1}. ${item.name} - €${item.price}\n`;
+                total += item.price;
+            });
+            
+            cartSummary += `\nGesamtsumme: €${total}`;
+            alert(cartSummary);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href="#home"], a[href="#products"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                     });
+                     // Hash etwas später setzen, damit der Browser nicht teleportiert
+                     setTimeout(() => {
+                         history.pushState(null, null, href);
+                         handleHashChange(); // Falls der Hash nicht von selbst ausgelöst wird
+                     }, 400);
+                }
+            });
+        });
+
+        
+    </script>
+</body>
+</html>
