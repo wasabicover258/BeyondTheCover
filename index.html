@@ -978,6 +978,9 @@
         </nav>
     </header>
 
+    <div id="aboutOverlay" class="overlay">About Content</div>
+    <div id="contactOverlay" class="overlay">Contact Content</div>
+
     <main>
         <section class="hero" id="home">
             <div class="container">
@@ -1375,6 +1378,26 @@
                 closeProductModal();
             }
         });
+
+        function handleHashChange() {
+            const hash = window.location.hash.toLowerCase();
+            const aboutOverlay = document.getElementById('aboutOverlay');
+            const contactOverlay = document.getElementById('contactOverlay');
+  
+            aboutOverlay.classList.remove('active');
+            contactOverlay.classList.remove('active');
+
+            if (hash === '#about') {
+                aboutOverlay.classList.add('active');
+            } else if (hash === '#contact') {
+                contactOverlay.classList.add('active');
+            }
+            // #home und #products schließen alles
+        }
+
+        window.addEventListener('hashchange', handleHashChange);
+        window.addEventListener('load', handleHashChange);
+
 
         function toggleCart() {
             if (cart.length === 0) {
