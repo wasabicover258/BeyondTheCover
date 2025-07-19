@@ -1438,11 +1438,10 @@
                 e.preventDefault();
                 const href = this.getAttribute('href');
                 
-                if (href === 'home') {
+                if (href === '#home') {
                     window.scrollTo({
                         top: 0,
-                        behavior: 'smooth',
-                        block: 'start'
+                        behavior: 'smooth'
                      });
                      // Hash etwas später setzen, damit der Browser nicht teleportiert
                      setTimeout(() => {
