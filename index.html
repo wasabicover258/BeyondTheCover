@@ -1437,31 +1437,18 @@
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const href = this.getAttribute('href');
-                
-                if (href === '#home') {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth'
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
                      });
                      // Hash etwas später setzen, damit der Browser nicht teleportiert
                      setTimeout(() => {
                          history.pushState(null, null, href);
                          handleHashChange(); // Falls der Hash nicht von selbst ausgelöst wird
                      }, 400);
-                } else {
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                        setTimeout(() => {
-                            history.pushState(null, null, href);
-                            handleHashChange();
-                        }, 400);
-                    }
                 }
-                
             });
         });
 
