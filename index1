@@ -978,6 +978,9 @@
         </nav>
     </header>
 
+    <div id="aboutOverlay" class="overlay">About Content</div>
+    <div id="contactOverlay" class="overlay">Contact Content</div>
+
     <main>
         <section class="hero" id="home">
             <div class="container">
@@ -1376,6 +1379,26 @@
             }
         });
 
+        function handleHashChange() {
+            const hash = window.location.hash.toLowerCase();
+            const aboutOverlay = document.getElementById('aboutOverlay');
+            const contactOverlay = document.getElementById('contactOverlay');
+  
+            aboutOverlay.classList.remove('active');
+            contactOverlay.classList.remove('active');
+
+            if (hash === '#about') {
+                aboutOverlay.classList.add('active');
+            } else if (hash === '#contact') {
+                contactOverlay.classList.add('active');
+            }
+            // #home und #products schließen alles
+        }
+
+        window.addEventListener('hashchange', handleHashChange);
+        window.addEventListener('load', handleHashChange);
+
+
         function toggleCart() {
             if (cart.length === 0) {
                 alert('Ihr Warenkorb ist leer!');
@@ -1395,18 +1418,26 @@
         }
 
         // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href="#home"], a[href="#products"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const href = this.getAttribute('href');
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
-                    });
+                     });
+                     // Hash etwas später setzen, damit der Browser nicht teleportiert
+                     setTimeout(() => {
+                         history.pushState(null, null, href);
+                         handleHashChange(); // Falls der Hash nicht von selbst ausgelöst wird
+                     }, 400);
                 }
             });
         });
+
+        
     </script>
 </body>
 </html>
