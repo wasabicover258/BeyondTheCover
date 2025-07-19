@@ -1293,6 +1293,11 @@
             currentProduct = products[productId];
             if (!currentProduct) return;
 
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.hash = this.getAttribute('href');
+            });
+
             // Update modal content
             document.getElementById('modal-title').textContent = currentProduct.name;
             document.getElementById('modal-price').innerHTML = '€' + currentProduct.price + '<small>/mo</small>';
