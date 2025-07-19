@@ -308,11 +308,12 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .info-igae img {
+        .info-image img {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
+            height: 100%;
             object-fit: cover;
             object-position: center;
             z-index: 0;
@@ -338,7 +339,16 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 3rem;
-            margin-top: 4rem;
+            margin-top: 1rem;
+            padding-left: 100px;
+            padding-right: 100px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                padding-left: 0px;
+                padding-right: 0px;
+            }
         }
 
         .stat-card {
@@ -953,8 +963,8 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#products">Products</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="about.html#about">About</a></li>
+                <li><a href="contact.html#contact">Contact</a></li>
             </ul>
             <div class="cart-icon" onclick="toggleCart()">
                 <button data-quantity="0" class="btn-cart">
@@ -968,6 +978,9 @@
         </nav>
     </header>
 
+    <div id="aboutOverlay" class="overlay">About Content</div>
+    <div id="contactOverlay" class="overlay">Contact Content</div>
+
     <main>
         <section class="hero" id="home">
             <div class="container">
@@ -980,27 +993,64 @@
             <div class="container">
                 <div class="info-content">
                     <div class="info-text">
-                        <h3>Qualität trifft auf Innovation</h3>
-                        <p>Wir kuratieren nur die <span class="highlight">besten Produkte</span> für anspruchsvolle Kunden. Jedes Produkt wird sorgfältig ausgewählt und getestet, um höchste Qualitätsstandards zu gewährleisten.</p>
-                        <p>Unsere Philosophie basiert auf <span class="highlight">Minimalismus, Funktionalität und zeitlosem Design</span>. Weniger ist mehr – aber das Wenige muss perfekt sein.</p>
-                        <p>Entdecken Sie, wie unsere Produkte Ihren Alltag bereichern und vereinfachen können.</p>
+                        <h3>Tired of being outplayed?</h3>
+                        <p>You're meant to believe the richest, most powerful people are brilliant traders  who just live a wealthy lifestyle.</p>
+                        <p>History <span class="highlight">disproves</span> this. <br>It shows the opposite:</p>
+                        <p>Great power <span class="highlight">always corrupts</span>. Take Julius Caesar for example. His wealth and ambition crushed the Republic for personal glory.</p>
+                        <p>Today's billionaire elites are <span class="highlight"> no different</span>, rigging systems against you for <span class="highlight"> their own profit.<br>And why wouldn't they?</span>.</p>
                     </div>
                     <div class="info-image">
                         <picture>
                             <source media="(max-width: 768px)" srcset="images/Image1.2.png">
                             <source media="(min-width: 769px)" srcset="images/Image1.1.png">
-                            <img src="images/Image1.1.png"> alt="Your Browser doesnt fit">
+                            <img src="images/Image1.1.png"> alt="Your Browser doesn't fit">
                         </picture>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="stats-grid">
+        <section class="info-section">
+            <div class="container">
+                <div class="info-content">
+                    <div class="info-text">
+                        <h3>What actually happens</h3>
+                        <p>Their trading models, courses, indicators, strategies, and even technical analysis itself are carefully crafted <span class="highlight">fictions</span> designed and implemented to generate <span class="highlight">liquidity</span>.</p>
+                        <p>To them, you are nothing more than <span class="highlight">liquidity</span> — a mere cog in their profit machine.</p>
+                        <p>They care <span class="highlight">nothing</span> for your dreams, your family, or your wealth. And why would they? <br>Your orders fuel their game.</p>
+                        <p>The stock market? <span class="highlight">Rigged!</span> <br>It's a grand charade, orchestrated to enrich the few while exploiting the hopes of the many.</p>
+                    </div>
+                    <div class="info-image"</div>
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="images/Image2.2.png">
+                            <source media="(max-width: 768px)" srcset="images/Image2.1.png">
+                            <img src="images/Image2.1.png"> alt="Your Browser doesn't fit">
+                        </picture>
+    
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="container">
+                <div class="info-content">
+                    <div class="info-text">
+                        <h3>Our service</h3>
+                        <p>Wir kuratieren nur die <span class="highlight">besten Produkte</span> für anspruchsvolle Kunden. Jedes Produkt wird sorgfältig ausgewählt und getestet, um höchste Qualitätsstandards zu gewährleisten.</p>
+                        <p>Unsere Philosophie basiert auf <span class="highlight">Minimalismus, Funktionalität und zeitlosem Design</span>. Weniger ist mehr – aber das Wenige muss perfekt sein.</p>
+                        <p>Entdecken Sie, wie unsere Produkte Ihren Alltag bereichern und vereinfachen können.</p>
+                    </div>
+                    <div class="info-image">✨</div>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-number">126+</div>
+                        <div class="stat-number">126</div>
                         <div class="stat-label">Persons of interest</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">5 years</div>
+                        <div class="stat-number">5 yrs</div>
                         <div class="stat-label">of experience</div>
                     </div>
                     <div class="stat-card">
@@ -1012,35 +1062,6 @@
                         <div class="stat-label">Delivery</div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="info-section">
-            <div class="container">
-                <div class="info-content">
-                    <div class="info-text">
-                        <h3>Nachhaltigkeit im Fokus</h3>
-                        <p>Wir kuratieren nur die <span class="highlight">besten Produkte</span> für anspruchsvolle Kunden. Jedes Produkt wird sorgfältig ausgewählt und getestet, um höchste Qualitätsstandards zu gewährleisten.</p>
-                        <p>Unsere Philosophie basiert auf <span class="highlight">Minimalismus, Funktionalität und zeitlosem Design</span>. Weniger ist mehr – aber das Wenige muss perfekt sein.</p>
-                        <p>Entdecken Sie, wie unsere Produkte Ihren Alltag bereichern und vereinfachen können.</p>
-                    </div>
-                    <div class="info-image">🌱</div>
-                </div>
-            </div>
-        </section>
-
-        <section class="info-section">
-            <div class="container">
-                <div class="info-content">
-                    <div class="info-text">
-                        <h3>Premium Experience</h3>
-                        <p>Wir kuratieren nur die <span class="highlight">besten Produkte</span> für anspruchsvolle Kunden. Jedes Produkt wird sorgfältig ausgewählt und getestet, um höchste Qualitätsstandards zu gewährleisten.</p>
-                        <p>Unsere Philosophie basiert auf <span class="highlight">Minimalismus, Funktionalität und zeitlosem Design</span>. Weniger ist mehr – aber das Wenige muss perfekt sein.</p>
-                        <p>Entdecken Sie, wie unsere Produkte Ihren Alltag bereichern und vereinfachen können.</p>
-                    </div>
-                    <div class="info-image">✨</div>
-                </div>
-            </div>
         </section>
 
         <section class="products" id="products">
@@ -1358,6 +1379,26 @@
             }
         });
 
+        function handleHashChange() {
+            const hash = window.location.hash.toLowerCase();
+            const aboutOverlay = document.getElementById('aboutOverlay');
+            const contactOverlay = document.getElementById('contactOverlay');
+  
+            aboutOverlay.classList.remove('active');
+            contactOverlay.classList.remove('active');
+
+            if (hash === '#about') {
+                aboutOverlay.classList.add('active');
+            } else if (hash === '#contact') {
+                contactOverlay.classList.add('active');
+            }
+            // #home und #products schließen alles
+        }
+
+        window.addEventListener('hashchange', handleHashChange);
+        window.addEventListener('load', handleHashChange);
+
+
         function toggleCart() {
             if (cart.length === 0) {
                 alert('Ihr Warenkorb ist leer!');
@@ -1377,18 +1418,26 @@
         }
 
         // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href="#home"], a[href="#products"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const href = this.getAttribute('href');
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
-                    });
+                     });
+                     // Hash etwas später setzen, damit der Browser nicht teleportiert
+                     setTimeout(() => {
+                         history.pushState(null, null, href);
+                         handleHashChange(); // Falls der Hash nicht von selbst ausgelöst wird
+                     }, 400);
                 }
             });
         });
+
+        
     </script>
 </body>
 </html>
