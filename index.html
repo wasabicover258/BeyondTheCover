@@ -1105,12 +1105,6 @@
         </section>
     </main>
 
-    <div id="contactOverlay" class="fullscreen-overlay">
-        <div class="overlay-content">
-            <h2>contact</h2>
-        </div>
-    </div>
-
     <footer>
         <div class="container">
             <p>&copy; 2025 BEYONDTHECOVER. All rights preserved.</p>
@@ -1330,37 +1324,6 @@
                 }
             });
         }
-
-
-        function openOverlay(overlayId) {
-            const overlay = document.getElementById(overlayId);
-            overlay.style.display = 'block';
-            setTimeout(() => {
-            const overlay = document.getElementById(overlayId);
-                overlay.classList.add('active');
-            }, 10);
-        }
-
-        function closeAllOverlays() {
-            overlays.forEach(overlay => {
-                overlay.classList.remove('active');
-                setTimeout(() => {
-                    overlay.style.display = 'none';
-                }, 300);
-            });
-        }
-
-        // Bei Klick auf Navigation
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            window.location.hash = this.getAttribute('href');
-  
-            if (hash === '#contact') {
-                openOverlay('contactOverlay');
-            } else {
-                closeAllOverlays();
-            }
-        });
 
         function changeQuantity(change) {
             const quantityInput = document.getElementById('quantity');
