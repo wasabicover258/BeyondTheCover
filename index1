@@ -81,9 +81,6 @@
             font-size: 30%;
         }
 
-        .container p {
-            font-family: 'MainFont';
-        }
 
         /* Header */
         header {
@@ -311,6 +308,17 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        .info-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 0;
+        }
+
         .info-image::before {
             content: '';
             position: absolute;
@@ -331,7 +339,16 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 3rem;
-            margin-top: 4rem;
+            margin-top: 1rem;
+            padding-left: 100px;
+            padding-right: 100px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                padding-left: 0px;
+                padding-right: 0px;
+            }
         }
 
         .stat-card {
@@ -458,6 +475,7 @@
             color: #aaa;
             margin-bottom: 1rem;
             font-size: 0.9rem;
+            font-family: 'MainFont';
         }
 
         .product-price {
@@ -972,23 +990,64 @@
             <div class="container">
                 <div class="info-content">
                     <div class="info-text">
-                        <h3>Qualität trifft auf Innovation</h3>
-                        <p>You're meant to believe the richest, most powerful people are brilliant traders  who just live a wealthy lifehste</p>
-                        <p>History<span class="highlight">disproves</span>this.</p>
-                        <p>It shows the opposite:</p>
-                        <p>Great power<span class="highlight">always corrupts</span>. Take Julius Caesar for example. His wealth and ambition crushed the Republic for personal glory.</p>
-                        <p>Today's billionaire elites are<span class="highlight">no different</span>, rigging systems against you for<span class="highlight">their own profit</span>.</p>
+                        <h3>Tired of being outplayed?</h3>
+                        <p>You're meant to believe the richest, most powerful people are brilliant traders  who just live a wealthy lifestyle.</p>
+                        <p>History <span class="highlight">disproves</span> this. <br>It shows the opposite:</p>
+                        <p>Great power <span class="highlight">always corrupts</span>. Take Julius Caesar for example. His wealth and ambition crushed the Republic for personal glory.</p>
+                        <p>Today's billionaire elites are <span class="highlight"> no different</span>, rigging systems against you for <span class="highlight"> their own profit.<br>And why wouldn't they?</span>.</p>
                     </div>
-                    <div class="info-image">🎯</div>
+                    <div class="info-image">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="images/Image1.2.png">
+                            <source media="(min-width: 769px)" srcset="images/Image1.1.png">
+                            <img src="images/Image1.1.png"> alt="Your Browser doesn't fit">
+                        </picture>
+                    </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="stats-grid">
+        <section class="info-section">
+            <div class="container">
+                <div class="info-content">
+                    <div class="info-text">
+                        <h3>What actually happens</h3>
+                        <p>Their trading models, courses, indicators, strategies, and even technical analysis itself are carefully crafted <span class="highlight">fictions</span> designed and implemented to generate <span class="highlight">liquidity</span>.</p>
+                        <p>To them, you are nothing more than <span class="highlight">liquidity</span> — a mere cog in their profit machine.</p>
+                        <p>They care <span class="highlight">nothing</span> for your dreams, your family, or your wealth. And why would they? <br>Your orders fuel their game.</p>
+                        <p>The stock market? <span class="highlight">Rigged!</span> <br>It's a grand charade, orchestrated to enrich the few while exploiting the hopes of the many.</p>
+                    </div>
+                    <div class="info-image"</div>
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="images/Image2.2.png">
+                            <source media="(max-width: 768px)" srcset="images/Image2.1.png">
+                            <img src="images/Image2.1.png"> alt="Your Browser doesn't fit">
+                        </picture>
+    
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="container">
+                <div class="info-content">
+                    <div class="info-text">
+                        <h3>Our service</h3>
+                        <p>Wir kuratieren nur die <span class="highlight">besten Produkte</span> für anspruchsvolle Kunden. Jedes Produkt wird sorgfältig ausgewählt und getestet, um höchste Qualitätsstandards zu gewährleisten.</p>
+                        <p>Unsere Philosophie basiert auf <span class="highlight">Minimalismus, Funktionalität und zeitlosem Design</span>. Weniger ist mehr – aber das Wenige muss perfekt sein.</p>
+                        <p>Entdecken Sie, wie unsere Produkte Ihren Alltag bereichern und vereinfachen können.</p>
+                    </div>
+                    <div class="info-image">✨</div>
+                </div>
+            </div>
+            
+            <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-number">126+</div>
+                        <div class="stat-number">126</div>
                         <div class="stat-label">Persons of interest</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">5 years</div>
+                        <div class="stat-number">5 yrs</div>
                         <div class="stat-label">of experience</div>
                     </div>
                     <div class="stat-card">
@@ -1000,35 +1059,6 @@
                         <div class="stat-label">Delivery</div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="info-section">
-            <div class="container">
-                <div class="info-content">
-                    <div class="info-text">
-                        <h3>Nachhaltigkeit im Fokus</h3>
-                        <p>Wir kuratieren nur die <span class="highlight">besten Produkte</span> für anspruchsvolle Kunden. Jedes Produkt wird sorgfältig ausgewählt und getestet, um höchste Qualitätsstandards zu gewährleisten.</p>
-                        <p>Unsere Philosophie basiert auf <span class="highlight">Minimalismus, Funktionalität und zeitlosem Design</span>. Weniger ist mehr – aber das Wenige muss perfekt sein.</p>
-                        <p>Entdecken Sie, wie unsere Produkte Ihren Alltag bereichern und vereinfachen können.</p>
-                    </div>
-                    <div class="info-image">🌱</div>
-                </div>
-            </div>
-        </section>
-
-        <section class="info-section">
-            <div class="container">
-                <div class="info-content">
-                    <div class="info-text">
-                        <h3>Premium Experience</h3>
-                        <p>Wir kuratieren nur die <span class="highlight">besten Produkte</span> für anspruchsvolle Kunden. Jedes Produkt wird sorgfältig ausgewählt und getestet, um höchste Qualitätsstandards zu gewährleisten.</p>
-                        <p>Unsere Philosophie basiert auf <span class="highlight">Minimalismus, Funktionalität und zeitlosem Design</span>. Weniger ist mehr – aber das Wenige muss perfekt sein.</p>
-                        <p>Entdecken Sie, wie unsere Produkte Ihren Alltag bereichern und vereinfachen können.</p>
-                    </div>
-                    <div class="info-image">✨</div>
-                </div>
-            </div>
         </section>
 
         <section class="products" id="products">
@@ -1040,7 +1070,7 @@
                         <div class="product-info">
                             <h3 class="product-name">Diver</h3>
                             <p class="product-description">Dip your toe through the surface.</p>
-                            <div class="product-price">€2</div>
+                            <div class="product-price">€2/mo</div>
                             <button class="view-product" onclick="openProductModal('premium-smartphone')">
                                 Show details
                             </button>
@@ -1052,7 +1082,7 @@
                         <div class="product-info">
                             <h3 class="product-name">Submarine</h3>
                             <p class="product-description">Dive right in and follow the whales.</p>
-                            <div class="product-price">€10</div>
+                            <div class="product-price">€10/mo</div>
                             <button class="view-product" onclick="openProductModal('wireless-headphones')">
                                 Show details
                             </button>
@@ -1098,7 +1128,7 @@
                 
                 <div class="modal-info">
                     <h2 class="modal-title" id="modal-title">Premium Smartphone</h2>
-                    <div class="modal-price" id="modal-price">€899</div>
+                    <div class="modal-price" id="modal-price">€ ~</div>
                     <p class="modal-description" id="modal-description">
                         Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle.
                     </p>
@@ -1158,7 +1188,7 @@
         const products = {
             'premium-smartphone': {
                 name: 'Premium Smartphone',
-                price: 899,
+                price: 2,
                 icon: '📱',
                 description: 'Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle. Dieses Premium-Smartphone vereint innovative Features mit zeitlosem Design und bietet eine unvergleichliche Benutzererfahrung.',
                 features: [
@@ -1180,7 +1210,7 @@
             },
             'wireless-headphones': {
                 name: 'Wireless Headphones',
-                price: 299,
+                price: 10,
                 icon: '🎧',
                 description: 'Kristallklarer Sound mit aktiver Geräuschunterdrückung. Für das ultimative Hörerlebnis. Diese Premium-Kopfhörer bieten studioqualitativen Sound und modernste Noise-Cancelling-Technologie.',
                 features: [
@@ -1202,7 +1232,7 @@
             },
             'smart-watch': {
                 name: 'Smart Watch',
-                price: 399,
+                price: 0,
                 icon: '⌚',
                 description: 'Fitness-Tracking und Smart-Features in einem stilvollen, minimalistischen Design. Diese Smartwatch ist der perfekte Begleiter für Sport, Gesundheit und den digitalen Alltag.',
                 features: [
@@ -1230,7 +1260,7 @@
 
             // Update modal content
             document.getElementById('modal-title').textContent = currentProduct.name;
-            document.getElementById('modal-price').textContent = '€' + currentProduct.price;
+            document.getElementById('modal-price').innerHTML = '€' + currentProduct.price + '<small>/mo</small>';
             document.getElementById('modal-description').textContent = currentProduct.description;
             document.getElementById('main-image').textContent = currentProduct.icon;
 
