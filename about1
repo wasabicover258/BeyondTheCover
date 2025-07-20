@@ -5,6 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Über Uns - InnovateTech</title>
     <style>
+
+        @font-face {
+           font-family: 'HeadlineFont';
+           src: url('fonts/Bezmiar-Regular.otf') format('opentype');
+           font-weight: 700;
+        }
+
+        @font-face {
+           font-family: 'MainFont1';
+           src: url('fonts/Mavoble.ttf') format('truetype');
+           font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'GoofyFont';
+            src: url('fonts/Iceland-Regular.ttf') format('truetype');
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'MainFont';
+            src: url('fonts/Relevance-trial-Regular.ttf') format('truetype');
+            font-weight: 400;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -12,10 +37,13 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
             min-height: 100vh;
+            line-height: 1.6;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
 
         .container {
@@ -25,14 +53,14 @@
         }
 
         header {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 20px 0;
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+            height: 80px;
             transition: all 0.3s ease;
         }
 
@@ -44,15 +72,33 @@
         nav {
             display: flex;
             justify-content: space-between;
+            padding: 0 20px;
+            height: 100%;
             align-items: center;
         }
 
+        /* Logo */
         .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s ease;
+            max-height: 50%;
+            height: auto;
+            width: auto;
+        }
+        
+        .mobile {
+            display: none;
+        }
+
+        .desktop {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .mobile {
+                display: block;
+            }
+            .desktop {
+                display: none;
+            }
         }
 
         header.scrolled .logo {
@@ -63,6 +109,16 @@
             display: flex;
             list-style: none;
             gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                row-gap: 7px;
+                column-gap: 15px;
+                font-size: 3vw;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .nav-links a {
@@ -88,7 +144,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: #ff6b6b;
+            background: #005F4E;
             transition: width 0.3s ease;
         }
 
@@ -102,19 +158,26 @@
 
         .hero {
             text-align: center;
-            padding: 100px 0;
+            padding: 90px 0;
             color: white;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: clamp(1.5rem, 5vw, 4rem);
+            font-family: 'HeadlineFont';
             margin-bottom: 20px;
             opacity: 0;
             animation: fadeInUp 1s ease forwards;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            word-break: break-word;
         }
 
         .hero p {
             font-size: 1.3rem;
+            font-family: 'MainFont';
             margin-bottom: 40px;
             opacity: 0;
             animation: fadeInUp 1s ease 0.3s forwards;
@@ -126,7 +189,7 @@
 
 
         .story-section {
-            background: white;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
             padding: 100px 0;
             margin: 80px 0;
             border-radius: 30px;
@@ -141,7 +204,7 @@
             left: 0;
             right: 0;
             height: 5px;
-            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+            background: linear-gradient(90deg, #171717, #005F4E, #171717);
         }
 
         .story-content {
@@ -153,7 +216,7 @@
 
         .story-text h2 {
             font-size: 2.5rem;
-            color: #333;
+            color: white;
             margin-bottom: 30px;
             position: relative;
         }
@@ -165,12 +228,12 @@
             left: 0;
             width: 50px;
             height: 3px;
-            background: #ff6b6b;
+            background: #005F4E;
         }
 
         .story-text p {
             font-size: 1.1rem;
-            color: #666;
+            color: white;
             margin-bottom: 20px;
             line-height: 1.8;
         }
@@ -180,11 +243,10 @@
             position: relative;
         }
 
-        .story-image::before {
-            content: '🚀';
-            font-size: 8rem;
-            display: block;
-            animation: float 3s ease-in-out infinite;
+        .story-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
         }
 
         .team-section {
@@ -236,6 +298,13 @@
             background: rgba(255, 255, 255, 0.15);
         }
 
+        .team-pic img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
         .team-avatar {
             width: 100px;
             height: 100px;
@@ -267,6 +336,19 @@
             color: rgba(255, 255, 255, 0.8);
             font-size: 0.95rem;
             line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            border-top: 1px solid #333;
+            padding: 2rem 0;
+            text-align: center;
+            color: #666;
+        }
+
+        footer .container {
+            font-size: clamp(1rem, 2vw, 2rem);
         }
 
         .values-section {
@@ -332,25 +414,19 @@
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
             .story-content {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-            
-            .nav-links {
-                display: none;
-            }
         }
     </style>
 </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body>
     <header id="header">
-        <nav class="container">
-            <a href="#" class="logo">InnovateTech</a>
+        <nav>
+            <img src="images/logos/SimplifiedLogo.png" class="logo mobile" />
+            <img src="images/logos/MainLogo.png" class="logo desktop" />
             <ul class="nav-links">
                 <li><a href="index.html#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -363,8 +439,8 @@
     <main>
         <section class="hero" id="home">
             <div class="container">
-                <h1>Wir gestalten die Zukunft</h1>
-                <p>Mit Leidenschaft, Innovation und einem außergewöhnlichen Team verwandeln wir Visionen in bahnbrechende digitale Lösungen.</p>
+                <h1>Breaking the illusion,<br>building your truth!</h1>
+                <p>The osjdckjewfbhclie.</p>
                 
 
             </div>
@@ -380,6 +456,7 @@
                         <p>Heute sind wir stolz darauf, mit einem internationalen Team von Experten die Grenzen des Möglichen zu verschieben und unseren Kunden dabei zu helfen, ihre Ziele zu erreichen.</p>
                     </div>
                     <div class="story-image">
+                        <img src="images/HQ.png" alt="Loading..."
                     </div>
                 </div>
             </div>
@@ -390,9 +467,9 @@
                 <h2>Unser Team</h2>
                 <div class="team-grid">
                     <div class="team-card">
-                        <div class="team-avatar">AS</div>
-                        <div class="team-name">Anna Schmidt</div>
-                        <div class="team-role">CEO & Gründerin</div>
+                        <div class="team-pic"> <img src="images/Team/CEO.png"></div>
+                        <div class="team-name">macrosoft</div>
+                        <div class="team-role">CEO & Founder</div>
                         <div class="team-bio">Visionäre Führungskraft mit 15 Jahren Erfahrung in der Tech-Branche. Anna treibt Innovation voran und inspiriert unser Team täglich.</div>
                     </div>
                     <div class="team-card">
@@ -440,17 +517,13 @@
         </section>
     </main>
 
-    <script>
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 BEYONDTHECOVER. All rights preserved.</p>
+        </div>
+    </footer>
 
+    <script>
         document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -459,10 +532,6 @@
             });
         });
 
-
-        // Counter animation for stats (removed)
-        
-        // Intersection Observer for animations (removed stats animation)
 
         // Add hover effects to team cards
         document.querySelectorAll('.team-card').forEach(card => {
