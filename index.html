@@ -160,12 +160,17 @@
         }
 
         .navigation {
-            width: 100%;
-            max-width: none;
-            margin: 0;
-            padding: 0 20px;
-            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px; /* Abstand zwischen Warenkorb und Nav */
+        }
+
 
         @media (max-width: 768px) {
             .navigation {
