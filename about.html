@@ -83,6 +83,16 @@
             gap: 30px;
         }
 
+        @media (max-width: 768px) {
+            .nav-links {
+                row-gap: 7px;
+                column-gap: 15px;
+                font-size: 3vw;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         .nav-links a {
             color: white;
             text-decoration: none;
