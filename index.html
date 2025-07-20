@@ -98,10 +98,29 @@
         }
 
         @media (min-width: 769px) {
-            header {
-                display: none;
+            .navigation {
+                display: grid;
+                grid-template-columns: auto auto 1fr;
+                align-items: center;
+                padding: 0 40px;
+            }
+
+            .logo.desktop {
+                justify-self: start;
+            }
+
+            .cart-icon {
+                justify-self: end;
+                margin-right: 40px;
+            }
+
+            .nav-links {
+                display: flex;
+                justify-content: flex-end;
+                gap: 2rem;
             }
         }
+
 
 
         /* Logo */
