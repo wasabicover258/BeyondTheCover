@@ -475,15 +475,6 @@
             });
         });
 
-        // Parallax effect for floating rocket
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const rocket = document.querySelector('.story-image::before');
-            if (rocket) {
-                document.querySelector('.story-image').style.transform = 
-                    `translateY(${scrolled * 0.1}px)`;
-            }
-        });
     </script>
 </body>
 </html>
