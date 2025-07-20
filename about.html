@@ -327,6 +327,19 @@
             line-height: 1.6;
         }
 
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            border-top: 1px solid #333;
+            padding: 2rem 0;
+            text-align: center;
+            color: #666;
+        }
+
+        footer .container {
+            font-size: clamp(1rem, 2vw, 2rem);
+        }
+
         .values-section {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -495,6 +508,12 @@
             </div>
         </section>
     </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 BEYONDTHECOVER. All rights preserved.</p>
+        </div>
+    </footer>
 
     <script>
         document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
