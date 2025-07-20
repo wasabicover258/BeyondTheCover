@@ -166,10 +166,22 @@
             text-decoration: none;
             transition: color 0.3s ease;
             font-weight: 500;
+            position: relative;
         }
 
-        .nav-links a:hover {
-            color: #fff;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #005F4E; /* Das ist das grüne Unterstreichungs-Ding */
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%; /* Beim Hover wächst der Strich auf die volle Breite */
         }
 
         .btn-cart {
@@ -1023,7 +1035,7 @@
                         <picture>
                             <source media="(max-width: 768px)" srcset="images/Image1.2.png">
                             <source media="(min-width: 769px)" srcset="images/Image1.1.png">
-                            <img src="images/Image1.1.png"> alt="Your Browser doesn't fit">
+                            <img src="images/Image1.1.png"> alt="Loading...">
                         </picture>
                     </div>
                 </div>
@@ -1044,7 +1056,7 @@
                         <picture>
                             <source media="(max-width: 768px)" srcset="images/Image2.2.png">
                             <source media="(max-width: 768px)" srcset="images/Image2.1.png">
-                            <img src="images/Image2.1.png"> alt="Your Browser doesn't fit">
+                            <img src="images/Image2.1.png"> alt="Loading...">
                         </picture>
     
                 </div>
