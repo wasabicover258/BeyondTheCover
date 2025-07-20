@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Über Uns - InnovateTech</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        header.scrolled .logo {
+            color: #333;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        header.scrolled .nav-links a {
+            color: #333;
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff6b6b;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            margin-top: 80px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+
+        .story-section {
+            background: white;
+            padding: 100px 0;
+            margin: 80px 0;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1);
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .story-text h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .story-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #ff6b6b;
+        }
+
+        .story-text p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .story-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .story-image::before {
+            content: '🚀';
+            font-size: 8rem;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .team-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .team-section h2 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 60px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 40px 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .team-card:hover::before {
+            left: 100%;
+        }
+
+        .team-card:hover {
+            transform: translateY(-15px) rotate(2deg);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .team-role {
+            color: #ff6b6b;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .team-bio {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .values-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 80px 0;
+            margin: 80px 0;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 40px 30px;
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: scale(1.05);
+        }
+
+        .value-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .value-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .value-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .story-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <nav class="container">
+            <a href="#" class="logo">InnovateTech</a>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="index.html#products">Products</a></li>
+                <li><a href="contact.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <h1>Wir gestalten die Zukunft</h1>
+                <p>Mit Leidenschaft, Innovation und einem außergewöhnlichen Team verwandeln wir Visionen in bahnbrechende digitale Lösungen.</p>
+                
+
+            </div>
+        </section>
+
+        <section class="story-section" id="about">
+            <div class="container">
+                <div class="story-content">
+                    <div class="story-text">
+                        <h2>Unsere Geschichte</h2>
+                        <p>2016 starteten wir als kleine Gruppe visionärer Entwickler mit einem großen Traum: Die digitale Welt zu revolutionieren. Was als Leidenschaftsprojekt in einer Garage begann, ist heute ein führendes Technologieunternehmen.</p>
+                        <p>Wir glauben daran, dass Technologie das Leben verbessern sollte. Deshalb entwickeln wir nicht nur Software – wir schaffen Erlebnisse, die Menschen begeistern und Unternehmen zum Erfolg führen.</p>
+                        <p>Heute sind wir stolz darauf, mit einem internationalen Team von Experten die Grenzen des Möglichen zu verschieben und unseren Kunden dabei zu helfen, ihre Ziele zu erreichen.</p>
+                    </div>
+                    <div class="story-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="team-section" id="team">
+            <div class="container">
+                <h2>Unser Team</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-avatar">AS</div>
+                        <div class="team-name">Anna Schmidt</div>
+                        <div class="team-role">CEO & Gründerin</div>
+                        <div class="team-bio">Visionäre Führungskraft mit 15 Jahren Erfahrung in der Tech-Branche. Anna treibt Innovation voran und inspiriert unser Team täglich.</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">MK</div>
+                        <div class="team-name">Max Kellner</div>
+                        <div class="team-role">CTO</div>
+                        <div class="team-bio">Technologieexperte und Problemlöser. Max verwandelt komplexe Herausforderungen in elegante, skalierbare Lösungen.</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">SB</div>
+                        <div class="team-name">Sarah Bauer</div>
+                        <div class="team-role">Head of Design</div>
+                        <div class="team-bio">Kreative Designerin mit einem Auge für Details. Sarah erschafft Benutzeroberflächen, die sowohl schön als auch intuitiv sind.</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">TH</div>
+                        <div class="team-name">Tom Hansen</div>
+                        <div class="team-role">Lead Developer</div>
+                        <div class="team-bio">Coding-Ninja und Mentor. Tom bringt die wildesten Ideen zum Leben und teilt sein Wissen gerne mit dem gesamten Team.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="values-section">
+            <div class="container">
+                <div class="values-grid">
+                    <div class="value-card">
+                        <span class="value-icon">🎯</span>
+                        <div class="value-title">Innovation</div>
+                        <div class="value-description">Wir denken über den Tellerrand hinaus und entwickeln Lösungen, die Branchen verändern und neue Maßstäbe setzen.</div>
+                    </div>
+                    <div class="value-card">
+                        <span class="value-icon">🤝</span>
+                        <div class="value-title">Zusammenarbeit</div>
+                        <div class="value-description">Erfolg entsteht durch Teamwork. Wir arbeiten eng mit unseren Kunden zusammen und schaffen gemeinsam Großartiges.</div>
+                    </div>
+                    <div class="value-card">
+                        <span class="value-icon">⚡</span>
+                        <div class="value-title">Exzellenz</div>
+                        <div class="value-description">Qualität ist nicht verhandelbar. Jedes Projekt wird mit höchster Präzision und Leidenschaft umgesetzt.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                history.pushState(null, null, href);
+            });
+        });
+
+
+        // Counter animation for stats (removed)
+        
+        // Intersection Observer for animations (removed stats animation)
+
+        // Add hover effects to team cards
+        document.querySelectorAll('.team-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) rotate(' + (Math.random() * 6 - 3) + 'deg)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) rotate(0deg)';
+            });
+        });
+
+    </script>
+</body>
+</html>
