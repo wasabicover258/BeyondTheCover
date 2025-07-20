@@ -441,16 +441,6 @@
     </main>
 
     <script>
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-
         document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -459,10 +449,6 @@
             });
         });
 
-
-        // Counter animation for stats (removed)
-        
-        // Intersection Observer for animations (removed stats animation)
 
         // Add hover effects to team cards
         document.querySelectorAll('.team-card').forEach(card => {
