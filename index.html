@@ -1230,7 +1230,7 @@
 
         const products = {
             'premium-smartphone': {
-                name: 'Premium Smartphone',
+                name: 'Diver',
                 price: 2,
                 icon: '📱',
                 description: 'Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle. Dieses Premium-Smartphone vereint innovative Features mit zeitlosem Design und bietet eine unvergleichliche Benutzererfahrung.',
@@ -1252,7 +1252,7 @@
                 images: ['📱', '📷', '🔋', '📡']
             },
             'wireless-headphones': {
-                name: 'Wireless Headphones',
+                name: 'Submarine',
                 price: 10,
                 icon: '🎧',
                 description: 'Kristallklarer Sound mit aktiver Geräuschunterdrückung. Für das ultimative Hörerlebnis. Diese Premium-Kopfhörer bieten studioqualitativen Sound und modernste Noise-Cancelling-Technologie.',
@@ -1274,7 +1274,7 @@
                 images: ['🎧', '🔊', '🔋', '📶']
             },
             'smart-watch': {
-                name: 'Smart Watch',
+                name: 'Moses',
                 price: 0,
                 icon: '⌚',
                 description: 'Fitness-Tracking und Smart-Features in einem stilvollen, minimalistischen Design. Diese Smartwatch ist der perfekte Begleiter für Sport, Gesundheit und den digitalen Alltag.',
@@ -1394,7 +1394,7 @@
             // Success feedback
             const button = document.querySelector('.add-to-cart-modal');
             const originalText = button.textContent;
-            button.textContent = `${quantity}x Hinzugefügt!`;
+            button.textContent = `${quantity}x Added!`;
             button.style.background = 'linear-gradient(#005F4E)';
             
             setTimeout(() => {
@@ -1402,7 +1402,7 @@
                 button.style.background = 'linear-gradient(45deg, #333, #555)';
             }, 1500);
             
-            console.log(`${quantity}x ${currentProduct.name} hinzugefügt`);
+            console.log(`${quantity}x ${currentProduct.name} added`);
         }
 
         // Close modal on outside click
