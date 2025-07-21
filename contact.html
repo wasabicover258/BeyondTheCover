@@ -186,161 +186,48 @@
             margin-right: auto;
         }
 
-
-
-        .story-section {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            padding: 100px 0;
-            margin: 80px 0;
-            border-radius: 30px;
-            position: relative;
-            overflow: hidden;
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
         }
 
-        .story-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #171717, #005F4E, #171717);
-        }
-
-        .story-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .story-text h2 {
-            font-size: 2.5rem;
-            color: white;
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .story-text h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: #005F4E;
-        }
-
-        .story-text p {
-            font-size: 1.1rem;
-            color: white;
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
-
-        .story-text .highlight {
-            color: #005F4E;
-            font-weight: 600;
-        }
-
-        .story-image {
-            text-align: center;
-            position: relative;
-        }
-
-        .story-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-        }
-
-        .team-section {
-            padding: 100px 0;
-            text-align: center;
-        }
-
-        .team-section h2 {
-            font-size: 3rem;
-            color: white;
-            margin-bottom: 60px;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-        }
-
-        .team-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 25px;
-            padding: 40px 30px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .team-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
+        input[type="email"],
+        textarea {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            border: 1px solid #999;
+            border-radius: 4px;
+            font-size: 1rem;
         }
 
-        .team-card:hover::before {
-            left: 100%;
+        textarea {
+            resize: vertical;
+            min-height: 150px;
         }
 
-        .team-card:hover {
-            transform: translateY(-15px) rotate(2deg);
-            background: rgba(255, 255, 255, 0.15);
+        .counter {
+            font-size: 0.9rem;
+            text-align: right;
+            margin-top: 0.3rem;
+            color: #555;
         }
 
-        .team-pic img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .team-avatar {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(200deg,rgba(0, 0, 0, 1) 5%, rgba(0, 95, 78, 1) 100%);
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
+        button {
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background-color: #222;
             color: white;
-            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
-        .team-name {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 10px;
-        }
-
-        .team-role {
-            color: #005F4E;
-            font-weight: 500;
-            margin-bottom: 15px;
-        }
-
-        .team-bio {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.95rem;
-            line-height: 1.6;
+        button:disabled {
+            background-color: #777;
+            cursor: not-allowed;
         }
 
         /* Footer */
@@ -354,48 +241,6 @@
 
         footer .container {
             font-size: clamp(1rem, 2vw, 2rem);
-        }
-
-        .values-section {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 80px 0;
-            margin: 80px 0;
-        }
-
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .value-card {
-            text-align: center;
-            padding: 40px 30px;
-            transition: all 0.3s ease;
-        }
-
-        .value-card:hover {
-            transform: scale(1.05);
-        }
-
-        .value-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .value-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 15px;
-        }
-
-        .value-description {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
         }
 
         @keyframes fadeInUp {
@@ -415,13 +260,6 @@
             }
             50% {
                 transform: translateY(-20px);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .story-content {
-                grid-template-columns: 1fr;
-                text-align: center;
             }
         }
     </style>
@@ -444,81 +282,21 @@
     <main>
         <section class="hero" id="home">
             <div class="container">
-                <h1>Breaking the illusion,<br>building your truth!</h1>
-                <p>The osjdckjewfbhclie.</p>
-                
-
+                <h1>Get in touch with us</h1>
             </div>
         </section>
 
-        <section class="story-section" id="about">
-            <div class="container">
-                <div class="story-content">
-                    <div class="story-text">
-                        <h2>Our story</h2>
-                        <p>In 2019, we started as a small group of traders and, over time, uncovered <span class="highlight">the truth</span> behind market movements.</p>
-                        <p>This revelation sparked <span class="highlight">BehindTheCover</span> — a company dedicated to decoding the stock market's <span class="highlight">hidden dynamics</span>.<br>What began as a personal quest has grown into a <span class="highlight">far more successful</span> project than we could’ve ever imagined.</p>
-                        <p>Today, our team analyzes and copy-trades the market’s most <span class="highlight">influential forces</span>, specializing in tracking potential <span class="highlight">insider traders</span> and powerful players who shape prices and turn people into <span class="highlight">liquidity</span>.</p>
-                    </div>
-                    <div class="story-image">
-                        <img src="images/HQ.png" alt="Loading..."
-                    </div>
-                </div>
-            </div>
-        </section>
+        <section>
+            <form id="contactForm">
+                <label for="email">Deine E-Mail-Adresse</label>
+                <input type="email" id="email" name="email" required placeholder="deine@email.de">
 
-        <section class="team-section" id="team">
-            <div class="container">
-                <h2>Unser Team</h2>
-                <div class="team-grid">
-                    <div class="team-card">
-                        <div class="team-pic"> <img src="images/Team/CEO.png"></div>
-                        <div class="team-name">macrosoft</div>
-                        <div class="team-role">CEO & Founder</div>
-                        <div class="team-bio">Visionäre Führungskraft mit 15 Jahren Erfahrung in der Tech-Branche. Anna treibt Innovation voran und inspiriert unser Team täglich.</div>
-                    </div>
-                    <div class="team-card">
-                        <div class="team-avatar">MK</div>
-                        <div class="team-name">Max Kellner</div>
-                        <div class="team-role">CTO</div>
-                        <div class="team-bio">Technologieexperte und Problemlöser. Max verwandelt komplexe Herausforderungen in elegante, skalierbare Lösungen.</div>
-                    </div>
-                    <div class="team-card">
-                        <div class="team-avatar">SB</div>
-                        <div class="team-name">Sarah Bauer</div>
-                        <div class="team-role">Head of Design</div>
-                        <div class="team-bio">Kreative Designerin mit einem Auge für Details. Sarah erschafft Benutzeroberflächen, die sowohl schön als auch intuitiv sind.</div>
-                    </div>
-                    <div class="team-card">
-                        <div class="team-avatar">TH</div>
-                        <div class="team-name">Tom Hansen</div>
-                        <div class="team-role">Lead Developer</div>
-                        <div class="team-bio">Coding-Ninja und Mentor. Tom bringt die wildesten Ideen zum Leben und teilt sein Wissen gerne mit dem gesamten Team.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                <label for="message">Deine Nachricht (max. 500 Wörter)</label>
+                <textarea id="message" name="message" required placeholder="Was möchtest du mitteilen?"></textarea>
+                <div class="counter" id="wordCounter">0 / 500 Wörter</div>
 
-        <section class="values-section">
-            <div class="container">
-                <div class="values-grid">
-                    <div class="value-card">
-                        <span class="value-icon">🎯</span>
-                        <div class="value-title">Innovation</div>
-                        <div class="value-description">Wir denken über den Tellerrand hinaus und entwickeln Lösungen, die Branchen verändern und neue Maßstäbe setzen.</div>
-                    </div>
-                    <div class="value-card">
-                        <span class="value-icon">🤝</span>
-                        <div class="value-title">Zusammenarbeit</div>
-                        <div class="value-description">Erfolg entsteht durch Teamwork. Wir arbeiten eng mit unseren Kunden zusammen und schaffen gemeinsam Großartiges.</div>
-                    </div>
-                    <div class="value-card">
-                        <span class="value-icon">⚡</span>
-                        <div class="value-title">Exzellenz</div>
-                        <div class="value-description">Qualität ist nicht verhandelbar. Jedes Projekt wird mit höchster Präzision und Leidenschaft umgesetzt.</div>
-                    </div>
-                </div>
-            </div>
+                <button type="submit">Absenden</button>
+            </form>
         </section>
     </main>
 
@@ -537,18 +315,33 @@
             });
         });
 
+        const messageInput = document.getElementById('message');
+        const wordCounter = document.getElementById('wordCounter');
+        const form = document.getElementById('contactForm');
+        const maxWords = 500;
 
-        // Add hover effects to team cards
-        document.querySelectorAll('.team-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-15px) rotate(' + (Math.random() * 6 - 3) + 'deg)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) rotate(0deg)';
-            });
+        messageInput.addEventListener('input', () => {
+             const words = messageInput.value.trim().split(/\s+/).filter(word => word.length > 0);
+             const count = words.length;
+             wordCounter.textContent = `${count} / ${maxWords} Wörter`;
+
+             if (count > maxWords) {
+                 messageInput.setCustomValidity("Maximal 500 Wörter erlaubt.");
+             } else {
+                 messageInput.setCustomValidity("");
+             }
+        });
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Das hier musst du später durch einen echten Versand ersetzen (z. B. EmailJS oder PHP)
+            alert("Danke! Deine Nachricht wurde vorbereitet (hier müsste es nun an info@btcoverinvest.com gesendet werden).");
+            form.reset();
+            wordCounter.textContent = "0 / 500 Wörter";
         });
 
     </script>
+    
 </body>
 </html>
