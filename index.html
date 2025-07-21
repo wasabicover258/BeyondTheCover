@@ -1365,135 +1365,113 @@
                 images: ['⌚', '💓', '🏃', '💧']
             }
         };
-
         function openProductModal(productId) {
             currentProduct = products[productId];
             if (!currentProduct) return;
 
-            // Update modal content (nur für das erste Modal sinnvoll)
+            // 1) Content updaten
             document.getElementById('modal-title').textContent = currentProduct.name;
             document.getElementById('modal-price').innerHTML = '€' + currentProduct.price + '<small>/mo</small>';
             document.getElementById('modal-description').textContent = currentProduct.description;
             document.getElementById('main-image').textContent = currentProduct.icon;
 
-            // Update features
+            // 2) Features
             const featuresList = document.getElementById('features-list');
             featuresList.innerHTML = '';
-            currentProduct.features.forEach(feature => {
+            currentProduct.features.forEach(f => {
                 const li = document.createElement('li');
-                li.textContent = feature;
+                li.textContent = f;
                 featuresList.appendChild(li);
             });
 
-            // Update specs
+            // 3) Specs
             const specsGrid = document.getElementById('specs-grid');
             specsGrid.innerHTML = '';
-            Object.entries(currentProduct.specs).forEach(([key, value]) => {
-                const specItem = document.createElement('div');
-                specItem.className = 'spec-item';
-                specItem.innerHTML = `
-                    <span class="spec-label">${key}:</span>
-                    <span class="spec-value">${value}</span>
-                `;
-                specsGrid.appendChild(specItem);
+            Object.entries(currentProduct.specs).forEach(([k, v]) => {
+                const item = document.createElement('div');
+                item.className = 'spec-item';
+                item.innerHTML = `<span class="spec-label">${k}:</span><span class="spec-value">${v}</span>`;
+                specsGrid.appendChild(item);
             });
 
-            // Update thumbnails
-            const thumbnails = document.querySelector('.image-thumbnails');
-            thumbnails.innerHTML = '';
-            currentProduct.images.forEach((image, index) => {
-                const thumbnail = document.createElement('div');
-                thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
-                thumbnail.textContent = image;
-                thumbnail.onclick = () => changeMainImage(image);
-                thumbnails.appendChild(thumbnail);
+            // 4) Thumbnails
+            const thumbs = document.querySelector('.image-thumbnails');
+            thumbs.innerHTML = '';
+            currentProduct.images.forEach((img, i) => {
+                const t = document.createElement('div');
+                t.className = 'thumbnail' + (i === 0 ? ' active' : '');
+                t.textContent = img;
+                t.onclick = () => changeMainImage(img);
+                thumbs.appendChild(t);
             });
 
-            // Reset quantity
+            // 5) Quantity reset
             document.getElementById('quantity').value = 1;
 
-            // Show the correct modal
-            document.getElementById('product-modal').style.display = 'none';
-            document.getElementById('product-modal1').style.display = 'none';
+            // 6) Beide Modals schließen
+            document.querySelectorAll('.product-modal, .product-modal1').forEach(m => {
+                m.classList.remove('active');
+            });
 
-            if (productId === 'premium-smartphone') {
-                document.getElementById('product-modal').style.display = 'flex';
-            } else if (productId === 'wireless-headphones' || productId === 'smart-watch') {
-                document.getElementById('product-modal1').style.display = 'flex';
+            // 7) Je nach ID das richtige Modal öffnen
+            let modal;
+            if (productId === 'diver') {
+                modal = document.getElementById('product-modal');
+            } else { // 'submarine' oder 'moses'
+                modal = document.getElementById('product-modal1');
             }
-
+            modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-
         function closeProductModal() {
-            const modal = document.getElementById('product-modal');
-            modal.classList.remove('active');
+            document.querySelectorAll('.product-modal, .product-modal1').forEach(m => {
+                m.classList.remove('active');
+            });
             document.body.style.overflow = 'auto';
             currentProduct = null;
         }
 
         function changeMainImage(imageIcon) {
             document.getElementById('main-image').textContent = imageIcon;
-            
-            // Update active thumbnail
-            document.querySelectorAll('.thumbnail').forEach(thumb => {
-                thumb.classList.remove('active');
-                if (thumb.textContent === imageIcon) {
-                    thumb.classList.add('active');
-                }
+            document.querySelectorAll('.thumbnail').forEach(t => {
+                t.classList.toggle('active', t.textContent === imageIcon);
             });
         }
 
-        function changeQuantity(change) {
-            const quantityInput = document.getElementById('quantity');
-            let newValue = parseInt(quantityInput.value) + change;
-            newValue = Math.max(1, Math.min(10, newValue));
-            quantityInput.value = newValue;
+        function changeQuantity(delta) {
+            const input = document.getElementById('quantity');
+            let val = parseInt(input.value) + delta;
+            input.value = Math.max(1, Math.min(10, val));
         }
 
         function addToCartFromModal() {
             if (!currentProduct) return;
-            
-            const quantity = parseInt(document.getElementById('quantity').value);
-            
-            for (let i = 0; i < quantity; i++) {
-                cart.push({
-                    name: currentProduct.name,
-                    price: currentProduct.price
-                });
+            const qty = parseInt(document.getElementById('quantity').value);
+            for (let i = 0; i < qty; i++) {
+                cart.push({ name: currentProduct.name, price: currentProduct.price });
             }
-            
-            cartCount += quantity;
+            cartCount += qty;
             document.getElementById('cart-count').textContent = cartCount;
             document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
-            
-            // Success feedback
-            const button = document.querySelector('.add-to-cart-modal');
-            const originalText = button.textContent;
-            button.textContent = `${quantity}x Added!`;
-            button.style.background = 'linear-gradient(#005F4E)';
-            
-            setTimeout(() => {
-                button.textContent = originalText;
-                button.style.background = 'linear-gradient(45deg, #333, #555)';
-            }, 1500);
-            
-            console.log(`${quantity}x ${currentProduct.name} added`);
+
+            const btn = document.querySelector('.add-to-cart-modal');
+            const txt = btn.textContent;
+            btn.textContent = `${qty}× Added!`;
+            setTimeout(() => btn.textContent = txt, 1500);
         }
 
-        // Close modal on outside click
-        document.getElementById('product-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeProductModal();
-            }
+        // Modal schließen bei Klick außerhalb
+        document.getElementById('product-modal').addEventListener('click', e => {
+            if (e.target === e.currentTarget) closeProductModal();
+        });
+        document.getElementById('product-modal1').addEventListener('click', e => {
+            if (e.target === e.currentTarget) closeProductModal();
         });
 
-        // Close modal on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeProductModal();
-            }
+        // Modal schließen mit Escape
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeProductModal();
         });
 
         function handleHashChange() {
