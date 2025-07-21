@@ -992,7 +992,8 @@
         <nav class="navigation">
             <img src="images/logos/SimplifiedLogo.png" class="logo mobile" />
             <img src="images/logos/MainLogo.png" class="logo desktop" />
-            <div class="cart-icon" onclick="toggleCart()">
+            <div class="nav-right">
+                <div class="cart-icon" onclick="toggleCart()">
                 <button data-quantity="0" class="btn-cart">
                           <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="30.52" width="24.38" xmlns="http://www.w3.org/2000/svg">
                             <title>icon-cart</title>
@@ -1000,13 +1001,14 @@
                           </svg>
                           <span class="quantity" id="cart-count">0</span>
                  </button>
+                 </div>
+                 <ul class="nav-links">
+                     <li><a href="#home">Home</a></li>
+                     <li><a href="about.html#about">About</a></li>
+                     <li><a href="#products">Products</a></li>
+                     <li><a href="contact.html#contact">Contact</a></li>
+                 </ul>
             </div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="about.html#about">About</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="contact.html#contact">Contact</a></li>
-            </ul>
         </nav>
     </header>
 
