@@ -544,7 +544,8 @@
         }
 
         /* Product Detail Modal */
-        .product-modal {
+        .product-modal,
+        .product-modal1 {
             position: fixed;
             top: 0;
             left: 0;
@@ -1114,7 +1115,7 @@
                             <h3 class="product-name">Diver</h3>
                             <p class="product-description">Dip your toe through the surface.</p>
                             <div class="product-price">€2/mo</div>
-                            <button class="view-product" onclick="openProductModal('premium-smartphone')">
+                            <button class="view-product" onclick="openProductModal('diver')">
                                 Show details
                             </button>
                         </div>
@@ -1126,7 +1127,7 @@
                             <h3 class="product-name">Submarine</h3>
                             <p class="product-description">Dive right in and follow the whales.</p>
                             <div class="product-price">€10/mo</div>
-                            <button class="view-product" onclick="openProductModal('wireless-headphones')">
+                            <button class="view-product" onclick="openProductModal('submarine')">
                                 Show details
                             </button>
                         </div>
@@ -1138,7 +1139,7 @@
                             <h3 class="product-name">Moses</h3>
                             <p class="product-description">Coming soon!</p>
                             <div class="product-price">€ ~</div>
-                            <button class="view-product" onclick="openProductModal('smart-watch')">
+                            <button class="view-product" onclick="openProductModal('moses')">
                                 Show details
                             </button>
                         </div>
@@ -1195,6 +1196,74 @@
                     
                     <button class="add-to-cart-modal" onclick="addToCartFromModal()">
                         Add to cart
+                    </button>
+                    
+                    <div class="product-specs">
+                        <div class="specs-title">Technische Daten</div>
+                        <div class="specs-grid" id="specs-grid">
+                            <div class="spec-item">
+                                <span class="spec-label">Display:</span>
+                                <span class="spec-value">6.7" OLED</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Speicher:</span>
+                                <span class="spec-value">256GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">RAM:</span>
+                                <span class="spec-value">8GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Akku:</span>
+                                <span class="spec-value">4500mAh</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="product-modal1" id="product-modal1">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProductModal()">×</button>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <div class="main-image" id="main-image">📱</div>
+                    <div class="image-thumbnails">
+                        <div class="thumbnail active" onclick="changeMainImage('📱')">📱</div>
+                        <div class="thumbnail" onclick="changeMainImage('📷')">📷</div>
+                        <div class="thumbnail" onclick="changeMainImage('🔋')">🔋</div>
+                        <div class="thumbnail" onclick="changeMainImage('📡')">📡</div>
+                    </div>
+                </div>
+                
+                <div class="modal-info">
+                    <h2 class="modal-title" id="modal-title">Premium Smartphone</h2>
+                    <div class="modal-price" id="modal-price">€ ~</div>
+                    <p class="modal-description" id="modal-description">
+                        Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle.
+                    </p>
+                    
+                    <ul class="features-list" id="features-list">
+                        <li>6.7" OLED Display mit 120Hz</li>
+                        <li>Triple-Kamera System</li>
+                        <li>5G Konnektivität</li>
+                        <li>Wasserdicht nach IP68</li>
+                        <li>Wireless Charging</li>
+                    </ul>
+                    
+                    <div class="quantity-selector">
+                        <span class="quantity-label">Quantity:</span>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
+                            <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="10">
+                            <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+                        </div>
+                    </div>
+                    
+                    <button class="add-to-cart-modal" onclick="addToCartFromModal()">
+                        Request access
                     </button>
                     
                     <div class="product-specs">
@@ -1301,7 +1370,7 @@
             currentProduct = products[productId];
             if (!currentProduct) return;
 
-            // Update modal content
+            // Update modal content (nur für das erste Modal sinnvoll)
             document.getElementById('modal-title').textContent = currentProduct.name;
             document.getElementById('modal-price').innerHTML = '€' + currentProduct.price + '<small>/mo</small>';
             document.getElementById('modal-description').textContent = currentProduct.description;
@@ -1343,11 +1412,19 @@
             // Reset quantity
             document.getElementById('quantity').value = 1;
 
-            // Show modal
-            const modal = document.getElementById('product-modal');
-            modal.classList.add('active');
+            // Show the correct modal
+            document.getElementById('product-modal').style.display = 'none';
+            document.getElementById('product-modal1').style.display = 'none';
+
+            if (productId === 'premium-smartphone') {
+                document.getElementById('product-modal').style.display = 'flex';
+            } else if (productId === 'wireless-headphones' || productId === 'smart-watch') {
+                document.getElementById('product-modal1').style.display = 'flex';
+            }
+
             document.body.style.overflow = 'hidden';
         }
+
 
         function closeProductModal() {
             const modal = document.getElementById('product-modal');
