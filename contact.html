@@ -291,9 +291,9 @@
                 <label for="email">Deine E-Mail-Adresse</label>
                 <input type="email" id="email" name="email" required placeholder="deine@email.de">
 
-                <label for="message">Deine Nachricht (max. 500 Wörter)</label>
+                <label for="message">Deine Nachricht (max. 500 Zeichen)</label>
                 <textarea id="message" name="message" required placeholder="Was möchtest du mitteilen?"></textarea>
-                <div class="counter" id="wordCounter">0 / 500 Wörter</div>
+                <div class="counter" id="charCounter">0 / 500 Zeichen</div>
 
                 <button type="submit">Absenden</button>
             </form>
@@ -316,20 +316,14 @@
         });
 
         const messageInput = document.getElementById('message');
-        const wordCounter = document.getElementById('wordCounter');
+        const charCounter = document.getElementById('charCounter');
         const form = document.getElementById('contactForm');
-        const maxWords = 500;
+        const maxChars = 500;
 
         messageInput.addEventListener('input', () => {
-             const words = messageInput.value.trim().split(/\s+/).filter(word => word.length > 0);
+             const currentLength = messageInput.valve.length;
              const count = words.length;
-             wordCounter.textContent = `${count} / ${maxWords} Wörter`;
-
-             if (count > maxWords) {
-                 messageInput.setCustomValidity("Maximal 500 Wörter erlaubt.");
-             } else {
-                 messageInput.setCustomValidity("");
-             }
+             charCounter.textContent = `${currentLength} / ${maxChars} Zeichen`;
         });
 
         form.addEventListener('submit', function(e) {
@@ -338,7 +332,7 @@
             // Das hier musst du später durch einen echten Versand ersetzen (z. B. EmailJS oder PHP)
             alert("Danke! Deine Nachricht wurde vorbereitet (hier müsste es nun an info@btcoverinvest.com gesendet werden).");
             form.reset();
-            wordCounter.textContent = "0 / 500 Wörter";
+            charCounter.textContent = '0 / ${maxChars} Zeichen';
         });
 
     </script>
