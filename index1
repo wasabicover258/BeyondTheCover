@@ -139,6 +139,12 @@
             box-sizing: border-box;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px; /* sorgt für Abstand zwischen Warenkorb und Navigation */
+        }
+
         @media (max-width: 768px) {
             .navigation {
                 padding: 0 5px;
@@ -992,7 +998,8 @@
         <nav class="navigation">
             <img src="images/logos/SimplifiedLogo.png" class="logo mobile" />
             <img src="images/logos/MainLogo.png" class="logo desktop" />
-            <div class="cart-icon" onclick="toggleCart()">
+            <div class="nav-right">
+                <div class="cart-icon" onclick="toggleCart()">
                 <button data-quantity="0" class="btn-cart">
                           <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="30.52" width="24.38" xmlns="http://www.w3.org/2000/svg">
                             <title>icon-cart</title>
@@ -1000,13 +1007,14 @@
                           </svg>
                           <span class="quantity" id="cart-count">0</span>
                  </button>
+                 </div>
+                 <ul class="nav-links">
+                     <li><a href="#home">Home</a></li>
+                     <li><a href="about.html#about">About</a></li>
+                     <li><a href="#products">Products</a></li>
+                     <li><a href="contact.html#contact">Contact</a></li>
+                 </ul>
             </div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="about.html#about">About</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="contact.html#contact">Contact</a></li>
-            </ul>
         </nav>
     </header>
 
@@ -1027,9 +1035,9 @@
                     <div class="info-text">
                         <h3>Tired of being outplayed?</h3>
                         <p>You're meant to believe the richest, most powerful people are brilliant traders  who just live a wealthy lifestyle.</p>
-                        <p>History <span class="highlight">disproves</span> this. <br>It shows the opposite:</p>
-                        <p>Great power <span class="highlight">always corrupts</span>. Take Julius Caesar for example. His wealth and ambition crushed the Republic for personal glory.</p>
-                        <p>Today's billionaire elites are <span class="highlight"> no different</span>, rigging systems against you for <span class="highlight"> their own profit.<br>And why wouldn't they?</span></p>
+                        <p>History proves <span class="highlight">otherwise</span>.<br>It shows the opposite:</p>
+                        <p>Great power <span class="highlight">always corrupts</span>. Take Julius Caesar, for example — his wealth and ambition crushed the Republic for personal glory.</p>
+                        <p>Today's billionaire elites are <span class="highlight"> no different</span>. They rig the system against you for <span class="highlight"> their own profit.<br>And why wouldn't they?</span></p>
                     </div>
                     <div class="info-image">
                         <picture>
