@@ -307,35 +307,56 @@
     </footer>
 
     <script>
-        document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                history.pushState(null, null, href);
-            });
-        });
+    // Interne Seitenverlinkung ohne Sprung
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            history.pushState(null, null, href);
+        });
+    });
 
-        const messageInput = document.getElementById('message');
-        const charCounter = document.getElementById('charCounter');
-        const form = document.getElementById('contactForm');
-        const maxChars = 500;
+    const messageInput = document.getElementById('message');
+    const charCounter = document.getElementById('charCounter');
+    const form = document.getElementById('contactForm');
+    const maxChars = 500;
 
-        messageInput.addEventListener('input', () => {
-             const currentLength = messageInput.valve.length;
-             const count = words.length;
-             charCounter.textContent = `${currentLength} / ${maxChars} Zeichen`;
-        });
+    messageInput.addEventListener('input', () => {
+        let content = messageInput.value;
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Sperre bei 500 Zeichen
+        if (content.length > maxChars) {
+            content = content.slice(0, maxChars);
+            messageInput.value = content;
+        }
 
-            // Das hier musst du später durch einen echten Versand ersetzen (z. B. EmailJS oder PHP)
-            alert("Danke! Deine Nachricht wurde vorbereitet (hier müsste es nun an info@btcoverinvest.com gesendet werden).");
-            form.reset();
-            charCounter.textContent = '0 / ${maxChars} Zeichen';
-        });
+        const remaining = maxChars - content.length;
+        charCounter.textContent = `Noch ${remaining} Zeichen`;
+
+        // Farbliche Warnung ab 50 Zeichen Rest
+        if (remaining <= 50) {
+            charCounter.style.color = 'darkred';
+            charCounter.style.fontWeight = 'bold';
+        } else {
+            charCounter.style.color = '#555';
+            charCounter.style.fontWeight = 'normal';
+        }
+    });
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Hier später PHP oder JS-Versand einbauen
+        alert("Danke! Deine Nachricht wurde vorbereitet (hier müsste sie an info@btcoverinvest.com gesendet werden).");
+
+        form.reset();
+        charCounter.textContent = `Noch ${maxChars} Zeichen`;
+        charCounter.style.color = '#555';
+        charCounter.style.fontWeight = 'normal';
+    });
 
     </script>
+
     
 </body>
 </html>
