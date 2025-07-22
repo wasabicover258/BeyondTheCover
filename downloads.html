@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Über Uns - InnovateTech</title>
+    <style>
+
+        @font-face {
+           font-family: 'HeadlineFont';
+           src: url('fonts/Bezmiar-Regular.otf') format('opentype');
+           font-weight: 700;
+        }
+
+        @font-face {
+           font-family: 'MainFont1';
+           src: url('fonts/Mavoble.ttf') format('truetype');
+           font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'GoofyFont';
+            src: url('fonts/Iceland-Regular.ttf') format('truetype');
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'MainFont';
+            src: url('fonts/Relevance-trial-Regular.ttf') format('truetype');
+            font-weight: 400;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+            height: 80px;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            height: 100%;
+            align-items: center;
+        }
+
+        /* Logo */
+        .logo {
+            max-height: 50%;
+            height: auto;
+            width: auto;
+        }
+        
+        .mobile {
+            display: none;
+        }
+
+        .desktop {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .mobile {
+                display: block;
+            }
+            .desktop {
+                display: none;
+            }
+        }
+
+        header.scrolled .logo {
+            color: #333;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                row-gap: 7px;
+                column-gap: 15px;
+                font-size: 3vw;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        header.scrolled .nav-links a {
+            color: #333;
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #005F4E;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            margin-top: 80px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 90px 0;
+            color: white;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
+        }
+
+        .hero h1 {
+            font-size: clamp(0.9rem, 1.8vw, 1.6rem);
+            font-family: 'HeadlineFont';
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+            max-width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            word-break: break-word;
+        }
+
+        .hero p {
+            font-size: clamp(0.8rem, 1.2vw, 1.1rem);
+            font-family: 'MainFont';
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+
+        .story-section {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 100px 0;
+            margin: 80px 0;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #171717, #005F4E, #171717);
+        }
+
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .story-text h2 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .story-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #005F4E;
+        }
+
+        .story-text p {
+            font-size: 1.1rem;
+            color: white;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .story-text .highlight {
+            color: #005F4E;
+            font-weight: 600;
+        }
+
+        .story-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .story-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .team-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .team-section h2 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 60px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 40px 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .team-card:hover::before {
+            left: 100%;
+        }
+
+        .team-card:hover {
+            transform: translateY(-15px) rotate(2deg);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .team-pic img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(200deg,rgba(0, 0, 0, 1) 5%, rgba(0, 95, 78, 1) 100%);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .team-role {
+            color: #005F4E;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .team-bio {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a0a0a;
+            border-top: 1px solid #333;
+            padding: 2rem 0;
+            text-align: center;
+            color: #666;
+        }
+
+        footer .container {
+            font-size: clamp(1rem, 2vw, 2rem);
+        }
+
+        .values-section {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 80px 0;
+            margin: 80px 0;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 40px 30px;
+            transition: all 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: scale(1.05);
+        }
+
+        .value-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .value-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .value-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .story-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<body>
+    <header id="header">
+        <nav>
+            <img src="images/logos/SimplifiedLogo.png" class="logo mobile" />
+            <img src="images/logos/MainLogo.png" class="logo desktop" />
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="index.html#products">Products</a></li>
+                <li><a href="contact.html#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <h1>Breaking the illusion,<br>building your truth!</h1>
+                <p>The osjdckjewfbhclie.</p>
+                
+
+            </div>
+        </section>
+
+        <section class="story-section" id="about">
+            <div class="container">
+                <div class="story-content">
+                    <div class="story-text">
+                        <h2>Our story</h2>
+                        <p>In 2019, we started as a small group of traders and, over time, uncovered <span class="highlight">the truth</span> behind market movements.</p>
+                        <p>This revelation sparked <span class="highlight">BehindTheCover</span> — a company dedicated to decoding the stock market's <span class="highlight">hidden dynamics</span>.<br>What began as a personal quest has grown into a <span class="highlight">far more successful</span> project than we could’ve ever imagined.</p>
+                        <p>Today, our team analyzes and copy-trades the market’s most <span class="highlight">influential forces</span>, specializing in tracking potential <span class="highlight">insider traders</span> and powerful players who shape prices and turn people into <span class="highlight">liquidity</span>.</p>
+                    </div>
+                    <div class="story-image">
+                        <img src="images/HQ.png" alt="Loading..."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="team-section" id="team">
+            <div class="container">
+                <h2>Unser Team</h2>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-pic"> <img src="images/Team/CEO.png"></div>
+                        <div class="team-name">macrosoft</div>
+                        <div class="team-role">CEO & Founder</div>
+                        <div class="team-bio">Visionäre Führungskraft mit 15 Jahren Erfahrung in der Tech-Branche. Anna treibt Innovation voran und inspiriert unser Team täglich.</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">MK</div>
+                        <div class="team-name">Max Kellner</div>
+                        <div class="team-role">CTO</div>
+                        <div class="team-bio">Technologieexperte und Problemlöser. Max verwandelt komplexe Herausforderungen in elegante, skalierbare Lösungen.</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">SB</div>
+                        <div class="team-name">Sarah Bauer</div>
+                        <div class="team-role">Head of Design</div>
+                        <div class="team-bio">Kreative Designerin mit einem Auge für Details. Sarah erschafft Benutzeroberflächen, die sowohl schön als auch intuitiv sind.</div>
+                    </div>
+                    <div class="team-card">
+                        <div class="team-avatar">TH</div>
+                        <div class="team-name">Tom Hansen</div>
+                        <div class="team-role">Lead Developer</div>
+                        <div class="team-bio">Coding-Ninja und Mentor. Tom bringt die wildesten Ideen zum Leben und teilt sein Wissen gerne mit dem gesamten Team.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="values-section">
+            <div class="container">
+                <div class="values-grid">
+                    <div class="value-card">
+                        <span class="value-icon">🎯</span>
+                        <div class="value-title">Innovation</div>
+                        <div class="value-description">Wir denken über den Tellerrand hinaus und entwickeln Lösungen, die Branchen verändern und neue Maßstäbe setzen.</div>
+                    </div>
+                    <div class="value-card">
+                        <span class="value-icon">🤝</span>
+                        <div class="value-title">Zusammenarbeit</div>
+                        <div class="value-description">Erfolg entsteht durch Teamwork. Wir arbeiten eng mit unseren Kunden zusammen und schaffen gemeinsam Großartiges.</div>
+                    </div>
+                    <div class="value-card">
+                        <span class="value-icon">⚡</span>
+                        <div class="value-title">Exzellenz</div>
+                        <div class="value-description">Qualität ist nicht verhandelbar. Jedes Projekt wird mit höchster Präzision und Leidenschaft umgesetzt.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 BEYONDTHECOVER. All rights preserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                history.pushState(null, null, href);
+            });
+        });
+
+
+        // Add hover effects to team cards
+        document.querySelectorAll('.team-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) rotate(' + (Math.random() * 6 - 3) + 'deg)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) rotate(0deg)';
+            });
+        });
+
+    </script>
+</body>
+</html>
