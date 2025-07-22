@@ -63,6 +63,11 @@
             transition: all 0.3s ease;
         }
 
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+        }
+
         nav {
             display: flex;
             justify-content: space-between;
@@ -71,13 +76,32 @@
             align-items: center;
         }
 
+        /* Logo */
         .logo {
             max-height: 50%;
             height: auto;
             width: auto;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
+        }
+        
+        .mobile {
+            display: none;
+        }
+
+        .desktop {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .mobile {
+                display: block;
+            }
+            .desktop {
+                display: none;
+            }
+        }
+
+        header.scrolled .logo {
+            color: #333;
         }
 
         .nav-links {
@@ -86,12 +110,26 @@
             gap: 30px;
         }
 
+        @media (max-width: 768px) {
+            .nav-links {
+                row-gap: 7px;
+                column-gap: 15px;
+                font-size: 3vw;
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
         .nav-links a {
             color: white;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
+        }
+
+        header.scrolled .nav-links a {
+            color: #333;
         }
 
         .nav-links a:hover {
@@ -432,16 +470,18 @@
     </style>
 </head>
 <body>
-    <header>
+    <header id="header">
         <nav>
-            <div class="logo">Your Logo</div>
+            <img src="images/logos/SimplifiedLogo.png" class="logo mobile" />
+            <img src="images/logos/MainLogo.png" class="logo desktop" />
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="index.html#products">Products</a></li>
-                <li><a href="#downloads">Downloads</a></li>
+                <li><a href="downloads.html#downloads">Downloads</a></li>
             </ul>
         </nav>
+    </header>
     </header>
 
     <main>
