@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Über Uns - InnovateTech</title>
+    <title>Downloads</title>
     <style>
-
         @font-face {
            font-family: 'HeadlineFont';
            src: url('fonts/Bezmiar-Regular.otf') format('opentype');
@@ -64,11 +63,6 @@
             transition: all 0.3s ease;
         }
 
-        header.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-        }
-
         nav {
             display: flex;
             justify-content: space-between;
@@ -77,32 +71,13 @@
             align-items: center;
         }
 
-        /* Logo */
         .logo {
             max-height: 50%;
             height: auto;
             width: auto;
-        }
-        
-        .mobile {
-            display: none;
-        }
-
-        .desktop {
-            display: block;
-        }
-
-        @media (max-width: 768px) {
-            .mobile {
-                display: block;
-            }
-            .desktop {
-                display: none;
-            }
-        }
-
-        header.scrolled .logo {
-            color: #333;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
         .nav-links {
@@ -111,26 +86,12 @@
             gap: 30px;
         }
 
-        @media (max-width: 768px) {
-            .nav-links {
-                row-gap: 7px;
-                column-gap: 15px;
-                font-size: 3vw;
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
         .nav-links a {
             color: white;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
-        }
-
-        header.scrolled .nav-links a {
-            color: #333;
         }
 
         .nav-links a:hover {
@@ -156,27 +117,23 @@
             margin-top: 80px;
         }
 
-        .hero {
+        .downloads-hero {
             text-align: center;
-            padding: 90px 0;
+            padding: 60px 0;
             color: white;
             background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
         }
 
-        .hero h1 {
-            font-size: clamp(0.9rem, 1.8vw, 1.6rem);
+        .downloads-hero h1 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
             font-family: 'HeadlineFont';
             margin-bottom: 20px;
             opacity: 0;
             animation: fadeInUp 1s ease forwards;
-            max-width: 90%;
-            margin-left: auto;
-            margin-right: auto;
-            word-break: break-word;
         }
 
-        .hero p {
-            font-size: clamp(0.8rem, 1.2vw, 1.1rem);
+        .downloads-hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
             font-family: 'MainFont';
             margin-bottom: 40px;
             opacity: 0;
@@ -186,104 +143,30 @@
             margin-right: auto;
         }
 
-
-
-        .story-section {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            padding: 100px 0;
-            margin: 80px 0;
-            border-radius: 30px;
-            position: relative;
-            overflow: hidden;
+        .downloads-section {
+            padding: 80px 0;
         }
 
-        .story-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #171717, #005F4E, #171717);
-        }
-
-        .story-content {
+        .downloads-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .story-text h2 {
-            font-size: 2.5rem;
-            color: white;
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .story-text h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: #005F4E;
-        }
-
-        .story-text p {
-            font-size: 1.1rem;
-            color: white;
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
-
-        .story-text .highlight {
-            color: #005F4E;
-            font-weight: 600;
-        }
-
-        .story-image {
-            text-align: center;
-            position: relative;
-        }
-
-        .story-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-        }
-
-        .team-section {
-            padding: 100px 0;
-            text-align: center;
-        }
-
-        .team-section h2 {
-            font-size: 3rem;
-            color: white;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
             margin-bottom: 60px;
         }
 
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-        }
-
-        .team-card {
+        .download-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 25px;
             padding: 40px 30px;
+            text-align: center;
             transition: all 0.3s ease;
-            cursor: pointer;
             position: relative;
             overflow: hidden;
         }
 
-        .team-card::before {
+        .download-card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -294,26 +177,20 @@
             transition: left 0.5s ease;
         }
 
-        .team-card:hover::before {
+        .download-card:hover::before {
             left: 100%;
         }
 
-        .team-card:hover {
-            transform: translateY(-15px) rotate(2deg);
+        .download-card:hover {
+            transform: translateY(-10px);
             background: rgba(255, 255, 255, 0.15);
+            border-color: #005F4E;
         }
 
-        .team-pic img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .team-avatar {
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(200deg,rgba(0, 0, 0, 1) 5%, rgba(0, 95, 78, 1) 100%);
+        .download-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #005F4E, #007A64);
             border-radius: 50%;
             margin: 0 auto 20px;
             display: flex;
@@ -324,181 +201,110 @@
             font-weight: bold;
         }
 
-        .team-name {
-            font-size: 1.3rem;
+        .download-title {
+            font-size: 2rem;
             font-weight: bold;
             color: white;
-            margin-bottom: 10px;
-        }
-
-        .team-role {
-            color: #005F4E;
-            font-weight: 500;
             margin-bottom: 15px;
+            font-family: 'HeadlineFont';
         }
 
-        .team-bio {
+        .download-description {
             color: rgba(255, 255, 255, 0.8);
-            font-size: 0.95rem;
+            margin-bottom: 30px;
             line-height: 1.6;
         }
 
-        /* Footer */
-        footer {
-            background: #0a0a0a;
-            border-top: 1px solid #333;
-            padding: 2rem 0;
-            color: #666;
-        }
-        
-        footer .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .footer-left {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .footer-center {
-            flex: 1;
-            text-align: center;
-            min-width: 200px;
-        }
-        
-        .footer-right {
-            flex: 1;
-            text-align: right;
-            min-width: 200px;
-        }
-        
-        .impressum {
-            margin-bottom: 1rem;
-        }
-        
-        .impressum h3 {
-            color: #999;
+        .download-btn {
+            background: linear-gradient(135deg, #005F4E, #007A64);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 15px;
             font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            font-weight: normal;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .impressum p {
-            margin: 0.2rem 0;
-            font-size: 0.9rem;
-            line-height: 1.4;
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 95, 78, 0.3);
+            background: linear-gradient(135deg, #007A64, #00A085);
         }
-        
-        .copyright {
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
-            color: #666;
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
         }
-        
-        .contact-btn {
+
+        .download-btn:hover::before {
+            left: 100%;
+        }
+
+        .membership-notice {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin: 60px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .membership-notice h3 {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .membership-btn {
             background: linear-gradient(135deg, #333, #555);
-            color: #fff;
-            padding: 0.8rem 1.5rem;
+            color: white;
+            padding: 12px 25px;
             border: 1px solid #666;
-            border-radius: 8px;
+            border-radius: 12px;
             text-decoration: none;
             font-size: 1rem;
+            font-weight: 500;
             transition: all 0.3s ease;
             display: inline-block;
         }
-        
-        .contact-btn:hover {
+
+        .membership-btn:hover {
             background: linear-gradient(135deg, #555, #777);
             border-color: #999;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        
-        /* Mobile Anpassungen */
-        @media (max-width: 768px) {
-            footer .container {
-                flex-direction: column;
-                text-align: center;
-                gap: 1.5rem;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            .footer-left,
-            .footer-center,
-            .footer-right {
-                text-align: center;
-                min-width: auto;
-            }
-            
-            .impressum {
-                margin-bottom: 1.5rem;
-            }
-            
-            .impressum h3 {
-                font-size: 1rem;
-            }
-            
-            .impressum p {
-                font-size: 0.8rem;
-            }
-            
-            .copyright {
-                font-size: 0.9rem;
-            }
-            
-            .contact-btn {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.9rem;
-            }
-        }
 
-        .values-section {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 80px 0;
-            margin: 80px 0;
-        }
-
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .value-card {
+        footer {
+            background: #0a0a0a;
+            border-top: 1px solid #333;
+            padding: 2rem 0;
+            color: #666;
             text-align: center;
-            padding: 40px 30px;
-            transition: all 0.3s ease;
         }
 
-        .value-card:hover {
-            transform: scale(1.05);
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
 
-        .value-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .value-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 15px;
-        }
-
-        .value-description {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
+        .copyright {
+            font-size: 0.9rem;
+            color: #666;
         }
 
         @keyframes fadeInUp {
@@ -512,114 +318,75 @@
             }
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
         @media (max-width: 768px) {
-            .story-content {
+            .downloads-grid {
                 grid-template-columns: 1fr;
-                text-align: center;
+                gap: 30px;
+            }
+            
+            .download-card {
+                padding: 30px 20px;
+            }
+            
+            .nav-links {
+                display: none;
             }
         }
     </style>
 </head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body>
-    <header id="header">
+    <header>
         <nav>
-            <img src="images/logos/SimplifiedLogo.png" class="logo mobile" />
-            <img src="images/logos/MainLogo.png" class="logo desktop" />
+            <div class="logo">Your Logo</div>
             <ul class="nav-links">
-                <li><a href="index.html#home">Home</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
                 <li><a href="index.html#products">Products</a></li>
-                <li><a href="downloads.html#downloads">Downloads</a></li>
+                <li><a href="#downloads">Downloads</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section class="hero" id="home">
+        <section class="downloads-hero">
             <div class="container">
-                <h1>Breaking the illusion,<br>building your truth!</h1>
-                <p>The osjdckjewfbhclie.</p>
-                
-
+                <h1>Downloads</h1>
+                <p>Laden Sie unsere Software herunter und entdecken Sie die Möglichkeiten</p>
             </div>
         </section>
 
-        <section class="story-section" id="about">
+        <section class="downloads-section">
             <div class="container">
-                <div class="story-content">
-                    <div class="story-text">
-                        <h2>Our story</h2>
-                        <p>In 2019, we started as a small group of traders and, over time, uncovered <span class="highlight">the truth</span> behind market movements.</p>
-                        <p>This revelation sparked <span class="highlight">BehindTheCover</span> — a company dedicated to decoding the stock market's <span class="highlight">hidden dynamics</span>.<br>What began as a personal quest has grown into a <span class="highlight">far more successful</span> project than we could’ve ever imagined.</p>
-                        <p>Today, our team analyzes and copy-trades the market’s most <span class="highlight">influential forces</span>, specializing in tracking potential <span class="highlight">insider traders</span> and powerful players who shape prices and turn people into <span class="highlight">liquidity</span>.</p>
+                <div class="downloads-grid">
+                    <div class="download-card">
+                        <div class="download-icon">🚢</div>
+                        <h3 class="download-title">Submarine</h3>
+                        <p class="download-description">
+                            Eine leistungsstarke Software für maritime Navigation und Unterwasser-Operationen. 
+                            Perfekt für professionelle Anwendungen und Simulationen.
+                        </p>
+                        <a href="#" class="download-btn" onclick="downloadSoftware('submarine')">
+                            Download Submarine
+                        </a>
                     </div>
-                    <div class="story-image">
-                        <img src="images/HQ.png" alt="Loading..."
+
+                    <div class="download-card">
+                        <div class="download-icon">⚡</div>
+                        <h3 class="download-title">Moses</h3>
+                        <p class="download-description">
+                            Ein vielseitiges Tool für Datenanalyse und Projektmanagement. 
+                            Steigern Sie Ihre Produktivität mit intelligenten Funktionen.
+                        </p>
+                        <a href="#" class="download-btn" onclick="downloadSoftware('moses')">
+                            Download Moses
+                        </a>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <section class="team-section" id="team">
-            <div class="container">
-                <h2>Unser Team</h2>
-                <div class="team-grid">
-                    <div class="team-card">
-                        <div class="team-pic"> <img src="images/Team/CEO.png"></div>
-                        <div class="team-name">macrosoft</div>
-                        <div class="team-role">CEO & Founder</div>
-                        <div class="team-bio">Visionäre Führungskraft mit 15 Jahren Erfahrung in der Tech-Branche. Anna treibt Innovation voran und inspiriert unser Team täglich.</div>
-                    </div>
-                    <div class="team-card">
-                        <div class="team-avatar">MK</div>
-                        <div class="team-name">Max Kellner</div>
-                        <div class="team-role">CTO</div>
-                        <div class="team-bio">Technologieexperte und Problemlöser. Max verwandelt komplexe Herausforderungen in elegante, skalierbare Lösungen.</div>
-                    </div>
-                    <div class="team-card">
-                        <div class="team-avatar">SB</div>
-                        <div class="team-name">Sarah Bauer</div>
-                        <div class="team-role">Head of Design</div>
-                        <div class="team-bio">Kreative Designerin mit einem Auge für Details. Sarah erschafft Benutzeroberflächen, die sowohl schön als auch intuitiv sind.</div>
-                    </div>
-                    <div class="team-card">
-                        <div class="team-avatar">TH</div>
-                        <div class="team-name">Tom Hansen</div>
-                        <div class="team-role">Lead Developer</div>
-                        <div class="team-bio">Coding-Ninja und Mentor. Tom bringt die wildesten Ideen zum Leben und teilt sein Wissen gerne mit dem gesamten Team.</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="values-section">
-            <div class="container">
-                <div class="values-grid">
-                    <div class="value-card">
-                        <span class="value-icon">🎯</span>
-                        <div class="value-title">Innovation</div>
-                        <div class="value-description">Wir denken über den Tellerrand hinaus und entwickeln Lösungen, die Branchen verändern und neue Maßstäbe setzen.</div>
-                    </div>
-                    <div class="value-card">
-                        <span class="value-icon">🤝</span>
-                        <div class="value-title">Zusammenarbeit</div>
-                        <div class="value-description">Erfolg entsteht durch Teamwork. Wir arbeiten eng mit unseren Kunden zusammen und schaffen gemeinsam Großartiges.</div>
-                    </div>
-                    <div class="value-card">
-                        <span class="value-icon">⚡</span>
-                        <div class="value-title">Exzellenz</div>
-                        <div class="value-description">Qualität ist nicht verhandelbar. Jedes Projekt wird mit höchster Präzision und Leidenschaft umgesetzt.</div>
-                    </div>
+                <div class="membership-notice">
+                    <h3>No membership yet? Get it here:</h3>
+                    <a href="index.html#products" class="membership-btn">Zur Mitgliedschaft</a>
                 </div>
             </div>
         </section>
@@ -627,50 +394,46 @@
 
     <footer>
         <div class="container">
-            <div class="footer-left">
-                <div class="impressum">
-                    <h3>Impressum</h3>
-                    <p>Northpeak Solutions OÜ</p>
-                    <p>Ahtri 12, 10151 Tallinn, Estonia</p>
-                    <p>16543210</p>
-                    <p>EE123456789</p>
-                    <p>support@northpeakshop.com</p>
-                </div>
-            </div>
-            
-            <div class="footer-center">
-                <div class="copyright">
-                    <p>&copy; 2025 BEYONDTHECOVER. All rights reserved.</p>
-                </div>
-            </div>
-            
-            <div class="footer-right">
-                <a href="contact.html#contact" class="contact-btn">Contact</a>
-            </div>
+            <p class="copyright">&copy; 2025 Your Company. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
 
     <script>
-        document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Download function
+        function downloadSoftware(software) {
+            // Hier würden Sie die tatsächlichen Download-Links einfügen
+            alert(`Download für ${software} wird gestartet...`);
+            
+            // Beispiel für echte Download-Links:
+            // if (software === 'submarine') {
+            //     window.location.href = 'path/to/submarine-installer.exe';
+            // } else if (software === 'moses') {
+            //     window.location.href = 'path/to/moses-installer.exe';
+            // }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const href = this.getAttribute('href');
-                history.pushState(null, null, href);
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
-
-
-        // Add hover effects to team cards
-        document.querySelectorAll('.team-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-15px) rotate(' + (Math.random() * 6 - 3) + 'deg)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) rotate(0deg)';
-            });
-        });
-
     </script>
 </body>
 </html>
