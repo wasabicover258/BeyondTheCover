@@ -348,12 +348,96 @@
             background: #0a0a0a;
             border-top: 1px solid #333;
             padding: 2rem 0;
-            text-align: center;
             color: #666;
         }
-
+        
         footer .container {
-            font-size: clamp(1rem, 2vw, 2rem);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-left {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .footer-center {
+            flex: 1;
+            text-align: center;
+            min-width: 200px;
+        }
+        
+        .footer-right {
+            flex: 1;
+            text-align: right;
+            min-width: 200px;
+        }
+        
+        .impressum {
+            margin-bottom: 1rem;
+        }
+        
+        .impressum h3 {
+            color: #999;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: normal;
+        }
+        
+        .impressum p {
+            margin: 0.2rem 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .copyright {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: #666;
+        }
+        
+        .contact-btn {
+            background: linear-gradient(135deg, #333, #555);
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid #666;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .contact-btn:hover {
+            background: linear-gradient(135deg, #555, #777);
+            border-color: #999;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        /* Mobile Anpassungen */
+        @media (max-width: 768px) {
+            footer .container {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            
+            .footer-left,
+            .footer-center,
+            .footer-right {
+                text-align: center;
+                min-width: auto;
+            }
+            
+            .impressum {
+                margin-bottom: 1.5rem;
+            }
         }
 
         .values-section {
@@ -436,7 +520,7 @@
                 <li><a href="index.html#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="index.html#products">Products</a></li>
-                <li><a href="contact.html#contact">Contact</a></li>
+                <li><a href="downloads.html#downloads">Downloads</a></li>
             </ul>
         </nav>
     </header>
@@ -446,8 +530,6 @@
             <div class="container">
                 <h1>Breaking the illusion,<br>building your truth!</h1>
                 <p>The osjdckjewfbhclie.</p>
-                
-
             </div>
         </section>
 
@@ -524,7 +606,26 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 BEYONDTHECOVER. All rights preserved.</p>
+            <div class="footer-left">
+                <div class="impressum">
+                    <h3>Impressum</h3>
+                    <p>Northpeak Solutions OÜ</p>
+                    <p>Ahtri 12, 10151 Tallinn, Estonia</p>
+                    <p>16543210</p>
+                    <p>EE123456789</p>
+                    <p>support@northpeakshop.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-center">
+                <div class="copyright">
+                    <p>&copy; 2025 BEYONDTHECOVER. All rights reserved.</p>
+                </div>
+            </div>
+            
+            <div class="footer-right">
+                <a href="contact.html#contact" class="contact-btn">Contact</a>
+            </div>
         </div>
     </footer>
 
