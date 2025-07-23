@@ -415,60 +415,69 @@
         </div>
     </footer>
 
-    <script>
-        // Interne Seitenverlinkung ohne Sprung
-        document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                history.pushState(null, null, href);
-            });
-        });
-
-        const messageInput = document.getElementById('message');
-        const charCounter = document.getElementById('charCounter');
-        const form = document.getElementById('contactForm');
-        const maxChars = 500;
-
-        messageInput.addEventListener('input', () => {
-            let content = messageInput.value;
-
-            // Sperre bei 500 Zeichen
-            if (content.length > maxChars) {
-                content = content.slice(0, maxChars);
-                messageInput.value = content;
-            }
-
-            const remaining = maxChars - content.length;
-            charCounter.textContent = `Noch ${remaining} Zeichen`;
-
-            // Farbliche Warnung ab 50 Zeichen Rest
-            if (remaining <= 50) {
-                charCounter.style.color = 'darkred';
-                charCounter.style.fontWeight = 'bold';
-            } else {
-                charCounter.style.color = '#555';
-                charCounter.style.fontWeight = 'normal';
-            }
-        });
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            emailjs.send("service_darbphr", "template_7agjdqb", {
-                email: document.getElementById("email").value,
-                message: document.getElementById("message").value
-            }).then(function (response) {
-                alert("Thank you! Your message has been sent successfully.");
-                form.reset();
-                charCounter.textContent = `Noch ${maxChars} Zeichen`;
-                charCounter.style.color = '#555';
-                charCounter.style.fontWeight = 'normal';
-            }, function (error) {
-                alert("Sorry, something went wrong. Please try again later.");
-                console.error("EmailJS error:", error);
-            });
-        });
+    <!-- Neue SDK-Einbindung -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init('6yY3IiIERrPIdxPC9'); // dein Public Key
+        })();
     </script>
+
+    <script>
+    // Interne Seitenverlinkung ohne Sprung
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            history.pushState(null, null, href);
+        });
+    });
+
+    const messageInput = document.getElementById('message');
+    const charCounter = document.getElementById('charCounter');
+    const form = document.getElementById('contactForm');
+    const maxChars = 500;
+
+    messageInput.addEventListener('input', () => {
+        let content = messageInput.value;
+
+        // Sperre bei 500 Zeichen
+        if (content.length > maxChars) {
+            content = content.slice(0, maxChars);
+            messageInput.value = content;
+        }
+
+        const remaining = maxChars - content.length;
+        charCounter.textContent = `Noch ${remaining} Zeichen`;
+
+        // Farbliche Warnung ab 50 Zeichen Rest
+        if (remaining <= 50) {
+            charCounter.style.color = 'darkred';
+            charCounter.style.fontWeight = 'bold';
+        } else {
+            charCounter.style.color = '#555';
+            charCounter.style.fontWeight = 'normal';
+        }
+    });
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        emailjs.send("service_darbphr", "template_7agjdqb", {
+            email: document.getElementById("email").value,
+            message: document.getElementById("message").value
+        }).then(function (response) {
+            alert("Thank you! Your message has been sent successfully.");
+            form.reset();
+            charCounter.textContent = `Noch ${maxChars} Zeichen`;
+            charCounter.style.color = '#555';
+            charCounter.style.fontWeight = 'normal';
+        }, function (error) {
+            alert("Sorry, something went wrong. Please try again later.");
+            console.error("EmailJS error:", error);
+        });
+    });
+    </script>
+
 </body>
 </html>
