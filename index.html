@@ -1570,18 +1570,28 @@
         function addToCartFromModal() {
             if (!currentProduct) return;
             const qty = parseInt(document.getElementById('quantity').value);
-            for (let i = 0; i < qty; i++) {
-                cart.push({ name: currentProduct.name, price: currentProduct.price });
-            }
-            cartCount += qty;
-            document.getElementById('cart-count').textContent = cartCount;
-            document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
 
-            const btn = document.querySelector('.add-to-cart-modal');
-            const txt = btn.textContent;
-            btn.textContent = `${qty}× Added!`;
-            setTimeout(() => btn.textContent = txt, 1500);
+             // Prüfen, ob bereits Produkte im Warenkorb sind
+             if (cart.length > 0 && cart[0].name !== currentProduct.name) {
+                 alert(`Only one product type can be in the cart at a time.\n\nYou already added "${cart[0].name}".\nRemove it before adding "${currentProduct.name}".`);
+                 return;
+             }
+
+             // Produkte hinzufügen
+             for (let i = 0; i < qty; i++) {
+                 cart.push({ name: currentProduct.name, price: currentProduct.price });
+             }
+
+             cartCount = cart.length;
+             document.getElementById('cart-count').textContent = cartCount;
+             document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
+
+             const btn = document.querySelector('.add-to-cart-modal');
+             const txt = btn.textContent;
+             btn.textContent = `${qty}× Added!`;
+             setTimeout(() => btn.textContent = txt, 1500);
         }
+
 
         // Modal schließen bei Klick außerhalb
         document.getElementById('product-modal').addEventListener('click', e => {
