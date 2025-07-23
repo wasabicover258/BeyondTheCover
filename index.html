@@ -1673,235 +1673,269 @@
     </div>
 
     <script>
-    let cart = [];
-    let cartCount = 0;
-    let currentProduct = null;
+        // global
+        let cart = [];
+        let currentProduct = null;
 
-    const products = {
-        'diver': {
-            name: 'Diver',
-            price: 2,
-            icon: '📱',
-            description: 'Neueste Technologie in elegantem Design...',
-            features: [ '6.7" OLED Display mit 120Hz', 'Triple-Kamera...', '5G...', 'Wasserdicht...', 'Wireless Charging' ],
-            specs: { 'Display': '6.7" OLED', 'Speicher': '256GB', 'RAM': '8GB', 'Akku': '4500mAh', 'Kamera': '108MP', 'OS': 'Android 14' },
-            images: ['📱', '📷', '🔋', '📡']
-        },
-        'submarine': {
-            name: 'Submarine',
-            price: 10,
-            icon: '🎧',
-            description: 'Kristallklarer Sound mit aktiver Geräuschunterdrückung...',
-            features: [ 'Noise Cancelling', '30h Akku', 'Hi-Res Audio', 'Schnellladung', 'Multipoint Bluetooth' ],
-            specs: { 'Akkulaufzeit': '30h', 'Ladezeit': '2h', 'Bluetooth': '5.2', 'Frequenz': '20Hz-40kHz', 'Gewicht': '250g', 'Noise Cancelling': 'Aktiv' },
-            images: ['🎧', '🔊', '🔋', '📶']
-        },
-        'moses': {
-            name: 'Moses',
-            price: 0,
-            icon: '⌚',
-            description: 'Fitness-Tracking und Smart-Features...',
-            features: [ 'GPS + Cellular', 'Gesundheitstracking', 'Wasserdicht 50m', '7 Tage Akku', 'Always-On Display' ],
-            specs: { 'Display': '1.9" AMOLED', 'Akkulaufzeit': '7 Tage', 'Wasserdicht': '50m', 'GPS': 'Integriert', 'Sensoren': 'Herz, SpO2', 'Kompatibilität': 'iOS & Android' },
-            images: ['⌚', '💓', '🏃', '💧']
-        }
-    };
-
-    function openProductModal(productId) {
-        currentProduct = products[productId];
-        if (!currentProduct) return;
-
-        document.getElementById('modal-title').textContent = currentProduct.name;
-        document.getElementById('modal-price').innerHTML = '$' + currentProduct.price + '<small>/mo</small>';
-        document.getElementById('modal-description').textContent = currentProduct.description;
-        document.getElementById('main-image').textContent = currentProduct.icon;
-
-        const featuresList = document.getElementById('features-list');
-        featuresList.innerHTML = '';
-        currentProduct.features.forEach(f => {
-            const li = document.createElement('li');
-            li.textContent = f;
-            featuresList.appendChild(li);
-        });
-
-        const specsGrid = document.getElementById('specs-grid');
-        specsGrid.innerHTML = '';
-        Object.entries(currentProduct.specs).forEach(([k, v]) => {
-            const item = document.createElement('div');
-            item.className = 'spec-item';
-            item.innerHTML = `<span class="spec-label">${k}:</span><span class="spec-value">${v}</span>`;
-            specsGrid.appendChild(item);
-        });
-
-        const thumbs = document.querySelector('.image-thumbnails');
-        thumbs.innerHTML = '';
-        currentProduct.images.forEach((img, i) => {
-            const t = document.createElement('div');
-            t.className = 'thumbnail' + (i === 0 ? ' active' : '');
-            t.textContent = img;
-            t.onclick = () => changeMainImage(img);
-            thumbs.appendChild(t);
-        });
-
-        document.getElementById('quantity').value = 1;
-
-        document.querySelectorAll('.product-modal, .product-modal1').forEach(m => {
-            m.classList.remove('active');
-        });
-
-        const modal = productId === 'diver'
-            ? document.getElementById('product-modal')
-            : document.getElementById('product-modal1');
-
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeProductModal() {
-        document.querySelectorAll('.product-modal, .product-modal1').forEach(m => m.classList.remove('active'));
-        document.body.style.overflow = 'auto';
-        currentProduct = null;
-    }
-
-    function changeMainImage(imageIcon) {
-        document.getElementById('main-image').textContent = imageIcon;
-        document.querySelectorAll('.thumbnail').forEach(t => {
-            t.classList.toggle('active', t.textContent === imageIcon);
-        });
-    }
-
-    function changeQuantity(delta) {
-        const input = document.getElementById('quantity');
-        let val = parseInt(input.value) + delta;
-        input.value = Math.max(1, Math.min(10, val));
-    }
-
-    function addToCartFromModal() {
-        if (!currentProduct) return;
-        const qty = parseInt(document.getElementById('quantity').value);
-
-        // Nur eine Produktsorte gleichzeitig
-        if (cart.length > 0 && cart[0].name !== currentProduct.name) {
-            alert(`Nur ein Produkttyp pro Warenkorb erlaubt.\n\nBereits im Warenkorb: "${cart[0].name}".\nBitte zuerst leeren.`);
-            return;
-        }
-
-        for (let i = 0; i < qty; i++) {
-            cart.push({ name: currentProduct.name, price: currentProduct.price });
-        }
-
-        cartCount = cart.length;
-        document.getElementById('cartCountBadge').textContent = cartCount;
-        document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
-
-        const btn = document.querySelector('.add-to-cart-modal');
-        const txt = btn.textContent;
-        btn.textContent = `${qty}× Added!`;
-        setTimeout(() => btn.textContent = txt, 1500);
-
-        updateCart();
-    }
-
-    function openCartModal() {
-        document.getElementById('cartModalOverlay').classList.add('show');
-    }
-
-    function closeCartModal() {
-        document.getElementById('cartModalOverlay').classList.remove('show');
-    }
-
-    document.getElementById('cartModalOverlay').addEventListener('click', function(e) {
-        if (e.target === this) closeCartModal();
-    });
-
-    function updateCart() {
-        const list = document.getElementById('cartProductList');
-        const empty = document.getElementById('cartEmpty');
-        const totalSec = document.getElementById('cartTotalSection');
-        const totalAmt = document.getElementById('cartTotalAmount');
-        const btn1 = document.getElementById('cartButton1');
-        const btn2 = document.getElementById('cartButton2');
-        const badge = document.getElementById('cartCountBadge');
-
-        badge.textContent = cart.length;
-        list.innerHTML = '';
-
-        if (cart.length === 0) {
-            empty.classList.remove('hidden');
-            totalSec.classList.add('hidden');
-            btn1.classList.add('hidden');
-            btn2.classList.add('hidden');
-            return;
-        }
-
-        empty.classList.add('hidden');
-        totalSec.classList.remove('hidden');
-
-        cart.forEach(product => {
-            const item = document.createElement('div');
-            item.className = 'cart-product-item';
-            item.innerHTML = `<span class="cart-product-name">${product.name}</span><span class="cart-product-price">€${product.price.toFixed(2)}</span>`;
-            list.appendChild(item);
-        });
-
-        const total = cart.reduce((sum, p) => sum + p.price, 0);
-        totalAmt.textContent = `€${total.toFixed(2)}`;
-
-        const hasDiver = cart.some(p => p.name === 'Diver');
-        const hasOther = cart.some(p => p.name === 'Submarine' || p.name === 'Moses');
-
-        btn1.classList.toggle('hidden', !hasDiver || hasOther);
-        btn2.classList.toggle('hidden', hasDiver || !hasOther);
-    }
-
-    function toggleCart() {
-        openCartModal();
-        updateCart(); // sicherstellen, dass Inhalt aktuell ist
-    }
-
-    updateCart(); // beim Start initialisieren
-
-    document.getElementById('product-modal').addEventListener('click', e => {
-        if (e.target === e.currentTarget) closeProductModal();
-    });
-    document.getElementById('product-modal1').addEventListener('click', e => {
-        if (e.target === e.currentTarget) closeProductModal();
-    });
-
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') closeProductModal();
-    });
-
-    function handleHashChange() {
-        const hash = window.location.hash.toLowerCase();
-        const about = document.getElementById('aboutOverlay');
-        const down = document.getElementById('downloadsOverlay');
-        const contact = document.getElementById('contactOverlay');
-        about.classList.remove('active');
-        down.classList.remove('active');
-        contact.classList.remove('active');
-        if (hash === '#about') about.classList.add('active');
-        else if (hash === '#contact') down.classList.add('active');
-    }
-
-    window.addEventListener('hashchange', handleHashChange);
-    window.addEventListener('load', handleHashChange);
-
-    document.querySelectorAll('a[href="#home"], a[href="#products"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const href = this.getAttribute('href');
-            const target = document.querySelector(href);
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                setTimeout(() => {
-                    history.pushState(null, null, href);
-                    handleHashChange();
-                }, 400);
+        // Produkt-Daten
+        const products = {
+            'diver': {
+                name: 'Diver',
+                price: 2,
+                icon: '📱',
+                description: 'Neueste Technologie in elegantem Design...',
+                features: [ '6.7" OLED Display mit 120Hz', 'Triple-Kamera...', '5G...', 'Wasserdicht...', 'Wireless Charging' ],
+                specs: { 'Display': '6.7" OLED', 'Speicher': '256GB', 'RAM': '8GB', 'Akku': '4500mAh', 'Kamera': '108MP', 'OS': 'Android 14' },
+                images: ['📱', '📷', '🔋', '📡']
+            },
+            'submarine': {
+                name: 'Submarine',
+                price: 10,
+                icon: '🎧',
+                description: 'Kristallklarer Sound mit aktiver Geräuschunterdrückung...',
+                features: [ 'Noise Cancelling', '30h Akku', 'Hi-Res Audio', 'Schnellladung', 'Multipoint Bluetooth' ],
+                specs: { 'Akkulaufzeit': '30h', 'Ladezeit': '2h', 'Bluetooth': '5.2', 'Frequenz': '20Hz-40kHz', 'Gewicht': '250g', 'Noise Cancelling': 'Aktiv' },
+                images: ['🎧', '🔊', '🔋', '📶']
+            },
+            'moses': {
+                name: 'Moses',
+                price: 0,
+                icon: '⌚',
+                description: 'Fitness-Tracking und Smart-Features...',
+                features: [ 'GPS + Cellular', 'Gesundheitstracking', 'Wasserdicht 50m', '7 Tage Akku', 'Always-On Display' ],
+                specs: { 'Display': '1.9" AMOLED', 'Akkulaufzeit': '7 Tage', 'Wasserdicht': '50m', 'GPS': 'Integriert', 'Sensoren': 'Herz, SpO2', 'Kompatibilität': 'iOS & Android' },
+                images: ['⌚', '💓', '🏃', '💧']
             }
+        };
+
+        // Öffnet das richtige Modal und füllt es
+        function openProductModal(id) {
+            currentProduct = products[id];
+            if (!currentProduct) return;
+            
+            // 1) Inhalte updaten
+            document.getElementById('modal-title').textContent = currentProduct.name;
+            document.getElementById('modal-price').innerHTML =
+                '$' + currentProduct.price + '<small>/mo</small>';
+            document.getElementById('modal-description').textContent =
+                currentProduct.description;
+            document.getElementById('main-image').textContent =
+                currentProduct.icon;
+            
+            // Features
+            const fList = document.getElementById('features-list');
+            fList.innerHTML = '';
+            currentProduct.features.forEach(f => {
+                const li = document.createElement('li');
+                li.textContent = f;
+                fList.appendChild(li);
+            });
+
+            // Specs
+            const specs = document.getElementById('specs-grid');
+            specs.innerHTML = '';
+            Object.entries(currentProduct.specs).forEach(([k, v]) => {
+                const div = document.createElement('div');
+                div.className = 'spec-item';
+                div.innerHTML = `<span class="spec-label">${k}:</span>
+                                 <span class="spec-value">${v}</span>`;
+                specs.appendChild(div);
+            });
+            
+            // Thumbnails
+            const thumbs = document.querySelector('.image-thumbnails');
+            thumbs.innerHTML = '';
+            currentProduct.images.forEach((ico, i) => {
+                const t = document.createElement('div');
+                t.className = 'thumbnail' + (i === 0 ? ' active' : '');
+                t.textContent = ico;
+                t.onclick = () => changeMainImage(ico);
+                thumbs.appendChild(t);
+            });
+
+            // Quantity zurücksetzen
+            document.getElementById('quantity').value = 1;
+
+            // Modal öffnen
+            document.querySelectorAll('.product-modal, .product-modal1')
+                .forEach(m => m.classList.remove('active'));
+            const modal = id === 'diver'
+                ? document.getElementById('product-modal')
+                : document.getElementById('product-modal1');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // schließt alle Produkt-Modals
+        function closeProductModal() {
+            document.querySelectorAll('.product-modal, .product-modal1')
+                .forEach(m => m.classList.remove('active'));
+            document.body.style.overflow = 'auto';
+            currentProduct = null;
+        }
+        
+        function changeMainImage(ico) {
+            document.getElementById('main-image').textContent = ico;
+            document.querySelectorAll('.thumbnail')
+                .forEach(t => t.classList.toggle('active', t.textContent === ico));
+        }
+
+        function changeQuantity(d) {
+            const inp = document.getElementById('quantity');
+            let v = parseInt(inp.value) + d;
+            inp.value = Math.max(1, Math.min(10, v));
+        }
+
+        // Hinzufügen aus Modal
+        function addToCartFromModal() {
+            if (!currentProduct) return;
+            const qty = parseInt(document.getElementById('quantity').value);
+
+            // nur eine Produkt-Sorte
+            if (cart.length > 0 &&
+                cart[0].name !== currentProduct.name) {
+                alert(
+                    `Nur ein Produkttyp zulässig.\n` +
+                    `Bereits im Warenkorb: "${cart[0].name}".\n` +
+                    `Leere den Warenkorb zuerst.`
+                );
+                return;
+            }
+
+            for (let i = 0; i < qty; i++) {
+                cart.push({
+                    name: currentProduct.name,
+                    price: currentProduct.price
+                });
+            }
+
+            // visuelles Feedback im Modal-Button
+            const btn = document.querySelector('.add-to-cart-modal');
+            const txt = btn.textContent;
+            btn.textContent = `${qty}× Added!`;
+            setTimeout(() => btn.textContent = txt, 1500);
+
+            updateCart();
+        }
+
+        // Cart-Modal öffnen/schließen
+        function openCartModal() {
+            document.getElementById('cartModalOverlay')
+                .classList.add('show');
+            updateCart();
+        }
+        function closeCartModal() {
+            document.getElementById('cartModalOverlay')
+                .classList.remove('show');
+        }
+        document.getElementById('cartModalOverlay')
+            .addEventListener('click', e => {
+                if (e.target === e.currentTarget)
+                    closeCartModal();
+            });
+
+        // Hauptfunktion: alles aus-/einblenden via style.display
+        function updateCart() {
+            const list     = document.getElementById('cartProductList');
+            const emptyBox = document.getElementById('cartEmpty');
+            const totalSec = document.getElementById('cartTotalSection');
+            const totalAmt = document.getElementById('cartTotalAmount');
+            const b1       = document.getElementById('cartButton1');
+            const b2       = document.getElementById('cartButton2');
+            const badge    = document.getElementById('cartCountBadge');
+
+            // Badge updaten
+            badge.textContent = cart.length;
+            list.innerHTML    = '';
+
+            if (cart.length === 0) {
+                emptyBox.style.display      = 'block';
+                totalSec.style.display      = 'none';
+                b1.style.display            = 'none';
+                b2.style.display            = 'none';
+                totalAmt.textContent        = '€0.00';
+                return;
+            }
+
+            // Produkte auflisten
+            emptyBox.style.display = 'none';
+            totalSec.style.display = 'block';
+            cart.forEach(p => {
+                const div = document.createElement('div');
+                div.className = 'cart-product-item';
+                div.innerHTML =
+                    `<span class="cart-product-name">${p.name}</span>` +
+                    `<span class="cart-product-price">€${p.price.toFixed(2)}</span>`;
+                list.appendChild(div);
+            });
+            // Gesamtsumme
+            const sum = cart.reduce((s, p) => s + p.price, 0);
+            totalAmt.textContent = `€${sum.toFixed(2)}`;
+
+            // Button-Logik
+            const hasD = cart.some(p => p.name === 'Diver');
+            const hasO = cart.some(p =>
+                p.name === 'Submarine' || p.name === 'Moses'
+            );
+
+            if (hasD && !hasO) {
+                b1.style.display = 'block';  // Zur Kasse
+                b2.style.display = 'none';
+            } else if (!hasD && hasO) {
+                b1.style.display = 'none';
+                b2.style.display = 'block'; // Spezialbestellung
+            } else {
+                // (sollte durch Ein-Produkt-Regel nie passieren)
+                b1.style.display = 'none';
+                b2.style.display = 'none';
+            }
+        }
+
+        // Escape-Key / Außenklick Produkt-Modal
+        document.getElementById('product-modal')
+                .addEventListener('click', e => {
+          if (e.target === e.currentTarget) closeProductModal();
         });
-    });
+        document.getElementById('product-modal1')
+                .addEventListener('click', e => {
+          if (e.target === e.currentTarget) closeProductModal();
+        });
+        document.addEventListener('keydown', e => {
+          if (e.key === 'Escape') closeProductModal();
+        });
+
+        // Smooth-Scroll, Hash-Handling usw. …
+        function handleHashChange() {
+            const h = window.location.hash.toLowerCase();
+            ['aboutOverlay','downloadsOverlay','contactOverlay']
+                .forEach(id => document.getElementById(id)
+                    .classList.remove('active'));
+            if (h === '#about')
+                document.getElementById('aboutOverlay')
+                    .classList.add('active');
+            if (h === '#contact')
+                document.getElementById('downloadsOverlay')
+                    .classList.add('active');
+        }
+        window.addEventListener('hashchange', handleHashChange);
+        window.addEventListener('load', handleHashChange);
+        document.querySelectorAll('a[href="#home"], a[href="#products"]')
+            .forEach(a => a.addEventListener('click', function(e) {
+                e.preventDefault();
+                const tgt = document.querySelector(this.getAttribute('href'));
+                if (tgt) {
+                    tgt.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    setTimeout(() => {
+                        history.pushState(null,null,this.getAttribute('href'));
+                        handleHashChange();
+                    }, 400);
+                }
+            }));
+        
+        // Erstaufruf: leeren Warenkorb anzeigen
+        updateCart();
 </script>
+
 
 </body>
 </html>
