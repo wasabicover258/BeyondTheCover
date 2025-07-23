@@ -244,6 +244,14 @@
             top: 105%;
        }
 
+        @media (max-width: 768px) {
+            .btn-cart .quantity {
+                color: #005F4E !important;
+                -webkit-text-fill-color: #005F4E !important;
+                text-decoration: none !important;
+            }
+        }
+
        #aboutOverlay,
        #contactOverlay {
            display: none;
@@ -901,20 +909,114 @@
             background: #0a0a0a;
             border-top: 1px solid #333;
             padding: 2rem 0;
-            text-align: center;
             color: #666;
         }
-
+        
         footer .container {
-            font-size: clamp(1rem, 2vw, 2rem);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
-
-
+        
+        .footer-left {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .footer-center {
+            flex: 1;
+            text-align: center;
+            min-width: 200px;
+        }
+        
+        .footer-right {
+            flex: 1;
+            text-align: right;
+            min-width: 200px;
+        }
+        
+        .impressum {
+            margin-bottom: 1rem;
+        }
+        
+        .impressum h3 {
+            color: #999;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: normal;
+        }
+        
+        .impressum p {
+            margin: 0.2rem 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .copyright {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: #666;
+        }
+        
+        .contact-btn {
+            background: linear-gradient(135deg, #333, #555);
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid #666;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .contact-btn:hover {
+            background: linear-gradient(135deg, #555, #777);
+            border-color: #999;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        /* Mobile Anpassungen */
         @media (max-width: 768px) {
-            .btn-cart .quantity {
-                color: #005F4E !important;
-                -webkit-text-fill-color: #005F4E !important;
-                text-decoration: none !important;
+            footer .container {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .footer-left,
+            .footer-center,
+            .footer-right {
+                text-align: center;
+                min-width: auto;
+            }
+            
+            .impressum {
+                margin-bottom: 1.5rem;
+            }
+            
+            .impressum h3 {
+                font-size: 1rem;
+            }
+            
+            .impressum p {
+                font-size: 0.8rem;
+            }
+            
+            .copyright {
+                font-size: 0.9rem;
+            }
+            
+            .contact-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
             }
         }
 
@@ -1110,15 +1212,15 @@
                 <h2>Our products</h2>
                 <div class="product-grid">
                     <div class="product-card">
-                        <div class="product-image">📱</div>
-                        <div class="product-info">
-                            <h3 class="product-name">Diver</h3>
-                            <p class="product-description">Dip your toe through the surface.</p>
-                            <div class="product-price">€2/mo</div>
-                            <button class="view-product" onclick="openProductModal('diver')">
-                                Show details
-                            </button>
-                        </div>
+                    <div class="product-image">📱</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Diver</h3>
+                        <p class="product-description">Dip your toe through the surface.</p>
+                        <div class="product-price">$2/mo</div>
+                        <button class="view-product" onclick="openProductModal('diver')">
+                            Show details
+                        </button>
+                    </div>
                     </div>
 
                     <div class="product-card">
@@ -1126,7 +1228,7 @@
                         <div class="product-info">
                             <h3 class="product-name">Submarine</h3>
                             <p class="product-description">Dive right in and follow the whales.</p>
-                            <div class="product-price">€10/mo</div>
+                            <div class="product-price">$10/mo</div>
                             <button class="view-product" onclick="openProductModal('submarine')">
                                 Show details
                             </button>
@@ -1138,7 +1240,7 @@
                         <div class="product-info">
                             <h3 class="product-name">Moses</h3>
                             <p class="product-description">Coming soon!</p>
-                            <div class="product-price">€ ~</div>
+                            <div class="product-price">$ ~</div>
                             <button class="view-product" onclick="openProductModal('moses')">
                                 Show details
                             </button>
@@ -1147,11 +1249,31 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 BEYONDTHECOVER. All rights preserved.</p>
+            <div class="footer-left">
+                <div class="impressum">
+                    <h3>Imprint</h3>
+                    <p>Northpeak Solutions OÜ</p>
+                    <p>Ahtri 12, 10151 Tallinn, Estonia</p>
+                    <p>16543210</p>
+                    <p>EE123456789</p>
+                    <p>info@btcoverinvest.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-center">
+                <div class="copyright">
+                    <p>&copy; 2025 BEYONDTHECOVER. All rights reserved.</p>
+                </div>
+            </div>
+            
+            <div class="footer-right">
+                <a href="contact.html#contact" class="contact-btn">Contact</a>
+            </div>
         </div>
     </footer>
 
@@ -1172,7 +1294,7 @@
                 
                 <div class="modal-info">
                     <h2 class="modal-title" id="modal-title">Premium Smartphone</h2>
-                    <div class="modal-price" id="modal-price">€ ~</div>
+                    <div class="modal-price" id="modal-price">$ ~</div>
                     <p class="modal-description" id="modal-description">
                         Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle.
                     </p>
@@ -1240,7 +1362,7 @@
                 
                 <div class="modal-info">
                     <h2 class="modal-title" id="modal-title">Premium Smartphone</h2>
-                    <div class="modal-price" id="modal-price">€ ~</div>
+                    <div class="modal-price" id="modal-price">$ ~</div>
                     <p class="modal-description" id="modal-description">
                         Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle.
                     </p>
@@ -1371,7 +1493,7 @@
 
             // 1) Content updaten
             document.getElementById('modal-title').textContent = currentProduct.name;
-            document.getElementById('modal-price').innerHTML = '€' + currentProduct.price + '<small>/mo</small>';
+            document.getElementById('modal-price').innerHTML = '$' + currentProduct.price + '<small>/mo</small>';
             document.getElementById('modal-description').textContent = currentProduct.description;
             document.getElementById('main-image').textContent = currentProduct.icon;
 
@@ -1448,18 +1570,28 @@
         function addToCartFromModal() {
             if (!currentProduct) return;
             const qty = parseInt(document.getElementById('quantity').value);
-            for (let i = 0; i < qty; i++) {
-                cart.push({ name: currentProduct.name, price: currentProduct.price });
-            }
-            cartCount += qty;
-            document.getElementById('cart-count').textContent = cartCount;
-            document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
 
-            const btn = document.querySelector('.add-to-cart-modal');
-            const txt = btn.textContent;
-            btn.textContent = `${qty}× Added!`;
-            setTimeout(() => btn.textContent = txt, 1500);
+             // Prüfen, ob bereits Produkte im Warenkorb sind
+             if (cart.length > 0 && cart[0].name !== currentProduct.name) {
+                 alert(`Only one product type can be in the cart at a time.\n\nYou already added "${cart[0].name}".\nRemove it before adding "${currentProduct.name}".`);
+                 return;
+             }
+
+             // Produkte hinzufügen
+             for (let i = 0; i < qty; i++) {
+                 cart.push({ name: currentProduct.name, price: currentProduct.price });
+             }
+
+             cartCount = cart.length;
+             document.getElementById('cart-count').textContent = cartCount;
+             document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
+
+             const btn = document.querySelector('.add-to-cart-modal');
+             const txt = btn.textContent;
+             btn.textContent = `${qty}× Added!`;
+             setTimeout(() => btn.textContent = txt, 1500);
         }
+
 
         // Modal schließen bei Klick außerhalb
         document.getElementById('product-modal').addEventListener('click', e => {
@@ -1498,19 +1630,19 @@
 
         function toggleCart() {
             if (cart.length === 0) {
-                alert('Ihr Warenkorb ist leer!');
+                alert('Your cart is empty!');
                 return;
             }
             
-            let cartSummary = 'Warenkorb:\n\n';
+            let cartSummary = 'Cart:\n\n';
             let total = 0;
             
             cart.forEach((item, index) => {
-                cartSummary += `${index + 1}. ${item.name} - €${item.price}\n`;
+                cartSummary += `${index + 1}. ${item.name} - $${item.price}\n`;
                 total += item.price;
             });
             
-            cartSummary += `\nGesamtsumme: €${total}`;
+            cartSummary += `\nGesamtsumme: $${total}`;
             alert(cartSummary);
         }
 
