@@ -1096,33 +1096,26 @@
     </style>
 </head>
 <body>
-    <!-- PayPal SDK (ersetze DEIN_CLIENT_ID) -->
-    <script src="https://www.paypal.com/sdk/js?client-id=DEIN_CLIENT_ID&vault=true&intent=subscription"></script>
-    <!-- EmailJS SDK (ersetze DEIN_PUBLIC_KEY) -->
-    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-    <script>
-        (function(){
-            emailjs.init("DEIN_PUBLIC_KEY");
-        })();
-    </script>
-
     <header>
         <nav class="navigation">
             <img src="images/logos/SimplifiedLogo.png" class="logo mobile" />
             <img src="images/logos/MainLogo.png" class="logo desktop" />
             <div class="nav-right">
                 <div class="cart-icon" onclick="toggleCart()">
-                    <button data-quantity="0" class="btn-cart">
-                        <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="30.52" width="24.38" xmlns="http://www.w3.org/2000/svg"><title>icon-cart</title><path transform="translate(-3.62 -0.85)" d="M28,27.3,26.24,7.51a.75.75,0,0,0-.76-.69h-3.7a6,6,0,0,0-12,0H6.13a.76.76,0,0,0-.76.69L3.62,27.3v.07a4.29,4.29,0,0,0,4.52,4H23.48a4.29,4.29,0,0,0,4.52-4ZM15.81,2.37a4.47,4.47,0,0,1,4.46,4.45H11.35a4.47,4.47,0,0,1,4.46-4.45Zm7.67,27.48H8.13a2.79,2.79,0,0,1-3-2.45L6.83,8.34h3V11a.76.76,0,0,0,1.52,0V8.34h8.92V11a.76.76,0,0,0,1.52,0V8.34h3L26.48,27.4a2.79,2.79,0,0,1-3,2.44Zm0,0"></path></svg>
-                        <span class="quantity" id="cart-count">0</span>
-                    </button>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="about.html#about">About</a></li>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="downloads.html#downloads">Downloads</a></li>
-                </ul>
+                <button data-quantity="0" class="btn-cart">
+                          <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="30.52" width="24.38" xmlns="http://www.w3.org/2000/svg">
+                            <title>icon-cart</title>
+                            <path transform="translate(-3.62 -0.85)" d="M28,27.3,26.24,7.51a.75.75,0,0,0-.76-.69h-3.7a6,6,0,0,0-12,0H6.13a.76.76,0,0,0-.76.69L3.62,27.3v.07a4.29,4.29,0,0,0,4.52,4H23.48a4.29,4.29,0,0,0,4.52-4ZM15.81,2.37a4.47,4.47,0,0,1,4.46,4.45H11.35a4.47,4.47,0,0,1,4.46-4.45Zm7.67,27.48H8.13a2.79,2.79,0,0,1-3-2.45L6.83,8.34h3V11a.76.76,0,0,0,1.52,0V8.34h8.92V11a.76.76,0,0,0,1.52,0V8.34h3L26.48,27.4a2.79,2.79,0,0,1-3,2.44Zm0,0"></path>
+                          </svg>
+                          <span class="quantity" id="cart-count">0</span>
+                 </button>
+                 </div>
+                 <ul class="nav-links">
+                     <li><a href="#home">Home</a></li>
+                     <li><a href="about.html#about">About</a></li>
+                     <li><a href="#products">Products</a></li>
+                     <li><a href="downloads.html#downloads">Downloads</a></li>
+                 </ul>
             </div>
         </nav>
     </header>
@@ -1284,26 +1277,6 @@
         </div>
     </footer>
 
-    <!-- Checkout-Modal -->
-    <div id="checkout-modal" class="product-modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeCheckoutModal()">×</button>
-            <div class="modal-body">
-                <div class="modal-info">
-                    <h2 class="modal-title">Checkout</h2>
-                    <div id="checkout-details" class="modal-description" style="margin-bottom: 1.5rem;"></div>
-                    <!-- PayPal Button -->
-                    <div id="paypal-button-container" style="display: none; margin-bottom: 2rem;"></div>
-                    <!-- Wartelistenformular -->
-                    <div id="waitlist-form" style="display: none;">
-                        <input type="email" id="waitlist-email" placeholder="Deine E-Mail" required>
-                        <button onclick="submitWaitlist()">In Warteliste eintragen</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Product Modals -->
     <div class="product-modal" id="product-modal">
         <div class="modal-content">
@@ -1442,117 +1415,258 @@
     </div>
 
     <script>
-        // Warenkorb-Daten
         let cart = [];
         let cartCount = 0;
         let currentProduct = null;
 
         const products = {
-            'diver':    { name:'Diver',    price:2,  icon:'📱', /* ... */ },
-            'submarine':{ name:'Submarine',price:10, icon:'🎧', /* ... */ },
-            'moses':    { name:'Moses',    price:0,  icon:'⌚', /* ... */ }
+            'diver': {
+                name: 'Diver',
+                price: 2,
+                icon: '📱',
+                description: 'Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle. Dieses Premium-Smartphone vereint innovative Features mit zeitlosem Design und bietet eine unvergleichliche Benutzererfahrung.',
+                features: [
+                    '6.7" OLED Display mit 120Hz',
+                    'Triple-Kamera System mit 108MP',
+                    '5G Konnektivität',
+                    'Wasserdicht nach IP68',
+                    'Wireless Charging & Reverse Charging'
+                ],
+                specs: {
+                    'Display': '6.7" OLED',
+                    'Speicher': '256GB',
+                    'RAM': '8GB',
+                    'Akku': '4500mAh',
+                    'Kamera': '108MP Triple',
+                    'OS': 'Android 14'
+                },
+                images: ['📱', '📷', '🔋', '📡']
+            },
+            'submarine': {
+                name: 'Submarine',
+                price: 10,
+                icon: '🎧',
+                description: 'Kristallklarer Sound mit aktiver Geräuschunterdrückung. Für das ultimative Hörerlebnis. Diese Premium-Kopfhörer bieten studioqualitativen Sound und modernste Noise-Cancelling-Technologie.',
+                features: [
+                    'Active Noise Cancelling',
+                    '30h Akkulaufzeit',
+                    'Hi-Res Audio Zertifizierung',
+                    'Schnellladung (15min = 3h)',
+                    'Multipoint Bluetooth Verbindung'
+                ],
+                specs: {
+                    'Akkulaufzeit': '30h',
+                    'Ladezeit': '2h',
+                    'Bluetooth': '5.2',
+                    'Frequenzbereich': '20Hz-40kHz',
+                    'Gewicht': '250g',
+                    'Noise Cancelling': 'Aktiv'
+                },
+                images: ['🎧', '🔊', '🔋', '📶']
+            },
+            'moses': {
+                name: 'Moses',
+                price: 0,
+                icon: '⌚',
+                description: 'Fitness-Tracking und Smart-Features in einem stilvollen, minimalistischen Design. Diese Smartwatch ist der perfekte Begleiter für Sport, Gesundheit und den digitalen Alltag.',
+                features: [
+                    'GPS + Cellular',
+                    'Gesundheits-Monitoring',
+                    'Wasserdicht bis 50m',
+                    '7 Tage Akkulaufzeit',
+                    'Always-On Display'
+                ],
+                specs: {
+                    'Display': '1.9" AMOLED',
+                    'Akkulaufzeit': '7 Tage',
+                    'Wasserdicht': '50m',
+                    'GPS': 'Integriert',
+                    'Sensoren': 'Herz, SpO2, Stress',
+                    'Kompatibilität': 'iOS & Android'
+                },
+                images: ['⌚', '💓', '🏃', '💧']
+            }
         };
+        function openProductModal(productId) {
+            currentProduct = products[productId];
+            if (!currentProduct) return;
 
-        // (Deine openProductModal, closeProductModal, changeMainImage, changeQuantity, addToCartFromModal bleiben unverändert)
+            // 1) Content updaten
+            document.getElementById('modal-title').textContent = currentProduct.name;
+            document.getElementById('modal-price').innerHTML = '$' + currentProduct.price + '<small>/mo</small>';
+            document.getElementById('modal-description').textContent = currentProduct.description;
+            document.getElementById('main-image').textContent = currentProduct.icon;
 
-        // --------------------
-        // NEUE Checkout-Logik
-        // --------------------
+            // 2) Features
+            const featuresList = document.getElementById('features-list');
+            featuresList.innerHTML = '';
+            currentProduct.features.forEach(f => {
+                const li = document.createElement('li');
+                li.textContent = f;
+                featuresList.appendChild(li);
+            });
+
+            // 3) Specs
+            const specsGrid = document.getElementById('specs-grid');
+            specsGrid.innerHTML = '';
+            Object.entries(currentProduct.specs).forEach(([k, v]) => {
+                const item = document.createElement('div');
+                item.className = 'spec-item';
+                item.innerHTML = `<span class="spec-label">${k}:</span><span class="spec-value">${v}</span>`;
+                specsGrid.appendChild(item);
+            });
+
+            // 4) Thumbnails
+            const thumbs = document.querySelector('.image-thumbnails');
+            thumbs.innerHTML = '';
+            currentProduct.images.forEach((img, i) => {
+                const t = document.createElement('div');
+                t.className = 'thumbnail' + (i === 0 ? ' active' : '');
+                t.textContent = img;
+                t.onclick = () => changeMainImage(img);
+                thumbs.appendChild(t);
+            });
+
+            // 5) Quantity reset
+            document.getElementById('quantity').value = 1;
+
+            // 6) Beide Modals schließen
+            document.querySelectorAll('.product-modal, .product-modal1').forEach(m => {
+                m.classList.remove('active');
+            });
+
+            // 7) Je nach ID das richtige Modal öffnen
+            let modal;
+            if (productId === 'diver') {
+                modal = document.getElementById('product-modal');
+            } else { // 'submarine' oder 'moses'
+                modal = document.getElementById('product-modal1');
+            }
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProductModal() {
+            document.querySelectorAll('.product-modal, .product-modal1').forEach(m => {
+                m.classList.remove('active');
+            });
+            document.body.style.overflow = 'auto';
+            currentProduct = null;
+        }
+
+        function changeMainImage(imageIcon) {
+            document.getElementById('main-image').textContent = imageIcon;
+            document.querySelectorAll('.thumbnail').forEach(t => {
+                t.classList.toggle('active', t.textContent === imageIcon);
+            });
+        }
+
+        function changeQuantity(delta) {
+            const input = document.getElementById('quantity');
+            let val = parseInt(input.value) + delta;
+            input.value = Math.max(1, Math.min(10, val));
+        }
+
+        function addToCartFromModal() {
+            if (!currentProduct) return;
+            const qty = parseInt(document.getElementById('quantity').value);
+
+             // Prüfen, ob bereits Produkte im Warenkorb sind
+             if (cart.length > 0 && cart[0].name !== currentProduct.name) {
+                 alert(`Only one product type can be in the cart at a time.\n\nYou already added "${cart[0].name}".\nRemove it before adding "${currentProduct.name}".`);
+                 return;
+             }
+
+             // Produkte hinzufügen
+             for (let i = 0; i < qty; i++) {
+                 cart.push({ name: currentProduct.name, price: currentProduct.price });
+             }
+
+             cartCount = cart.length;
+             document.getElementById('cart-count').textContent = cartCount;
+             document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
+
+             const btn = document.querySelector('.add-to-cart-modal');
+             const txt = btn.textContent;
+             btn.textContent = `${qty}× Added!`;
+             setTimeout(() => btn.textContent = txt, 1500);
+        }
+
+
+        // Modal schließen bei Klick außerhalb
+        document.getElementById('product-modal').addEventListener('click', e => {
+            if (e.target === e.currentTarget) closeProductModal();
+        });
+        document.getElementById('product-modal1').addEventListener('click', e => {
+            if (e.target === e.currentTarget) closeProductModal();
+        });
+
+        // Modal schließen mit Escape
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeProductModal();
+        });
+
+        function handleHashChange() {
+            const hash = window.location.hash.toLowerCase();
+            const aboutOverlay = document.getElementById('aboutOverlay');
+            const downloadsOverlay = document.getElementById('downloadsOverlay');
+            const contactOverlay = document.getElementById('contactOverlay');
+  
+            aboutOverlay.classList.remove('active');
+            downloadsOverlay.classList.remove('active');
+            contactOverlay.classList.remove('active');
+
+            if (hash === '#about') {
+                aboutOverlay.classList.add('active');
+            } else if (hash === '#contact') {
+                downloadsOverlay.classList.add('active');
+            }
+            // #home und #products schließen alles
+        }
+
+        window.addEventListener('hashchange', handleHashChange);
+        window.addEventListener('load', handleHashChange);
+
+
         function toggleCart() {
             if (cart.length === 0) {
                 alert('Your cart is empty!');
                 return;
             }
-            const product = cart[0];
-            const quantity = cart.length;
-            const total = product.price * quantity;
-
-            // Checkout-Details
-            document.getElementById('checkout-details').innerHTML = `
-                <strong>Produkt:</strong> ${product.name}<br>
-                <strong>Preis pro Stück:</strong> $${product.price}<br>
-                <strong>Menge:</strong> ${quantity}<br>
-                <strong>Gesamt:</strong> $${total}
-            `;
-
-            // Bereiche ausblenden
-            document.getElementById('paypal-button-container').style.display = 'none';
-            document.getElementById('waitlist-form').style.display = 'none';
-
-            if (product.name === 'Diver') {
-                // PayPal anzeigen
-                let pp = document.getElementById('paypal-button-container');
-                pp.style.display = 'block';
-                if (!pp.hasChildNodes()) {
-                    paypal.Buttons({
-                        createSubscription: (data, actions) => {
-                            return actions.subscription.create({
-                                plan_id: 'DEIN_PLAN_ID' // <-- hier eintragen
-                            });
-                        },
-                        onApprove: (data, actions) => {
-                            alert('Danke! Dein Abo wurde gestartet.');
-                            sendEmailToOwner(product.name, 'checkout', 'paypal');
-                            clearCartAndClose();
-                        },
-                        onError: err => {
-                            console.error('PayPal Fehler:', err);
-                            alert('Es gab ein Problem mit PayPal.');
-                        }
-                    }).render('#paypal-button-container');
-                }
-            } else {
-                // Warteliste anzeigen
-                let wf = document.getElementById('waitlist-form');
-                wf.style.display = 'block';
-                wf.dataset.product = product.name;
-            }
-
-            // Modal öffnen
-            document.getElementById('checkout-modal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeCheckoutModal() {
-            document.getElementById('checkout-modal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        function clearCartAndClose() {
-            cart = [];
-            cartCount = 0;
-            document.getElementById('cart-count').textContent = 0;
-            document.querySelector('.btn-cart').setAttribute('data-quantity', 0);
-            closeCheckoutModal();
-        }
-
-        function submitWaitlist() {
-            const email = document.getElementById('waitlist-email').value;
-            const product = document.getElementById('waitlist-form').dataset.product;
-            if (!email || !email.includes('@')) {
-                alert("Bitte gib eine gültige E-Mail-Adresse ein.");
-                return;
-            }
-            alert("Danke! Du wurdest auf die Warteliste gesetzt.");
-            sendEmailToOwner(product, 'waitlist', 'none', email);
-            clearCartAndClose();
-        }
-
-        function sendEmailToOwner(product, type, method, userEmail = '') {
-            emailjs.send("DEIN_SERVICE_ID", "DEIN_TEMPLATE_ID", {
-                product_name:   product,
-                checkout_type:  type,
-                payment_method: method,
-                user_email:     userEmail
-            }).then((response) => {
-                console.log("SUCCESS!", response.status, response.text);
-            }, (error) => {
-                console.error("FAILED...", error);
+            
+            let cartSummary = 'Cart:\n\n';
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                cartSummary += `${index + 1}. ${item.name} - $${item.price}\n`;
+                total += item.price;
             });
+            
+            cartSummary += `\nGesamtsumme: $${total}`;
+            alert(cartSummary);
         }
 
-        // (Rest deiner bisherigen JS-Logik: Produkt-Modals, openProductModal etc.)
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href="#home"], a[href="#products"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                     });
+                     // Hash etwas später setzen, damit der Browser nicht teleportiert
+                     setTimeout(() => {
+                         history.pushState(null, null, href);
+                         handleHashChange(); // Falls der Hash nicht von selbst ausgelöst wird
+                     }, 400);
+                }
+            });
+        });
+
+        
     </script>
 </body>
 </html>
-
