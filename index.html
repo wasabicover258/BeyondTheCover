@@ -252,7 +252,8 @@
             }
         }
 
-        .cart-modal {
+        /*cart modal*/
+        .cart-modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -264,9 +265,53 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
 
-        .cart-modal-close-btn {
+        .cart-modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-modal {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 450px;
+            width: 100%;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            position: relative;
+            transform: scale(0.9);
+            animation: cartModalAppear 0.3s ease-out forwards;
+        }
+
+        @keyframes cartModalAppear {
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .cart-modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+        }
+
+        .cart-modal-title {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cart-close-btn {
             position: absolute;
             top: 15px;
             right: 20px;
@@ -284,10 +329,155 @@
             justify-content: center;
         }
 
-       #aboutOverlay,
-       #contactOverlay {
-           display: none;
-       }
+        .cart-close-btn:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: #333;
+            transform: rotate(90deg);
+        }
+
+        .cart-content {
+            min-height: 200px;
+        }
+
+        .cart-product-list {
+            margin-bottom: 20px;
+        }
+
+        .cart-product-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            animation: cartSlideIn 0.3s ease-out;
+        }
+
+        @keyframes cartSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .cart-product-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .cart-product-price {
+            color: #667eea;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .cart-total-section {
+            background: linear-gradient(145deg, #f8f9ff, #e8eaff);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            border: 2px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .cart-total-label {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .cart-total-amount {
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cart-button-container {
+            position: relative;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+
+        .cart-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart-button1 {
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .cart-button1:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .cart-button2 {
+            background: linear-gradient(145deg, #ff6b6b, #ee5a24);
+            color: white;
+        }
+
+        .cart-button2:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .cart-empty-message {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .cart-products-button {
+            background: linear-gradient(145deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .cart-products-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        #aboutOverlay,
+        #contactOverlay {
+            display: none;
+        }
 
 
 
@@ -1309,6 +1499,42 @@
         </div>
     </footer>
 
+    <div id="cartModalOverlay" class="cart-modal-overlay">
+        <div class="cart-modal">
+            <button class="cart-close-btn" onclick="closeCartModal()">&times;</button>
+            
+            <div class="cart-modal-header">
+                <h2 class="cart-modal-title">Warenkorb</h2>
+            </div>
+
+            <div class="cart-content">
+                <!-- Products List -->
+                <div id="cartProductList" class="cart-product-list">
+                </div>
+
+                <!-- Empty Cart Message -->
+                <div id="cartEmpty" class="cart-empty hidden">
+                    <div class="cart-empty-message">
+                        Cart is empty.<br>Find our products here
+                    </div>
+                    <a href="index.html#products" class="cart-products-button">Zu den Produkten</a>
+                </div>
+
+                <!-- Total Section -->
+                <div id="cartTotalSection" class="cart-total-section">
+                    <div class="cart-total-label">Gesamtsumme</div>
+                    <div id="cartTotalAmount" class="cart-total-amount">€0.00</div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="cart-button-container">
+                    <button id="cartButton1" class="cart-button cart-button1">Zur Kasse</button>
+                    <button id="cartButton2" class="cart-button cart-button2 hidden">Spezialbestellung</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Product Modals -->
     <div class="product-modal" id="product-modal">
         <div class="modal-content">
@@ -1623,6 +1849,106 @@
              btn.textContent = `${qty}× Added!`;
              setTimeout(() => btn.textContent = txt, 1500);
         }
+
+        /*Cart-Modal*/
+        // Cart state
+        let cart = [];
+
+        // Add product to cart
+        function addProduct(name, price) {
+            cart.push({ name, price });
+            updateCart();
+        }
+
+        // Clear cart
+        function clearCart() {
+            cart = [];
+            updateCart();
+        }
+
+        // Open modal
+        function openCartModal() {
+            const cartModalOverlay = document.getElementById('cartModalOverlay');
+            cartModalOverlay.classList.add('show');
+        }
+
+        // Close modal
+        function closeCartModal() {
+            const cartModalOverlay = document.getElementById('cartModalOverlay');
+            cartModalOverlay.classList.remove('show');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('cartModalOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCartModal();
+            }
+        });
+
+        // Update cart display
+        function updateCart() {
+            const cartProductList = document.getElementById('cartProductList');
+            const cartEmpty = document.getElementById('cartEmpty');
+            const cartTotalSection = document.getElementById('cartTotalSection');
+            const cartTotalAmount = document.getElementById('cartTotalAmount');
+            const cartButton1 = document.getElementById('cartButton1');
+            const cartButton2 = document.getElementById('cartButton2');
+            const cartCountBadge = document.getElementById('cartCountBadge');
+
+            // Update cart count
+            cartCountBadge.textContent = cart.length;
+
+            // Clear product list
+            cartProductList.innerHTML = '';
+
+            if (cart.length === 0) {
+                // Empty cart
+                cartEmpty.classList.remove('hidden');
+                cartTotalSection.classList.add('hidden');
+                cartButton1.classList.add('hidden');
+                cartButton2.classList.add('hidden');
+            } else {
+                // Cart has items
+                cartEmpty.classList.add('hidden');
+                cartTotalSection.classList.remove('hidden');
+
+                // Display products
+                cart.forEach(product => {
+                    const productItem = document.createElement('div');
+                    productItem.className = 'cart-product-item';
+                    productItem.innerHTML = `
+                        <span class="cart-product-name">${product.name}</span>
+                        <span class="cart-product-price">€${product.price.toFixed(2)}</span>
+                    `;
+                    cartProductList.appendChild(productItem);
+                });
+
+                // Calculate total
+                const total = cart.reduce((sum, product) => sum + product.price, 0);
+                cartTotalAmount.textContent = `€${total.toFixed(2)}`;
+
+                // Button logic
+                const hasDiver = cart.some(product => product.name === 'Diver');
+                const hasSubmarineOrMoses = cart.some(product => 
+                    product.name === 'Submarine' || product.name === 'Moses'
+                );
+
+                if (hasDiver) {
+                    cartButton1.classList.remove('hidden');
+                    cartButton2.classList.add('hidden');
+                } else if (hasSubmarineOrMoses) {
+                    cartButton1.classList.add('hidden');
+                    cartButton2.classList.remove('hidden');
+                } else {
+                    // Other products
+                    cartButton1.classList.remove('hidden');
+                    cartButton2.classList.add('hidden');
+                }
+            }
+        }
+
+        // Initialize cart display
+        updateCart();
 
 
         // Modal schließen bei Klick außerhalb
