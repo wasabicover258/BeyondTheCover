@@ -1987,22 +1987,9 @@
 
 
         function toggleCart() {
-            if (cart.length === 0) {
-                alert('Your cart is empty!');
-                return;
-            }
-            
-            let cartSummary = 'Cart:\n\n';
-            let total = 0;
-            
-            cart.forEach((item, index) => {
-                cartSummary += `${index + 1}. ${item.name} - $${item.price}\n`;
-                total += item.price;
-            });
-            
-            cartSummary += `\nGesamtsumme: $${total}`;
-            alert(cartSummary);
+            openCartModal();
         }
+
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href="#home"], a[href="#products"]').forEach(anchor => {
