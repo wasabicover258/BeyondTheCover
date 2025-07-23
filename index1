@@ -244,6 +244,14 @@
             top: 105%;
        }
 
+        @media (max-width: 768px) {
+            .btn-cart .quantity {
+                color: #005F4E !important;
+                -webkit-text-fill-color: #005F4E !important;
+                text-decoration: none !important;
+            }
+        }
+
        #aboutOverlay,
        #contactOverlay {
            display: none;
@@ -544,12 +552,11 @@
         }
 
         /* Product Detail Modal */
-        .product-modal {
+        .product-modal,
+        .product-modal1 {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(10px);
             box-sizing: border-box;
@@ -562,7 +569,8 @@
             transition: opacity 0.3s ease;
         }
 
-        .product-modal.active {
+        .product-modal.active,
+        .product-modal1.active {
             display: flex;
             opacity: 1;
         }
@@ -901,20 +909,114 @@
             background: #0a0a0a;
             border-top: 1px solid #333;
             padding: 2rem 0;
-            text-align: center;
             color: #666;
         }
-
+        
         footer .container {
-            font-size: clamp(1rem, 2vw, 2rem);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 2rem;
+            flex-wrap: wrap;
         }
-
-
+        
+        .footer-left {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .footer-center {
+            flex: 1;
+            text-align: center;
+            min-width: 200px;
+        }
+        
+        .footer-right {
+            flex: 1;
+            text-align: right;
+            min-width: 200px;
+        }
+        
+        .impressum {
+            margin-bottom: 1rem;
+        }
+        
+        .impressum h3 {
+            color: #999;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: normal;
+        }
+        
+        .impressum p {
+            margin: 0.2rem 0;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .copyright {
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            color: #666;
+        }
+        
+        .contact-btn {
+            background: linear-gradient(135deg, #333, #555);
+            color: #fff;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid #666;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .contact-btn:hover {
+            background: linear-gradient(135deg, #555, #777);
+            border-color: #999;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        /* Mobile Anpassungen */
         @media (max-width: 768px) {
-            .btn-cart .quantity {
-                color: #005F4E !important;
-                -webkit-text-fill-color: #005F4E !important;
-                text-decoration: none !important;
+            footer .container {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .footer-left,
+            .footer-center,
+            .footer-right {
+                text-align: center;
+                min-width: auto;
+            }
+            
+            .impressum {
+                margin-bottom: 1.5rem;
+            }
+            
+            .impressum h3 {
+                font-size: 1rem;
+            }
+            
+            .impressum p {
+                font-size: 0.8rem;
+            }
+            
+            .copyright {
+                font-size: 0.9rem;
+            }
+            
+            .contact-btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
             }
         }
 
@@ -1012,13 +1114,14 @@
                      <li><a href="#home">Home</a></li>
                      <li><a href="about.html#about">About</a></li>
                      <li><a href="#products">Products</a></li>
-                     <li><a href="contact.html#contact">Contact</a></li>
+                     <li><a href="downloads.html#downloads">Downloads</a></li>
                  </ul>
             </div>
         </nav>
     </header>
 
     <div id="aboutOverlay" class="overlay">About Content</div>
+    <div id="downloadsOverlay" class="overlay">Downloads Content</div>
     <div id="contactOverlay" class="overlay">Contact Content</div>
 
     <main>
@@ -1114,7 +1217,7 @@
                             <h3 class="product-name">Diver</h3>
                             <p class="product-description">Dip your toe through the surface.</p>
                             <div class="product-price">€2/mo</div>
-                            <button class="view-product" onclick="openProductModal('premium-smartphone')">
+                            <button class="view-product" onclick="openProductModal('diver')">
                                 Show details
                             </button>
                         </div>
@@ -1126,7 +1229,7 @@
                             <h3 class="product-name">Submarine</h3>
                             <p class="product-description">Dive right in and follow the whales.</p>
                             <div class="product-price">€10/mo</div>
-                            <button class="view-product" onclick="openProductModal('wireless-headphones')">
+                            <button class="view-product" onclick="openProductModal('submarine')">
                                 Show details
                             </button>
                         </div>
@@ -1138,7 +1241,7 @@
                             <h3 class="product-name">Moses</h3>
                             <p class="product-description">Coming soon!</p>
                             <div class="product-price">€ ~</div>
-                            <button class="view-product" onclick="openProductModal('smart-watch')">
+                            <button class="view-product" onclick="openProductModal('moses')">
                                 Show details
                             </button>
                         </div>
@@ -1150,7 +1253,26 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 BEYONDTHECOVER. All rights preserved.</p>
+            <div class="footer-left">
+                <div class="impressum">
+                    <h3>Imprint</h3>
+                    <p>Northpeak Solutions OÜ</p>
+                    <p>Ahtri 12, 10151 Tallinn, Estonia</p>
+                    <p>16543210</p>
+                    <p>EE123456789</p>
+                    <p>info@btcoverinvest.com</p>
+                </div>
+            </div>
+            
+            <div class="footer-center">
+                <div class="copyright">
+                    <p>&copy; 2025 BEYONDTHECOVER. All rights reserved.</p>
+                </div>
+            </div>
+            
+            <div class="footer-right">
+                <a href="contact.html#contact" class="contact-btn">Contact</a>
+            </div>
         </div>
     </footer>
 
@@ -1223,13 +1345,81 @@
         </div>
     </div>
 
+    <div class="product-modal1" id="product-modal1">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProductModal()">×</button>
+            <div class="modal-body">
+                <div class="modal-images">
+                    <div class="main-image" id="main-image">📱</div>
+                    <div class="image-thumbnails">
+                        <div class="thumbnail active" onclick="changeMainImage('📱')">📱</div>
+                        <div class="thumbnail" onclick="changeMainImage('📷')">📷</div>
+                        <div class="thumbnail" onclick="changeMainImage('🔋')">🔋</div>
+                        <div class="thumbnail" onclick="changeMainImage('📡')">📡</div>
+                    </div>
+                </div>
+                
+                <div class="modal-info">
+                    <h2 class="modal-title" id="modal-title">Premium Smartphone</h2>
+                    <div class="modal-price" id="modal-price">€ ~</div>
+                    <p class="modal-description" id="modal-description">
+                        Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle.
+                    </p>
+                    
+                    <ul class="features-list" id="features-list">
+                        <li>6.7" OLED Display mit 120Hz</li>
+                        <li>Triple-Kamera System</li>
+                        <li>5G Konnektivität</li>
+                        <li>Wasserdicht nach IP68</li>
+                        <li>Wireless Charging</li>
+                    </ul>
+                    
+                    <div class="quantity-selector">
+                        <span class="quantity-label">Quantity:</span>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
+                            <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="10">
+                            <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+                        </div>
+                    </div>
+                    
+                    <button class="add-to-cart-modal" onclick="addToCartFromModal()">
+                        Request access
+                    </button>
+                    
+                    <div class="product-specs">
+                        <div class="specs-title">Technische Daten</div>
+                        <div class="specs-grid" id="specs-grid">
+                            <div class="spec-item">
+                                <span class="spec-label">Display:</span>
+                                <span class="spec-value">6.7" OLED</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Speicher:</span>
+                                <span class="spec-value">256GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">RAM:</span>
+                                <span class="spec-value">8GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span class="spec-label">Akku:</span>
+                                <span class="spec-value">4500mAh</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         let cart = [];
         let cartCount = 0;
         let currentProduct = null;
 
         const products = {
-            'premium-smartphone': {
+            'diver': {
                 name: 'Diver',
                 price: 2,
                 icon: '📱',
@@ -1251,7 +1441,7 @@
                 },
                 images: ['📱', '📷', '🔋', '📡']
             },
-            'wireless-headphones': {
+            'submarine': {
                 name: 'Submarine',
                 price: 10,
                 icon: '🎧',
@@ -1273,7 +1463,7 @@
                 },
                 images: ['🎧', '🔊', '🔋', '📶']
             },
-            'smart-watch': {
+            'moses': {
                 name: 'Moses',
                 price: 0,
                 icon: '⌚',
@@ -1296,141 +1486,129 @@
                 images: ['⌚', '💓', '🏃', '💧']
             }
         };
-
         function openProductModal(productId) {
             currentProduct = products[productId];
             if (!currentProduct) return;
 
-            // Update modal content
+            // 1) Content updaten
             document.getElementById('modal-title').textContent = currentProduct.name;
             document.getElementById('modal-price').innerHTML = '€' + currentProduct.price + '<small>/mo</small>';
             document.getElementById('modal-description').textContent = currentProduct.description;
             document.getElementById('main-image').textContent = currentProduct.icon;
 
-            // Update features
+            // 2) Features
             const featuresList = document.getElementById('features-list');
             featuresList.innerHTML = '';
-            currentProduct.features.forEach(feature => {
+            currentProduct.features.forEach(f => {
                 const li = document.createElement('li');
-                li.textContent = feature;
+                li.textContent = f;
                 featuresList.appendChild(li);
             });
 
-            // Update specs
+            // 3) Specs
             const specsGrid = document.getElementById('specs-grid');
             specsGrid.innerHTML = '';
-            Object.entries(currentProduct.specs).forEach(([key, value]) => {
-                const specItem = document.createElement('div');
-                specItem.className = 'spec-item';
-                specItem.innerHTML = `
-                    <span class="spec-label">${key}:</span>
-                    <span class="spec-value">${value}</span>
-                `;
-                specsGrid.appendChild(specItem);
+            Object.entries(currentProduct.specs).forEach(([k, v]) => {
+                const item = document.createElement('div');
+                item.className = 'spec-item';
+                item.innerHTML = `<span class="spec-label">${k}:</span><span class="spec-value">${v}</span>`;
+                specsGrid.appendChild(item);
             });
 
-            // Update thumbnails
-            const thumbnails = document.querySelector('.image-thumbnails');
-            thumbnails.innerHTML = '';
-            currentProduct.images.forEach((image, index) => {
-                const thumbnail = document.createElement('div');
-                thumbnail.className = `thumbnail ${index === 0 ? 'active' : ''}`;
-                thumbnail.textContent = image;
-                thumbnail.onclick = () => changeMainImage(image);
-                thumbnails.appendChild(thumbnail);
+            // 4) Thumbnails
+            const thumbs = document.querySelector('.image-thumbnails');
+            thumbs.innerHTML = '';
+            currentProduct.images.forEach((img, i) => {
+                const t = document.createElement('div');
+                t.className = 'thumbnail' + (i === 0 ? ' active' : '');
+                t.textContent = img;
+                t.onclick = () => changeMainImage(img);
+                thumbs.appendChild(t);
             });
 
-            // Reset quantity
+            // 5) Quantity reset
             document.getElementById('quantity').value = 1;
 
-            // Show modal
-            const modal = document.getElementById('product-modal');
+            // 6) Beide Modals schließen
+            document.querySelectorAll('.product-modal, .product-modal1').forEach(m => {
+                m.classList.remove('active');
+            });
+
+            // 7) Je nach ID das richtige Modal öffnen
+            let modal;
+            if (productId === 'diver') {
+                modal = document.getElementById('product-modal');
+            } else { // 'submarine' oder 'moses'
+                modal = document.getElementById('product-modal1');
+            }
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
         function closeProductModal() {
-            const modal = document.getElementById('product-modal');
-            modal.classList.remove('active');
+            document.querySelectorAll('.product-modal, .product-modal1').forEach(m => {
+                m.classList.remove('active');
+            });
             document.body.style.overflow = 'auto';
             currentProduct = null;
         }
 
         function changeMainImage(imageIcon) {
             document.getElementById('main-image').textContent = imageIcon;
-            
-            // Update active thumbnail
-            document.querySelectorAll('.thumbnail').forEach(thumb => {
-                thumb.classList.remove('active');
-                if (thumb.textContent === imageIcon) {
-                    thumb.classList.add('active');
-                }
+            document.querySelectorAll('.thumbnail').forEach(t => {
+                t.classList.toggle('active', t.textContent === imageIcon);
             });
         }
 
-        function changeQuantity(change) {
-            const quantityInput = document.getElementById('quantity');
-            let newValue = parseInt(quantityInput.value) + change;
-            newValue = Math.max(1, Math.min(10, newValue));
-            quantityInput.value = newValue;
+        function changeQuantity(delta) {
+            const input = document.getElementById('quantity');
+            let val = parseInt(input.value) + delta;
+            input.value = Math.max(1, Math.min(10, val));
         }
 
         function addToCartFromModal() {
             if (!currentProduct) return;
-            
-            const quantity = parseInt(document.getElementById('quantity').value);
-            
-            for (let i = 0; i < quantity; i++) {
-                cart.push({
-                    name: currentProduct.name,
-                    price: currentProduct.price
-                });
+            const qty = parseInt(document.getElementById('quantity').value);
+            for (let i = 0; i < qty; i++) {
+                cart.push({ name: currentProduct.name, price: currentProduct.price });
             }
-            
-            cartCount += quantity;
+            cartCount += qty;
             document.getElementById('cart-count').textContent = cartCount;
             document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
-            
-            // Success feedback
-            const button = document.querySelector('.add-to-cart-modal');
-            const originalText = button.textContent;
-            button.textContent = `${quantity}x Added!`;
-            button.style.background = 'linear-gradient(#005F4E)';
-            
-            setTimeout(() => {
-                button.textContent = originalText;
-                button.style.background = 'linear-gradient(45deg, #333, #555)';
-            }, 1500);
-            
-            console.log(`${quantity}x ${currentProduct.name} added`);
+
+            const btn = document.querySelector('.add-to-cart-modal');
+            const txt = btn.textContent;
+            btn.textContent = `${qty}× Added!`;
+            setTimeout(() => btn.textContent = txt, 1500);
         }
 
-        // Close modal on outside click
-        document.getElementById('product-modal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeProductModal();
-            }
+        // Modal schließen bei Klick außerhalb
+        document.getElementById('product-modal').addEventListener('click', e => {
+            if (e.target === e.currentTarget) closeProductModal();
+        });
+        document.getElementById('product-modal1').addEventListener('click', e => {
+            if (e.target === e.currentTarget) closeProductModal();
         });
 
-        // Close modal on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeProductModal();
-            }
+        // Modal schließen mit Escape
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeProductModal();
         });
 
         function handleHashChange() {
             const hash = window.location.hash.toLowerCase();
             const aboutOverlay = document.getElementById('aboutOverlay');
+            const downloadsOverlay = document.getElementById('downloadsOverlay');
             const contactOverlay = document.getElementById('contactOverlay');
   
             aboutOverlay.classList.remove('active');
+            downloadsOverlay.classList.remove('active');
             contactOverlay.classList.remove('active');
 
             if (hash === '#about') {
                 aboutOverlay.classList.add('active');
             } else if (hash === '#contact') {
-                contactOverlay.classList.add('active');
+                downloadsOverlay.classList.add('active');
             }
             // #home und #products schließen alles
         }
