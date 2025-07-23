@@ -1212,15 +1212,15 @@
                 <h2>Our products</h2>
                 <div class="product-grid">
                     <div class="product-card">
-                        <div class="product-image">📱</div>
-                        <div class="product-info">
-                            <h3 class="product-name">Diver</h3>
-                            <p class="product-description">Dip your toe through the surface.</p>
-                            <div class="product-price">€2/mo</div>
-                            <button class="view-product" onclick="openProductModal('diver')">
-                                Show details
-                            </button>
-                        </div>
+                    <div class="product-image">📱</div>
+                    <div class="product-info">
+                        <h3 class="product-name">Diver</h3>
+                        <p class="product-description">Dip your toe through the surface.</p>
+                        <div class="product-price">$2/mo</div>
+                        <button class="view-product" onclick="openProductModal('diver')">
+                            Show details
+                        </button>
+                    </div>
                     </div>
 
                     <div class="product-card">
@@ -1228,7 +1228,7 @@
                         <div class="product-info">
                             <h3 class="product-name">Submarine</h3>
                             <p class="product-description">Dive right in and follow the whales.</p>
-                            <div class="product-price">€10/mo</div>
+                            <div class="product-price">$10/mo</div>
                             <button class="view-product" onclick="openProductModal('submarine')">
                                 Show details
                             </button>
@@ -1240,7 +1240,7 @@
                         <div class="product-info">
                             <h3 class="product-name">Moses</h3>
                             <p class="product-description">Coming soon!</p>
-                            <div class="product-price">€ ~</div>
+                            <div class="product-price">$ ~</div>
                             <button class="view-product" onclick="openProductModal('moses')">
                                 Show details
                             </button>
@@ -1249,6 +1249,7 @@
                 </div>
             </div>
         </section>
+
     </main>
 
     <footer>
@@ -1293,7 +1294,7 @@
                 
                 <div class="modal-info">
                     <h2 class="modal-title" id="modal-title">Premium Smartphone</h2>
-                    <div class="modal-price" id="modal-price">€ ~</div>
+                    <div class="modal-price" id="modal-price">$ ~</div>
                     <p class="modal-description" id="modal-description">
                         Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle.
                     </p>
@@ -1361,7 +1362,7 @@
                 
                 <div class="modal-info">
                     <h2 class="modal-title" id="modal-title">Premium Smartphone</h2>
-                    <div class="modal-price" id="modal-price">€ ~</div>
+                    <div class="modal-price" id="modal-price">$ ~</div>
                     <p class="modal-description" id="modal-description">
                         Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle.
                     </p>
@@ -1492,7 +1493,7 @@
 
             // 1) Content updaten
             document.getElementById('modal-title').textContent = currentProduct.name;
-            document.getElementById('modal-price').innerHTML = '€' + currentProduct.price + '<small>/mo</small>';
+            document.getElementById('modal-price').innerHTML = '$' + currentProduct.price + '<small>/mo</small>';
             document.getElementById('modal-description').textContent = currentProduct.description;
             document.getElementById('main-image').textContent = currentProduct.icon;
 
@@ -1569,18 +1570,28 @@
         function addToCartFromModal() {
             if (!currentProduct) return;
             const qty = parseInt(document.getElementById('quantity').value);
-            for (let i = 0; i < qty; i++) {
-                cart.push({ name: currentProduct.name, price: currentProduct.price });
-            }
-            cartCount += qty;
-            document.getElementById('cart-count').textContent = cartCount;
-            document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
 
-            const btn = document.querySelector('.add-to-cart-modal');
-            const txt = btn.textContent;
-            btn.textContent = `${qty}× Added!`;
-            setTimeout(() => btn.textContent = txt, 1500);
+             // Prüfen, ob bereits Produkte im Warenkorb sind
+             if (cart.length > 0 && cart[0].name !== currentProduct.name) {
+                 alert(`Only one product type can be in the cart at a time.\n\nYou already added "${cart[0].name}".\nRemove it before adding "${currentProduct.name}".`);
+                 return;
+             }
+
+             // Produkte hinzufügen
+             for (let i = 0; i < qty; i++) {
+                 cart.push({ name: currentProduct.name, price: currentProduct.price });
+             }
+
+             cartCount = cart.length;
+             document.getElementById('cart-count').textContent = cartCount;
+             document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
+
+             const btn = document.querySelector('.add-to-cart-modal');
+             const txt = btn.textContent;
+             btn.textContent = `${qty}× Added!`;
+             setTimeout(() => btn.textContent = txt, 1500);
         }
+
 
         // Modal schließen bei Klick außerhalb
         document.getElementById('product-modal').addEventListener('click', e => {
@@ -1619,19 +1630,19 @@
 
         function toggleCart() {
             if (cart.length === 0) {
-                alert('Ihr Warenkorb ist leer!');
+                alert('Your cart is empty!');
                 return;
             }
             
-            let cartSummary = 'Warenkorb:\n\n';
+            let cartSummary = 'Cart:\n\n';
             let total = 0;
             
             cart.forEach((item, index) => {
-                cartSummary += `${index + 1}. ${item.name} - €${item.price}\n`;
+                cartSummary += `${index + 1}. ${item.name} - $${item.price}\n`;
                 total += item.price;
             });
             
-            cartSummary += `\nGesamtsumme: €${total}`;
+            cartSummary += `\nGesamtsumme: $${total}`;
             alert(cartSummary);
         }
 
