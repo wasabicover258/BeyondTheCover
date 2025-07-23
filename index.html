@@ -1841,17 +1841,18 @@
              }
 
              cartCount = cart.length;
-             document.getElementById('cart-count').textContent = cartCount;
+             document.getElementById('cartCountBadge').textContent = cartCount;
              document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
 
              const btn = document.querySelector('.add-to-cart-modal');
              const txt = btn.textContent;
              btn.textContent = `${qty}× Added!`;
              setTimeout(() => btn.textContent = txt, 1500);
+
+            updateCart();
         }
 
         /*Cart-Modal*/
-
         // Add product to cart
         function addProduct(name, price) {
             cart.push({ name, price });
