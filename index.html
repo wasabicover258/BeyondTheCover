@@ -250,10 +250,20 @@
 
         @media (max-width: 768px) {
             .btn-cart .quantity {
+                opacity: 1;
                 color: #005F4E !important;
                 -webkit-text-fill-color: #005F4E !important;
                 text-decoration: none !important;
             }
+        }
+
+        .btn-cart .quantity {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn-cart:hover .quantity {
+            opacity: 1;
         }
 
         /*cart modal*/
