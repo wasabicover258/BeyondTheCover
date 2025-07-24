@@ -6,18 +6,52 @@
   <title>Request Access</title>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background: linear-gradient(135deg, #667eea, #764ba2);
       min-height: 100vh;
-      margin: 0;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
+      flex-direction: column;
     }
 
-    .form-container {
+    header {
+      background: #fff;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px 30px;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      opacity: 0.85;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 30px 20px;
+    }
+
+    .form-section {
       background: #fff;
       padding: 30px;
       border-radius: 12px;
@@ -26,7 +60,7 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
 
-    h2 {
+    .form-section h2 {
       margin-bottom: 20px;
       text-align: center;
       color: #333;
@@ -77,8 +111,25 @@
       color: #721c24;
     }
 
+    footer {
+      background: #fff;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9em;
+      color: #555;
+      border-top: 1px solid #eee;
+    }
+
     @media (max-width: 768px) {
-      .form-container {
+      .hero h1 {
+        font-size: 2em;
+      }
+
+      .hero p {
+        font-size: 1em;
+      }
+
+      .form-section {
         padding: 20px;
       }
     }
@@ -86,38 +137,53 @@
 </head>
 <body>
 
-  <div class="form-container">
-    <h2>Request Access</h2>
-    <form id="accessForm">
-      <label for="package">Paket auswählen</label>
-      <select id="package" name="package" required>
-        <option value="" disabled selected>-- Bitte wählen --</option>
-        <option value="Submarine">Submarine</option>
-        <option value="Moses">Moses</option>
-      </select>
+  <header>
+    <!-- Logo oder Navigation -->
+    <strong>BEYONDTHECOVER</strong>
+  </header>
 
-      <label for="quantity">Anzahl</label>
-      <select id="quantity" name="quantity" required>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="50">50</option>
-      </select>
+  <section class="hero">
+    <h1>Request Access</h1>
+    <p>Wählen Sie Ihr gewünschtes Paket und hinterlassen Sie Ihre E-Mail-Adresse</p>
+  </section>
 
-      <label for="email">E-Mail-Adresse</label>
-      <input type="email" id="email" name="email" required placeholder="deine@email.de"/>
+  <main>
+    <section class="form-section">
+      <h2>Zugang anfordern</h2>
+      <form id="accessForm">
+        <label for="package">Paket auswählen</label>
+        <select id="package" name="package" required>
+          <option value="" disabled selected>-- Bitte wählen --</option>
+          <option value="Submarine">Submarine</option>
+          <option value="Moses">Moses</option>
+        </select>
 
-      <button type="submit">Zugang anfordern</button>
+        <label for="quantity">Anzahl</label>
+        <select id="quantity" name="quantity" required>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
 
-      <div id="feedback"></div>
-    </form>
-  </div>
+        <label for="email">E-Mail-Adresse</label>
+        <input type="email" id="email" name="email" required placeholder="deine@email.de"/>
+
+        <button type="submit">Absenden</button>
+
+        <div id="feedback"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 BEYONDTHECOVER. All rights reserved.
+  </footer>
 
   <script>
-    // Init EmailJS
     emailjs.init('6yY3IiIERrPIdxPC9');
 
     document.getElementById('accessForm').addEventListener('submit', function (e) {
@@ -138,7 +204,7 @@
 
       feedback.innerHTML = '';
 
-      emailjs.send('service_darbphr', 'template_ms6hsbr', templateParams)
+      emailjs.send('service_darbphr', 'template_7agjdqb', templateParams)
         .then(function () {
           feedback.innerHTML = '<div class="success">You are on the waiting list and will be notified as soon as possible.</div>';
           document.getElementById('accessForm').reset();
