@@ -1980,8 +1980,22 @@
     });
 
     window.addEventListener('load', () => {
-        window.scrollTo(0, 18);
-        // Falls du verhindern willst, dass Back/Forward die Position wiederherstellen:
+        // Wenn die URL einen Hash enthält, manuell zum Ziel scrollen...
+        if (window.location.hash) {
+            const target = document.querySelector(window.location.hash);
+            if (target) {
+                // Höhe von Header + 20px Puffer
+                const offset = document.querySelector('header').offsetHeight + 20;
+                const topPos = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top: topPos, behavior: 'smooth' });
+            }
+        }
+        // Wenn kein Hash, ganz oben + 20px Puffer (optional)
+        else {
+            window.scrollTo({ top: 20, left: 0 });
+        }
+
+        // Verhindert, dass Back/Forward wieder automatisches Scroll-Restore macht
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
