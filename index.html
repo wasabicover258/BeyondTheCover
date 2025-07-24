@@ -1574,7 +1574,7 @@
             <button class="cart-close-btn" onclick="closeCartModal()">&times;</button>
             
             <div class="cart-modal-header">
-                <h2 class="cart-modal-title">Warenkorb</h2>
+                <h2 class="cart-modal-title">Cart</h2>
             </div>
 
             <div class="cart-content">
@@ -1587,13 +1587,13 @@
                     <div class="cart-empty-message">
                         Cart is empty.<br>Find our products here
                     </div>
-                    <a href="index.html#products" class="cart-products-button">Zu den Produkten</a>
+                    <a href="index.html#products" class="cart-products-button">To the products</a>
                 </div>
 
                 <!-- Total Section -->
                 <div id="cartTotalSection" class="cart-total-section">
-                    <div class="cart-total-label">Gesamtsumme</div>
-                    <div id="cartTotalAmount" class="cart-total-amount">€0.00</div>
+                    <div class="cart-total-label">Total</div>
+                    <div id="cartTotalAmount" class="cart-total-amount">$0.00/mo</div>
                 </div>
 
                 <!-- Buttons -->
@@ -1915,7 +1915,7 @@
         });
 
         const total = cart.reduce((sum, p) => sum + p.price, 0);
-        totalAmt.textContent = `€${total.toFixed(2)}`;
+        totalAmt.textContent = `$${total.toFixed(2)}`;
 
         const hasDiver = cart.some(p => p.name === 'Diver');
         const hasOther = cart.some(p => p.name === 'Submarine' || p.name === 'Moses');
