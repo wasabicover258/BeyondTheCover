@@ -1651,7 +1651,8 @@
                         </div>
                     </div>
                     
-                    <button class="add-to-cart-modal" onclick="addToCartFromModal()">
+                    <button class="add-to-cart-modal"
+                        onclick="addToCartFromModal(this)">
                         Add to cart
                     </button>
                     
@@ -1719,7 +1720,8 @@
                         </div>
                     </div>
                     
-                    <button class="add-to-cart-modal" onclick="addToCartFromModal()">
+                    <button class="add-to-cart-modal"
+                        onclick="addToCartFromModal(this)">
                         Request access
                     </button>
                     
@@ -1892,28 +1894,31 @@
         input.value = Math.max(1, Math.min(10, val));
     }
 
-    function addToCartFromModal() {
-        if (!currentProduct) return;
-        const qty = parseInt(document.getElementById('quantity').value);
+    function addToCartFromModal(btn) {
+        // 1. Sichtbares Modal ermitteln (Kopie beider Modal-Klassen)
+        const modal = btn.closest('.product-modal, .product-modal1');
+        if (!modal || !currentProduct) return;
 
-        // Nur eine Produktsorte gleichzeitig
+        // 2. Quantity rein aus diesem Modal auslesen
+        const qtyInput = modal.querySelector('.quantity-input');
+        const qty = parseInt(qtyInput.value) || 1;
+
+        // 3. Warenkorb‑Logik wie gehabt...
         if (cart.length > 0 && cart[0].name !== currentProduct.name) {
             alert(`Nur ein Produkttyp pro Warenkorb erlaubt.\n\nBereits im Warenkorb: "${cart[0].name}".\nBitte zuerst leeren.`);
             return;
         }
-
         for (let i = 0; i < qty; i++) {
             cart.push({ name: currentProduct.name, price: currentProduct.price });
         }
-
         cartCount = cart.length;
         document.getElementById('cartCountBadge').textContent = cartCount;
         document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
 
-        const btn = document.querySelector('.add-to-cart-modal');
-        const txt = btn.textContent;
+        // 4. Button‑Text nur für **diesen** Button ändern
+        const originalText = btn.textContent;
         btn.textContent = `${qty}× Added!`;
-        setTimeout(() => btn.textContent = txt, 1500);
+        setTimeout(() => btn.textContent = originalText, 1500);
 
         updateCart();
     }
