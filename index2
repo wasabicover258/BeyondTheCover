@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>BTC</title>
     
     <link rel="icon" type="image/x-icon" href="images/favicons/Favicon.ico">
@@ -47,11 +49,12 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            color: #ffffff;
+            color: #0d0d0d;
             min-height: 100vh;
             line-height: 1.6;
             max-width: 100vw;
             overflow-x: hidden;
+            padding-top: env(safe-area-inset-top);
         }
 
         .container {
@@ -79,6 +82,10 @@
         .container h2 {
             font-family: 'HeadlineFont';
             font-size: 30%;
+        }
+
+        .hidden {
+            display: none !important;
         }
 
 
@@ -246,16 +253,269 @@
 
         @media (max-width: 768px) {
             .btn-cart .quantity {
+                opacity: 1 !important!;
                 color: #005F4E !important;
                 -webkit-text-fill-color: #005F4E !important;
                 text-decoration: none !important;
             }
         }
 
-       #aboutOverlay,
-       #contactOverlay {
-           display: none;
-       }
+        .btn-cart .quantity {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .btn-cart:hover .quantity {
+            opacity: 1;
+        }
+
+        /*cart modal*/
+        .cart-modal-overlay {
+            position: fixed;
+            top: 100px; /* oder Höhe deines Headers */
+            right: 20px;
+            width: auto;
+            height: auto;
+            background: none; /* kein dunkler Overlay-Hintergrund */
+            backdrop-filter: none;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+
+        .cart-modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-modal {
+            background: #101010;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 350px;
+            width: 100%;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: cartSlideFromTop 0.3s ease-out forwards;
+        }
+
+        @media (max-width: 768px) {
+            .cart-modal-overlay {
+                top: 0;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: rgba(0, 0, 0, 0.6); /* optional: wieder dunkler Hintergrund für mobile UX */
+            }
+
+            .cart-modal {
+                max-width: 90%;
+                width: 100%;
+                margin: 0 20px;
+            }
+        }
+
+        @keyframes cartSlideFromTop {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .cart-modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 15px;
+        }
+
+        .cart-modal-title {
+            font-size: 28px;
+            font-weight: 700;
+            font-family: 'HeadlineFont';
+            background: white;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cart-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.2s ease;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-close-btn:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: #333;
+            transform: rotate(90deg);
+        }
+
+        .cart-content {
+            min-height: 200px;
+        }
+
+        .cart-product-list {
+            margin-bottom: 20px;
+        }
+
+        .cart-product-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            animation: cartSlideIn 0.3s ease-out;
+        }
+
+        @keyframes cartSlideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .cart-product-name {
+            font-weight: 600;
+            color: white;
+            font-size: 16px;
+        }
+
+        .cart-product-price {
+            color: #005F4E;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .cart-total-section {
+            background: linear-gradient(145deg, #181818, #232324);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            border: 1px solid #383838;
+        }
+
+        .cart-total-label {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .cart-total-amount {
+            font-size: 32px;
+            font-weight: 800;
+            background: #005F4E;
+            background: linear-gradient(7deg,rgba(0, 95, 78, 1) 0%, rgba(0, 28, 24, 1) 100%)
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cart-button-container {
+            position: relative;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+
+        .cart-button {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart-button1 {
+            background: linear-gradient(7deg,rgba(0, 95, 78, 1) 0%, rgba(0, 28, 24, 1) 100%);
+            color: white;
+        }
+
+        .cart-button1:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px #004033;
+        }
+
+        .cart-button2 {
+            background: linear-gradient(7deg,rgba(0, 95, 78, 1) 0%, rgba(0, 28, 24, 1) 100%);
+            color: white;
+        }
+
+        .cart-button2:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px #004033;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .cart-empty-message {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .cart-products-button {
+            background: linear-gradient(7deg,rgba(0, 95, 78, 1) 0%, rgba(0, 28, 24, 1) 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px #00403380;
+        }
+
+        .cart-products-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px #004033;
+        }
+
+        #aboutOverlay,
+        #contactOverlay {
+            display: none;
+        }
 
 
 
@@ -276,18 +536,19 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: fadeInUp 1s ease forwards;
         }
 
         .hero p {
             font-size: 1vw;
             color: #005F4E;
             margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s forwards;
         }
 
         @media (max-width: 768px) {
             .hero p {
                 font-size: 3vw;
-                color: #005F4E;
                 margin-bottom: 2rem;
             }
         }
@@ -549,6 +810,31 @@
             background: linear-gradient(45deg, #555, #777);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-text {
+            margin-bottom: 200px;
+        }
+
+        .pricing-text h3 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .pricing-text p {
+            font-size: 1.1rem;
+            font-family: 'MainFont';
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .pricing-text .highlight {
+            color: #005F4E;
+            font-weight: 600;
         }
 
         /* Product Detail Modal */
@@ -1103,12 +1389,12 @@
             <div class="nav-right">
                 <div class="cart-icon" onclick="toggleCart()">
                 <button data-quantity="0" class="btn-cart">
-                          <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="30.52" width="24.38" xmlns="http://www.w3.org/2000/svg">
-                            <title>icon-cart</title>
-                            <path transform="translate(-3.62 -0.85)" d="M28,27.3,26.24,7.51a.75.75,0,0,0-.76-.69h-3.7a6,6,0,0,0-12,0H6.13a.76.76,0,0,0-.76.69L3.62,27.3v.07a4.29,4.29,0,0,0,4.52,4H23.48a4.29,4.29,0,0,0,4.52-4ZM15.81,2.37a4.47,4.47,0,0,1,4.46,4.45H11.35a4.47,4.47,0,0,1,4.46-4.45Zm7.67,27.48H8.13a2.79,2.79,0,0,1-3-2.45L6.83,8.34h3V11a.76.76,0,0,0,1.52,0V8.34h8.92V11a.76.76,0,0,0,1.52,0V8.34h3L26.48,27.4a2.79,2.79,0,0,1-3,2.44Zm0,0"></path>
-                          </svg>
-                          <span class="quantity" id="cart-count">0</span>
-                 </button>
+                    <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="30.52" width="24.38" xmlns="http://www.w3.org/2000/svg">
+                        <title>icon-cart</title>
+                        <path transform="translate(-3.62 -0.85)" d="M28,27.3,26.24,7.51a.75.75,0,0,0-.76-.69h-3.7a6,6,0,0,0-12,0H6.13a.76.76,0,0,0-.76.69L3.62,27.3v.07a4.29,4.29,0,0,0,4.52,4H23.48a4.29,4.29,0,0,0,4.52-4ZM15.81,2.37a4.47,4.47,0,0,1,4.46,4.45H11.35a4.47,4.47,0,0,1,4.46-4.45Zm7.67,27.48H8.13a2.79,2.79,0,0,1-3-2.45L6.83,8.34h3V11a.76.76,0,0,0,1.52,0V8.34h8.92V11a.76.76,0,0,0,1.52,0V8.34h3L26.48,27.4a2.79,2.79,0,0,1-3,2.44Zm0,0"></path>
+                    </svg>
+                    <span class="quantity" id="cartCountBadge">0</span> <!-- ← das ist die richtige ID -->
+                </button>
                  </div>
                  <ul class="nav-links">
                      <li><a href="#home">Home</a></li>
@@ -1249,6 +1535,19 @@
                 </div>
             </div>
         </section>
+        <section>
+            <div class="container">
+                <div class="pricing-text">
+                    <h3>How our pricing works</h3>
+                    <p>We don’t believe in charging <span class="highlight">'high prices</span> for our products. Thanks to our system, we’re no longer dependent on <span class="highlight">inflated pricing</span> to stay afloat.<br>Instead, we’ve chosen to <span class="highlight">reduce</span> our costs to the <span class="highlight">absolute minimum</span> — so that <span class="highlight">more people</span> can afford to take their first successful steps into the world of financial markets.<br>Our pricing covers <span class="highlight">only the essentials</span>:</p>
+                    <p>   • Fair employee wages</p>
+                    <p>   • Taxes and legal compliance</p>
+                    <p>   • Office rent and operational costs</p>
+                    <p>   • Basic infrastructure and maintainance</p>
+                    <p><span class="highlight">That's it.</span> No inflated margins. No hidden fees. Just what’s necessary to keep things running — and accessible for <span class="highlight">everyone</span>.</p>
+                </div>
+            </div>
+        </section>
 
     </main>
 
@@ -1276,6 +1575,42 @@
             </div>
         </div>
     </footer>
+
+    <div id="cartModalOverlay" class="cart-modal-overlay">
+        <div class="cart-modal">
+            <button class="cart-close-btn" onclick="closeCartModal()">&times;</button>
+            
+            <div class="cart-modal-header">
+                <h2 class="cart-modal-title">Cart</h2>
+            </div>
+
+            <div class="cart-content">
+                <!-- Products List -->
+                <div id="cartProductList" class="cart-product-list">
+                </div>
+
+                <!-- Empty Cart Message -->
+                <div id="cartEmpty" class="cart-empty hidden">
+                    <div class="cart-empty-message">
+                        Cart is empty.<br>Find our products here
+                    </div>
+                    <a href="index.html#products" class="cart-products-button">To the products</a>
+                </div>
+
+                <!-- Total Section -->
+                <div id="cartTotalSection" class="cart-total-section">
+                    <div class="cart-total-label">Total</div>
+                    <div id="cartTotalAmount" class="cart-total-amount">$0.00/mo</div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="cart-button-container">
+                    <button id="cartButton1" class="cart-button cart-button1">Zur Kasse</button>
+                    <button id="cartButton2" class="cart-button cart-button2 hidden">Spezialbestellung</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Product Modals -->
     <div class="product-modal" id="product-modal">
@@ -1415,258 +1750,244 @@
     </div>
 
     <script>
-        let cart = [];
-        let cartCount = 0;
-        let currentProduct = null;
+    let cart = [];
+    let cartCount = 0;
+    let currentProduct = null;
 
-        const products = {
-            'diver': {
-                name: 'Diver',
-                price: 2,
-                icon: '📱',
-                description: 'Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle. Dieses Premium-Smartphone vereint innovative Features mit zeitlosem Design und bietet eine unvergleichliche Benutzererfahrung.',
-                features: [
-                    '6.7" OLED Display mit 120Hz',
-                    'Triple-Kamera System mit 108MP',
-                    '5G Konnektivität',
-                    'Wasserdicht nach IP68',
-                    'Wireless Charging & Reverse Charging'
-                ],
-                specs: {
-                    'Display': '6.7" OLED',
-                    'Speicher': '256GB',
-                    'RAM': '8GB',
-                    'Akku': '4500mAh',
-                    'Kamera': '108MP Triple',
-                    'OS': 'Android 14'
-                },
-                images: ['📱', '📷', '🔋', '📡']
-            },
-            'submarine': {
-                name: 'Submarine',
-                price: 10,
-                icon: '🎧',
-                description: 'Kristallklarer Sound mit aktiver Geräuschunterdrückung. Für das ultimative Hörerlebnis. Diese Premium-Kopfhörer bieten studioqualitativen Sound und modernste Noise-Cancelling-Technologie.',
-                features: [
-                    'Active Noise Cancelling',
-                    '30h Akkulaufzeit',
-                    'Hi-Res Audio Zertifizierung',
-                    'Schnellladung (15min = 3h)',
-                    'Multipoint Bluetooth Verbindung'
-                ],
-                specs: {
-                    'Akkulaufzeit': '30h',
-                    'Ladezeit': '2h',
-                    'Bluetooth': '5.2',
-                    'Frequenzbereich': '20Hz-40kHz',
-                    'Gewicht': '250g',
-                    'Noise Cancelling': 'Aktiv'
-                },
-                images: ['🎧', '🔊', '🔋', '📶']
-            },
-            'moses': {
-                name: 'Moses',
-                price: 0,
-                icon: '⌚',
-                description: 'Fitness-Tracking und Smart-Features in einem stilvollen, minimalistischen Design. Diese Smartwatch ist der perfekte Begleiter für Sport, Gesundheit und den digitalen Alltag.',
-                features: [
-                    'GPS + Cellular',
-                    'Gesundheits-Monitoring',
-                    'Wasserdicht bis 50m',
-                    '7 Tage Akkulaufzeit',
-                    'Always-On Display'
-                ],
-                specs: {
-                    'Display': '1.9" AMOLED',
-                    'Akkulaufzeit': '7 Tage',
-                    'Wasserdicht': '50m',
-                    'GPS': 'Integriert',
-                    'Sensoren': 'Herz, SpO2, Stress',
-                    'Kompatibilität': 'iOS & Android'
-                },
-                images: ['⌚', '💓', '🏃', '💧']
-            }
-        };
-        function openProductModal(productId) {
-            currentProduct = products[productId];
-            if (!currentProduct) return;
-
-            // 1) Content updaten
-            document.getElementById('modal-title').textContent = currentProduct.name;
-            document.getElementById('modal-price').innerHTML = '$' + currentProduct.price + '<small>/mo</small>';
-            document.getElementById('modal-description').textContent = currentProduct.description;
-            document.getElementById('main-image').textContent = currentProduct.icon;
-
-            // 2) Features
-            const featuresList = document.getElementById('features-list');
-            featuresList.innerHTML = '';
-            currentProduct.features.forEach(f => {
-                const li = document.createElement('li');
-                li.textContent = f;
-                featuresList.appendChild(li);
-            });
-
-            // 3) Specs
-            const specsGrid = document.getElementById('specs-grid');
-            specsGrid.innerHTML = '';
-            Object.entries(currentProduct.specs).forEach(([k, v]) => {
-                const item = document.createElement('div');
-                item.className = 'spec-item';
-                item.innerHTML = `<span class="spec-label">${k}:</span><span class="spec-value">${v}</span>`;
-                specsGrid.appendChild(item);
-            });
-
-            // 4) Thumbnails
-            const thumbs = document.querySelector('.image-thumbnails');
-            thumbs.innerHTML = '';
-            currentProduct.images.forEach((img, i) => {
-                const t = document.createElement('div');
-                t.className = 'thumbnail' + (i === 0 ? ' active' : '');
-                t.textContent = img;
-                t.onclick = () => changeMainImage(img);
-                thumbs.appendChild(t);
-            });
-
-            // 5) Quantity reset
-            document.getElementById('quantity').value = 1;
-
-            // 6) Beide Modals schließen
-            document.querySelectorAll('.product-modal, .product-modal1').forEach(m => {
-                m.classList.remove('active');
-            });
-
-            // 7) Je nach ID das richtige Modal öffnen
-            let modal;
-            if (productId === 'diver') {
-                modal = document.getElementById('product-modal');
-            } else { // 'submarine' oder 'moses'
-                modal = document.getElementById('product-modal1');
-            }
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+    const products = {
+        'diver': {
+            name: 'Diver',
+            price: 2,
+            icon: '📱',
+            description: 'Neueste Technologie in elegantem Design...',
+            features: [ '6.7" OLED Display mit 120Hz', 'Triple-Kamera...', '5G...', 'Wasserdicht...', 'Wireless Charging' ],
+            specs: { 'Display': '6.7" OLED', 'Speicher': '256GB', 'RAM': '8GB', 'Akku': '4500mAh', 'Kamera': '108MP', 'OS': 'Android 14' },
+            images: ['📱', '📷', '🔋', '📡']
+        },
+        'submarine': {
+            name: 'Submarine',
+            price: 10,
+            icon: '🎧',
+            description: 'Kristallklarer Sound mit aktiver Geräuschunterdrückung...',
+            features: [ 'Noise Cancelling', '30h Akku', 'Hi-Res Audio', 'Schnellladung', 'Multipoint Bluetooth' ],
+            specs: { 'Akkulaufzeit': '30h', 'Ladezeit': '2h', 'Bluetooth': '5.2', 'Frequenz': '20Hz-40kHz', 'Gewicht': '250g', 'Noise Cancelling': 'Aktiv' },
+            images: ['🎧', '🔊', '🔋', '📶']
+        },
+        'moses': {
+            name: 'Moses',
+            price: 0,
+            icon: '⌚',
+            description: 'Fitness-Tracking und Smart-Features...',
+            features: [ 'GPS + Cellular', 'Gesundheitstracking', 'Wasserdicht 50m', '7 Tage Akku', 'Always-On Display' ],
+            specs: { 'Display': '1.9" AMOLED', 'Akkulaufzeit': '7 Tage', 'Wasserdicht': '50m', 'GPS': 'Integriert', 'Sensoren': 'Herz, SpO2', 'Kompatibilität': 'iOS & Android' },
+            images: ['⌚', '💓', '🏃', '💧']
         }
+    };
 
-        function closeProductModal() {
-            document.querySelectorAll('.product-modal, .product-modal1').forEach(m => {
-                m.classList.remove('active');
-            });
-            document.body.style.overflow = 'auto';
-            currentProduct = null;
-        }
+    function openProductModal(productId) {
+        currentProduct = products[productId];
+        if (!currentProduct) return;
 
-        function changeMainImage(imageIcon) {
-            document.getElementById('main-image').textContent = imageIcon;
-            document.querySelectorAll('.thumbnail').forEach(t => {
-                t.classList.toggle('active', t.textContent === imageIcon);
-            });
-        }
+        document.getElementById('modal-title').textContent = currentProduct.name;
+        document.getElementById('modal-price').innerHTML = '$' + currentProduct.price + '<small>/mo</small>';
+        document.getElementById('modal-description').textContent = currentProduct.description;
+        document.getElementById('main-image').textContent = currentProduct.icon;
 
-        function changeQuantity(delta) {
-            const input = document.getElementById('quantity');
-            let val = parseInt(input.value) + delta;
-            input.value = Math.max(1, Math.min(10, val));
-        }
-
-        function addToCartFromModal() {
-            if (!currentProduct) return;
-            const qty = parseInt(document.getElementById('quantity').value);
-
-             // Prüfen, ob bereits Produkte im Warenkorb sind
-             if (cart.length > 0 && cart[0].name !== currentProduct.name) {
-                 alert(`Only one product type can be in the cart at a time.\n\nYou already added "${cart[0].name}".\nRemove it before adding "${currentProduct.name}".`);
-                 return;
-             }
-
-             // Produkte hinzufügen
-             for (let i = 0; i < qty; i++) {
-                 cart.push({ name: currentProduct.name, price: currentProduct.price });
-             }
-
-             cartCount = cart.length;
-             document.getElementById('cart-count').textContent = cartCount;
-             document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
-
-             const btn = document.querySelector('.add-to-cart-modal');
-             const txt = btn.textContent;
-             btn.textContent = `${qty}× Added!`;
-             setTimeout(() => btn.textContent = txt, 1500);
-        }
-
-
-        // Modal schließen bei Klick außerhalb
-        document.getElementById('product-modal').addEventListener('click', e => {
-            if (e.target === e.currentTarget) closeProductModal();
-        });
-        document.getElementById('product-modal1').addEventListener('click', e => {
-            if (e.target === e.currentTarget) closeProductModal();
+        const featuresList = document.getElementById('features-list');
+        featuresList.innerHTML = '';
+        currentProduct.features.forEach(f => {
+            const li = document.createElement('li');
+            li.textContent = f;
+            featuresList.appendChild(li);
         });
 
-        // Modal schließen mit Escape
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') closeProductModal();
+        const specsGrid = document.getElementById('specs-grid');
+        specsGrid.innerHTML = '';
+        Object.entries(currentProduct.specs).forEach(([k, v]) => {
+            const item = document.createElement('div');
+            item.className = 'spec-item';
+            item.innerHTML = `<span class="spec-label">${k}:</span><span class="spec-value">${v}</span>`;
+            specsGrid.appendChild(item);
         });
 
-        function handleHashChange() {
-            const hash = window.location.hash.toLowerCase();
-            const aboutOverlay = document.getElementById('aboutOverlay');
-            const downloadsOverlay = document.getElementById('downloadsOverlay');
-            const contactOverlay = document.getElementById('contactOverlay');
-  
-            aboutOverlay.classList.remove('active');
-            downloadsOverlay.classList.remove('active');
-            contactOverlay.classList.remove('active');
-
-            if (hash === '#about') {
-                aboutOverlay.classList.add('active');
-            } else if (hash === '#contact') {
-                downloadsOverlay.classList.add('active');
-            }
-            // #home und #products schließen alles
-        }
-
-        window.addEventListener('hashchange', handleHashChange);
-        window.addEventListener('load', handleHashChange);
-
-
-        function toggleCart() {
-            if (cart.length === 0) {
-                alert('Your cart is empty!');
-                return;
-            }
-            
-            let cartSummary = 'Cart:\n\n';
-            let total = 0;
-            
-            cart.forEach((item, index) => {
-                cartSummary += `${index + 1}. ${item.name} - $${item.price}\n`;
-                total += item.price;
-            });
-            
-            cartSummary += `\nGesamtsumme: $${total}`;
-            alert(cartSummary);
-        }
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href="#home"], a[href="#products"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                     });
-                     // Hash etwas später setzen, damit der Browser nicht teleportiert
-                     setTimeout(() => {
-                         history.pushState(null, null, href);
-                         handleHashChange(); // Falls der Hash nicht von selbst ausgelöst wird
-                     }, 400);
-                }
-            });
+        const thumbs = document.querySelector('.image-thumbnails');
+        thumbs.innerHTML = '';
+        currentProduct.images.forEach((img, i) => {
+            const t = document.createElement('div');
+            t.className = 'thumbnail' + (i === 0 ? ' active' : '');
+            t.textContent = img;
+            t.onclick = () => changeMainImage(img);
+            thumbs.appendChild(t);
         });
 
-        
-    </script>
+        document.getElementById('quantity').value = 1;
+
+        document.querySelectorAll('.product-modal, .product-modal1').forEach(m => {
+            m.classList.remove('active');
+        });
+
+        const modal = productId === 'diver'
+            ? document.getElementById('product-modal')
+            : document.getElementById('product-modal1');
+
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeProductModal() {
+        document.querySelectorAll('.product-modal, .product-modal1').forEach(m => m.classList.remove('active'));
+        document.body.style.overflow = 'auto';
+        currentProduct = null;
+    }
+
+    function changeMainImage(imageIcon) {
+        document.getElementById('main-image').textContent = imageIcon;
+        document.querySelectorAll('.thumbnail').forEach(t => {
+            t.classList.toggle('active', t.textContent === imageIcon);
+        });
+    }
+
+    function changeQuantity(delta) {
+        const input = document.getElementById('quantity');
+        let val = parseInt(input.value) + delta;
+        input.value = Math.max(1, Math.min(10, val));
+    }
+
+    function addToCartFromModal() {
+        if (!currentProduct) return;
+        const qty = parseInt(document.getElementById('quantity').value);
+
+        // Nur eine Produktsorte gleichzeitig
+        if (cart.length > 0 && cart[0].name !== currentProduct.name) {
+            alert(`Nur ein Produkttyp pro Warenkorb erlaubt.\n\nBereits im Warenkorb: "${cart[0].name}".\nBitte zuerst leeren.`);
+            return;
+        }
+
+        for (let i = 0; i < qty; i++) {
+            cart.push({ name: currentProduct.name, price: currentProduct.price });
+        }
+
+        cartCount = cart.length;
+        document.getElementById('cartCountBadge').textContent = cartCount;
+        document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
+
+        const btn = document.querySelector('.add-to-cart-modal');
+        const txt = btn.textContent;
+        btn.textContent = `${qty}× Added!`;
+        setTimeout(() => btn.textContent = txt, 1500);
+
+        updateCart();
+    }
+
+    function openCartModal() {
+        document.getElementById('cartModalOverlay').classList.add('show');
+    }
+
+    function closeCartModal() {
+        document.getElementById('cartModalOverlay').classList.remove('show');
+    }
+
+    document.getElementById('cartModalOverlay').addEventListener('click', function(e) {
+        if (e.target === this) closeCartModal();
+    });
+
+    function updateCart() {
+        const list = document.getElementById('cartProductList');
+        const empty = document.getElementById('cartEmpty');
+        const totalSec = document.getElementById('cartTotalSection');
+        const totalAmt = document.getElementById('cartTotalAmount');
+        const btn1 = document.getElementById('cartButton1');
+        const btn2 = document.getElementById('cartButton2');
+        const badge = document.getElementById('cartCountBadge');
+
+        badge.textContent = cart.length;
+        list.innerHTML = '';
+
+        if (cart.length === 0) {
+            empty.classList.remove('hidden');
+            totalSec.classList.add('hidden');
+            btn1.classList.add('hidden');
+            btn2.classList.add('hidden');
+            return;
+        }
+
+        empty.classList.add('hidden');
+        totalSec.classList.remove('hidden');
+
+        cart.forEach(product => {
+            const item = document.createElement('div');
+            item.className = 'cart-product-item';
+            item.innerHTML = `<span class="cart-product-name">${product.name}</span><span class="cart-product-price">€${product.price.toFixed(2)}</span>`;
+            list.appendChild(item);
+        });
+
+        const total = cart.reduce((sum, p) => sum + p.price, 0);
+        totalAmt.textContent = `$${total.toFixed(2)}`;
+
+        const hasDiver = cart.some(p => p.name === 'Diver');
+        const hasOther = cart.some(p => p.name === 'Submarine' || p.name === 'Moses');
+
+        btn1.classList.toggle('hidden', !hasDiver || hasOther);
+        btn2.classList.toggle('hidden', hasDiver || !hasOther);
+    }
+
+    function toggleCart() {
+        openCartModal();
+        updateCart(); // sicherstellen, dass Inhalt aktuell ist
+    }
+
+    updateCart(); // beim Start initialisieren
+
+    document.getElementById('product-modal').addEventListener('click', e => {
+        if (e.target === e.currentTarget) closeProductModal();
+    });
+    document.getElementById('product-modal1').addEventListener('click', e => {
+        if (e.target === e.currentTarget) closeProductModal();
+    });
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeProductModal();
+    });
+
+    function handleHashChange() {
+        const hash = window.location.hash.toLowerCase();
+        const about = document.getElementById('aboutOverlay');
+        const down = document.getElementById('downloadsOverlay');
+        const contact = document.getElementById('contactOverlay');
+        about.classList.remove('active');
+        down.classList.remove('active');
+        contact.classList.remove('active');
+        if (hash === '#about') about.classList.add('active');
+        else if (hash === '#contact') down.classList.add('active');
+    }
+
+    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener('load', handleHashChange);
+
+    document.querySelectorAll('a[href="#home"], a[href="#products"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                setTimeout(() => {
+                    history.pushState(null, null, href);
+                    handleHashChange();
+                }, 400);
+            }
+        });
+    });
+
+    window.addEventListener('load', () => {
+        window.scrollTo(0, 18);
+        // Falls du verhindern willst, dass Back/Forward die Position wiederherstellen:
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+    });
+
+</script>
+
 </body>
 </html>
