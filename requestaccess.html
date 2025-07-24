@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Access</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/emailjs-com/3.2.0/email.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95em;
+        }
+
+        .dropdown-container {
+            position: relative;
+        }
+
+        .dropdown-selected {
+            background: white;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+        .dropdown-selected:hover {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .dropdown-selected.active {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .dropdown-arrow {
+            transition: transform 0.3s ease;
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        .dropdown-arrow.rotated {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid #e1e5e9;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-options.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-option {
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-option:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-option:hover {
+            background-color: #f8f9ff;
+            color: #667eea;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input[type="email"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .error {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #d63384;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Request Access</h1>
+        <p class="subtitle">Wählen Sie Ihr gewünschtes Paket und hinterlassen Sie Ihre E-Mail-Adresse</p>
+        
+        <form id="accessForm">
+            <div class="form-group">
+                <label for="package">Paket auswählen</label>
+                <div class="dropdown-container">
+                    <div class="dropdown-selected" id="dropdownSelected">
+                        <span id="selectedText">Bitte wählen Sie ein Paket</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </div>
+                    <div class="dropdown-options" id="dropdownOptions">
+                        <div class="dropdown-option" data-value="Submarine">Submarine</div>
+                        <div class="dropdown-option" data-value="Moses">Moses</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-Mail-Adresse</label>
+                <input type="email" id="email" name="email" required placeholder="ihre.email@beispiel.com">
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                Zugang anfordern
+            </button>
+        </form>
+
+        <div id="message" class="message"></div>
+    </div>
+
+    <script>
+        // EmailJS initialisieren
+        emailjs.init('6yY3IiIERrPIdxPC9');
+
+        // Dropdown Funktionalität
+        const dropdownSelected = document.getElementById('dropdownSelected');
+        const dropdownOptions = document.getElementById('dropdownOptions');
+        const dropdownArrow = document.querySelector('.dropdown-arrow');
+        const selectedText = document.getElementById('selectedText');
+        let selectedPackage = '';
+
+        dropdownSelected.addEventListener('click', function() {
+            dropdownOptions.classList.toggle('show');
+            dropdownArrow.classList.toggle('rotated');
+            dropdownSelected.classList.toggle('active');
+        });
+
+        // Option auswählen
+        document.querySelectorAll('.dropdown-option').forEach(option => {
+            option.addEventListener('click', function() {
+                selectedPackage = this.getAttribute('data-value');
+                selectedText.textContent = selectedPackage;
+                dropdownOptions.classList.remove('show');
+                dropdownArrow.classList.remove('rotated');
+                dropdownSelected.classList.remove('active');
+            });
+        });
+
+        // Außerhalb klicken um Dropdown zu schließen
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown-container')) {
+                dropdownOptions.classList.remove('show');
+                dropdownArrow.classList.remove('rotated');
+                dropdownSelected.classList.remove('active');
+            }
+        });
+
+        // Form Submit Handler
+        document.getElementById('accessForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const submitBtn = document.getElementById('submitBtn');
+            const messageDiv = document.getElementById('message');
+            
+            // Validierung
+            if (!selectedPackage) {
+                showMessage('Bitte wählen Sie ein Paket aus.', 'error');
+                return;
+            }
+            
+            if (!email) {
+                showMessage('Bitte geben Sie eine E-Mail-Adresse ein.', 'error');
+                return;
+            }
+
+            // Loading State
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading"></span>Wird gesendet...';
+
+            // EmailJS Parameter
+            const templateParams = {
+                to_email: 'info@btcoverinvest.com',
+                user_email: email,
+                selected_package: selectedPackage,
+                message: `Neue Anfrage für Paketzugang:\n\nPaket: ${selectedPackage}\nE-Mail: ${email}\n\nGesendet über die Request Access Seite.`
+            };
+
+            // E-Mail senden
+            emailjs.send('service_darbphr', 'template_7agjdqb', templateParams)
+                .then(function(response) {
+                    console.log('E-Mail erfolgreich gesendet:', response);
+                    showMessage('You are on the waiting list and will be notified as soon as possible', 'success');
+                    
+                    // Form zurücksetzen
+                    document.getElementById('email').value = '';
+                    selectedPackage = '';
+                    selectedText.textContent = 'Bitte wählen Sie ein Paket';
+                })
+                .catch(function(error) {
+                    console.error('Fehler beim Senden der E-Mail:', error);
+                    showMessage('Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.', 'error');
+                })
+                .finally(function() {
+                    // Loading State zurücksetzen
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Zugang anfordern';
+                });
+        });
+
+        function showMessage(text, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = `message ${type}`;
+            
+            // Message anzeigen
+            setTimeout(() => {
+                messageDiv.classList.add('show');
+            }, 100);
+            
+            // Message nach 5 Sekunden ausblenden
+            setTimeout(() => {
+                messageDiv.classList.remove('show');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
