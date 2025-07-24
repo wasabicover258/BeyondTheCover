@@ -1756,33 +1756,72 @@
 
     const products = {
         'diver': {
-            name: 'Diver',
-            price: 2,
-            icon: '📱',
-            description: 'Neueste Technologie in elegantem Design...',
-            features: [ '6.7" OLED Display mit 120Hz', 'Triple-Kamera...', '5G...', 'Wasserdicht...', 'Wireless Charging' ],
-            specs: { 'Display': '6.7" OLED', 'Speicher': '256GB', 'RAM': '8GB', 'Akku': '4500mAh', 'Kamera': '108MP', 'OS': 'Android 14' },
-            images: ['📱', '📷', '🔋', '📡']
-        },
-        'submarine': {
-            name: 'Submarine',
-            price: 10,
-            icon: '🎧',
-            description: 'Kristallklarer Sound mit aktiver Geräuschunterdrückung...',
-            features: [ 'Noise Cancelling', '30h Akku', 'Hi-Res Audio', 'Schnellladung', 'Multipoint Bluetooth' ],
-            specs: { 'Akkulaufzeit': '30h', 'Ladezeit': '2h', 'Bluetooth': '5.2', 'Frequenz': '20Hz-40kHz', 'Gewicht': '250g', 'Noise Cancelling': 'Aktiv' },
-            images: ['🎧', '🔊', '🔋', '📶']
-        },
-        'moses': {
-            name: 'Moses',
-            price: 0,
-            icon: '⌚',
-            description: 'Fitness-Tracking und Smart-Features...',
-            features: [ 'GPS + Cellular', 'Gesundheitstracking', 'Wasserdicht 50m', '7 Tage Akku', 'Always-On Display' ],
-            specs: { 'Display': '1.9" AMOLED', 'Akkulaufzeit': '7 Tage', 'Wasserdicht': '50m', 'GPS': 'Integriert', 'Sensoren': 'Herz, SpO2', 'Kompatibilität': 'iOS & Android' },
-            images: ['⌚', '💓', '🏃', '💧']
-        }
-    };
+                name: 'Diver',
+                price: 2,
+                icon: '📱',
+                description: 'Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle. Dieses Premium-Smartphone vereint innovative Features mit zeitlosem Design und bietet eine unvergleichliche Benutzererfahrung.',
+                features: [
+                    '6.7" OLED Display mit 120Hz',
+                    'Triple-Kamera System mit 108MP',
+                    '5G Konnektivität',
+                    'Wasserdicht nach IP68',
+                    'Wireless Charging & Reverse Charging'
+                ],
+                specs: {
+                    'Display': '6.7" OLED',
+                    'Speicher': '256GB',
+                    'RAM': '8GB',
+                    'Akku': '4500mAh',
+                    'Kamera': '108MP Triple',
+                    'OS': 'Android 14'
+                },
+                images: ['📱', '📷', '🔋', '📡']
+            },
+            'submarine': {
+                name: 'Submarine',
+                price: 10,
+                icon: '🎧',
+                description: 'Kristallklarer Sound mit aktiver Geräuschunterdrückung. Für das ultimative Hörerlebnis. Diese Premium-Kopfhörer bieten studioqualitativen Sound und modernste Noise-Cancelling-Technologie.',
+                features: [
+                    'Active Noise Cancelling',
+                    '30h Akkulaufzeit',
+                    'Hi-Res Audio Zertifizierung',
+                    'Schnellladung (15min = 3h)',
+                    'Multipoint Bluetooth Verbindung'
+                ],
+                specs: {
+                    'Akkulaufzeit': '30h',
+                    'Ladezeit': '2h',
+                    'Bluetooth': '5.2',
+                    'Frequenzbereich': '20Hz-40kHz',
+                    'Gewicht': '250g',
+                    'Noise Cancelling': 'Aktiv'
+                },
+                images: ['🎧', '🔊', '🔋', '📶']
+            },
+            'moses': {
+                name: 'Moses',
+                price: 0,
+                icon: '⌚',
+                description: 'Fitness-Tracking und Smart-Features in einem stilvollen, minimalistischen Design. Diese Smartwatch ist der perfekte Begleiter für Sport, Gesundheit und den digitalen Alltag.',
+                features: [
+                    'GPS + Cellular',
+                    'Gesundheits-Monitoring',
+                    'Wasserdicht bis 50m',
+                    '7 Tage Akkulaufzeit',
+                    'Always-On Display'
+                ],
+                specs: {
+                    'Display': '1.9" AMOLED',
+                    'Akkulaufzeit': '7 Tage',
+                    'Wasserdicht': '50m',
+                    'GPS': 'Integriert',
+                    'Sensoren': 'Herz, SpO2, Stress',
+                    'Kompatibilität': 'iOS & Android'
+                },
+                images: ['⌚', '💓', '🏃', '💧']
+            }
+        };
 
     function openProductModal(productId) {
         currentProduct = products[productId];
@@ -1980,8 +2019,22 @@
     });
 
     window.addEventListener('load', () => {
-        window.scrollTo(0, 18);
-        // Falls du verhindern willst, dass Back/Forward die Position wiederherstellen:
+        // Wenn die URL einen Hash enthält, manuell zum Ziel scrollen...
+        if (window.location.hash) {
+            const target = document.querySelector(window.location.hash);
+            if (target) {
+                // Höhe von Header + 18px Puffer
+                const offset = document.querySelector('header').offsetHeight + 18;
+                const topPos = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top: topPos, behavior: 'smooth' });
+            }
+        }
+        // Wenn kein Hash, ganz oben + 18px Puffer (optional)
+        else {
+            window.scrollTo({ top: 18, left: 0 });
+        }
+
+        // Verhindert, dass Back/Forward wieder automatisches Scroll-Restore macht
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
