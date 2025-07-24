@@ -1984,15 +1984,15 @@
         if (window.location.hash) {
             const target = document.querySelector(window.location.hash);
             if (target) {
-                // Höhe von Header + 20px Puffer
-                const offset = document.querySelector('header').offsetHeight + 20;
+                // Höhe von Header + 18px Puffer
+                const offset = document.querySelector('header').offsetHeight + 18;
                 const topPos = target.getBoundingClientRect().top + window.pageYOffset - offset;
                 window.scrollTo({ top: topPos, behavior: 'smooth' });
             }
         }
-        // Wenn kein Hash, ganz oben + 20px Puffer (optional)
+        // Wenn kein Hash, ganz oben + 18px Puffer (optional)
         else {
-            window.scrollTo({ top: 20, left: 0 });
+            window.scrollTo({ top: 18, left: 0 });
         }
 
         // Verhindert, dass Back/Forward wieder automatisches Scroll-Restore macht
