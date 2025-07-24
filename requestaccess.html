@@ -233,7 +233,29 @@
             to { transform: rotate(360deg); }
         }
 
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-col {
+            flex: 1;
+        }
+
+        .form-col:first-child {
+            flex: 2;
+        }
+
         @media (max-width: 480px) {
+            .form-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .form-col:first-child {
+                flex: 1;
+            }
+        }
             .container {
                 padding: 30px 20px;
                 margin: 10px;
@@ -252,15 +274,38 @@
         
         <form id="accessForm">
             <div class="form-group">
-                <label for="package">Paket auswählen</label>
-                <div class="dropdown-container">
-                    <div class="dropdown-selected" id="dropdownSelected">
-                        <span id="selectedText">Bitte wählen Sie ein Paket</span>
-                        <span class="dropdown-arrow">▼</span>
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="package">Paket auswählen</label>
+                        <div class="dropdown-container">
+                            <div class="dropdown-selected" id="dropdownSelected">
+                                <span id="selectedText">Bitte wählen Sie ein Paket</span>
+                                <span class="dropdown-arrow">▼</span>
+                            </div>
+                            <div class="dropdown-options" id="dropdownOptions">
+                                <div class="dropdown-option" data-value="Submarine">Submarine</div>
+                                <div class="dropdown-option" data-value="Moses">Moses</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="dropdown-options" id="dropdownOptions">
-                        <div class="dropdown-option" data-value="Submarine">Submarine</div>
-                        <div class="dropdown-option" data-value="Moses">Moses</div>
+                    <div class="form-col">
+                        <label for="quantity">Anzahl</label>
+                        <div class="dropdown-container">
+                            <div class="dropdown-selected" id="quantityDropdownSelected">
+                                <span id="quantitySelectedText">1</span>
+                                <span class="dropdown-arrow">▼</span>
+                            </div>
+                            <div class="dropdown-options" id="quantityDropdownOptions">
+                                <div class="dropdown-option" data-value="1">1</div>
+                                <div class="dropdown-option" data-value="2">2</div>
+                                <div class="dropdown-option" data-value="3">3</div>
+                                <div class="dropdown-option" data-value="4">4</div>
+                                <div class="dropdown-option" data-value="5">5</div>
+                                <div class="dropdown-option" data-value="10">10</div>
+                                <div class="dropdown-option" data-value="20">20</div>
+                                <div class="dropdown-option" data-value="50">50</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -285,33 +330,63 @@
         // Dropdown Funktionalität
         const dropdownSelected = document.getElementById('dropdownSelected');
         const dropdownOptions = document.getElementById('dropdownOptions');
-        const dropdownArrow = document.querySelector('.dropdown-arrow');
         const selectedText = document.getElementById('selectedText');
+        
+        const quantityDropdownSelected = document.getElementById('quantityDropdownSelected');
+        const quantityDropdownOptions = document.getElementById('quantityDropdownOptions');
+        const quantitySelectedText = document.getElementById('quantitySelectedText');
+        
         let selectedPackage = '';
+        let selectedQuantity = '1';
 
+        // Package Dropdown
         dropdownSelected.addEventListener('click', function() {
             dropdownOptions.classList.toggle('show');
-            dropdownArrow.classList.toggle('rotated');
+            dropdownSelected.querySelector('.dropdown-arrow').classList.toggle('rotated');
             dropdownSelected.classList.toggle('active');
         });
 
-        // Option auswählen
-        document.querySelectorAll('.dropdown-option').forEach(option => {
+        // Quantity Dropdown
+        quantityDropdownSelected.addEventListener('click', function() {
+            quantityDropdownOptions.classList.toggle('show');
+            quantityDropdownSelected.querySelector('.dropdown-arrow').classList.toggle('rotated');
+            quantityDropdownSelected.classList.toggle('active');
+        });
+
+        // Package Option auswählen
+        document.querySelectorAll('#dropdownOptions .dropdown-option').forEach(option => {
             option.addEventListener('click', function() {
                 selectedPackage = this.getAttribute('data-value');
                 selectedText.textContent = selectedPackage;
                 dropdownOptions.classList.remove('show');
-                dropdownArrow.classList.remove('rotated');
+                dropdownSelected.querySelector('.dropdown-arrow').classList.remove('rotated');
                 dropdownSelected.classList.remove('active');
             });
         });
 
-        // Außerhalb klicken um Dropdown zu schließen
+        // Quantity Option auswählen
+        document.querySelectorAll('#quantityDropdownOptions .dropdown-option').forEach(option => {
+            option.addEventListener('click', function() {
+                selectedQuantity = this.getAttribute('data-value');
+                quantitySelectedText.textContent = selectedQuantity;
+                quantityDropdownOptions.classList.remove('show');
+                quantityDropdownSelected.querySelector('.dropdown-arrow').classList.remove('rotated');
+                quantityDropdownSelected.classList.remove('active');
+            });
+        });
+
+        // Außerhalb klicken um Dropdowns zu schließen
         document.addEventListener('click', function(e) {
             if (!e.target.closest('.dropdown-container')) {
+                // Package Dropdown schließen
                 dropdownOptions.classList.remove('show');
-                dropdownArrow.classList.remove('rotated');
+                dropdownSelected.querySelector('.dropdown-arrow').classList.remove('rotated');
                 dropdownSelected.classList.remove('active');
+                
+                // Quantity Dropdown schließen
+                quantityDropdownOptions.classList.remove('show');
+                quantityDropdownSelected.querySelector('.dropdown-arrow').classList.remove('rotated');
+                quantityDropdownSelected.classList.remove('active');
             }
         });
 
@@ -343,7 +418,8 @@
                 to_email: 'info@btcoverinvest.com',
                 user_email: email,
                 selected_package: selectedPackage,
-                message: `Neue Anfrage für Paketzugang:\n\nPaket: ${selectedPackage}\nE-Mail: ${email}\n\nGesendet über die Request Access Seite.`
+                quantity: selectedQuantity,
+                message: `Neue Anfrage für Paketzugang:\n\nPaket: ${selectedPackage}\nAnzahl: ${selectedQuantity}\nE-Mail: ${email}\n\nGesendet über die Request Access Seite.`
             };
 
             // E-Mail senden
@@ -355,7 +431,9 @@
                     // Form zurücksetzen
                     document.getElementById('email').value = '';
                     selectedPackage = '';
+                    selectedQuantity = '1';
                     selectedText.textContent = 'Bitte wählen Sie ein Paket';
+                    quantitySelectedText.textContent = '1';
                 })
                 .catch(function(error) {
                     console.error('Fehler beim Senden der E-Mail:', error);
