@@ -347,32 +347,11 @@
             }
 
             @media (min-width: 768px) {
-                /* 1. Volle Höhe für html & body sicherstellen */
-                html, body {
-                    height: 100%;
-                    /* das hier überschreibt dein min-height:100vh oben */
-                    min-height: 100%;
-                }
-
-                /* 2. Body zum Flex-Container machen */
-                body {
-                    display: flex;
-                    flex-direction: column;
-                }
-
-                /* 3. Main als flexible Lücke definieren */
                 main {
-                    /* falls du margin-top wegen fixed header brauchst, behalte es */
-                    /* margin-top: 80px; */
-                    flex: 1;
-                }
-
-                /* 4. Footer unten anordnen */
-                footer {
-                    /* kein zusätzliches CSS nötig, bleibt im Fluss */
+                    margin-bottom: 200px;
                 }
             }
-        }
+            
     </style>
 </head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
