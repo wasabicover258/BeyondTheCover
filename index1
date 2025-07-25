@@ -476,6 +476,12 @@
             color: white;
         }
 
+        @media (min-width: 768px) {
+            .cart-button2 {
+                font-size: 15px;
+            }
+        }
+
         .cart-button2:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px #004033;
@@ -1150,9 +1156,8 @@
         }
 
         .add-to-cart-modal:hover {
-            background: linear-gradient(45deg, #555, #777);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 25px #004033;
         }
 
         .product-specs {
@@ -1606,13 +1611,13 @@
 
                 <!-- Buttons -->
                 <div class="cart-button-container">
-                    <button id="cartButton1" class="cart-button cart-button1">Zur Kasse</button>
+                    <button id="cartButton1" class="cart-button cart-button1">Checkout</button>
                     <button 
                         id="cartButton2" 
                         class="cart-button cart-button2 hidden"
                         onclick="window.location.href='requestaccess.html';"
                         >
-                        Spezialbestellung
+                        Request access
                     </button>
                 </div>
             </div>
@@ -1625,7 +1630,7 @@
             <button class="modal-close" onclick="closeProductModal()">×</button>
             <div class="modal-body">
                 <div class="modal-images">
-                    <div class="main-image" id="main-image">📱</div>
+                    <div class="main-image modal-main-image">📱</div>
                     <div class="image-thumbnails">
                         <div class="thumbnail active" onclick="changeMainImage('📱')">📱</div>
                         <div class="thumbnail" onclick="changeMainImage('📷')">📷</div>
@@ -1694,64 +1699,30 @@
             <button class="modal-close" onclick="closeProductModal()">×</button>
             <div class="modal-body">
                 <div class="modal-images">
-                    <div class="main-image" id="main-image">📱</div>
-                    <div class="image-thumbnails">
-                        <div class="thumbnail active" onclick="changeMainImage('📱')">📱</div>
-                        <div class="thumbnail" onclick="changeMainImage('📷')">📷</div>
-                        <div class="thumbnail" onclick="changeMainImage('🔋')">🔋</div>
-                        <div class="thumbnail" onclick="changeMainImage('📡')">📡</div>
-                    </div>
+                    <div class="main-image modal-main-image">📱</div>
+                    <div class="image-thumbnails"></div>
                 </div>
-                
                 <div class="modal-info">
-                    <h2 class="modal-title" id="modal-title">Premium Smartphone</h2>
-                    <div class="modal-price" id="modal-price">$ ~</div>
-                    <p class="modal-description" id="modal-description">
+                    <h2 class="modal-title">Premium Smartphone</h2>
+                    <div class="modal-price">$ ~</div>
+                    <p class="modal-description">
                         Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle.
                     </p>
-                    
-                    <ul class="features-list" id="features-list">
-                        <li>6.7" OLED Display mit 120Hz</li>
-                        <li>Triple-Kamera System</li>
-                        <li>5G Konnektivität</li>
-                        <li>Wasserdicht nach IP68</li>
-                        <li>Wireless Charging</li>
-                    </ul>
-                    
+                    <ul class="features-list"></ul>
                     <div class="quantity-selector">
                         <span class="quantity-label">Quantity:</span>
                         <div class="quantity-controls">
                             <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
-                            <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="10">
+                            <input type="number" class="quantity-input" value="1" min="1" max="10">
                             <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
                         </div>
                     </div>
-                    
-                    <button class="add-to-cart-modal"
-                        onclick="addToCartFromModal(this)">
+                    <button class="add-to-cart-modal" onclick="addToCartFromModal(this)">
                         Request access
                     </button>
-                    
                     <div class="product-specs">
                         <div class="specs-title">Technische Daten</div>
-                        <div class="specs-grid" id="specs-grid">
-                            <div class="spec-item">
-                                <span class="spec-label">Display:</span>
-                                <span class="spec-value">6.7" OLED</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Speicher:</span>
-                                <span class="spec-value">256GB</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">RAM:</span>
-                                <span class="spec-value">8GB</span>
-                            </div>
-                            <div class="spec-item">
-                                <span class="spec-label">Akku:</span>
-                                <span class="spec-value">4500mAh</span>
-                            </div>
-                        </div>
+                        <div class="specs-grid"></div>
                     </div>
                 </div>
             </div>
@@ -1836,12 +1807,19 @@
         currentProduct = products[productId];
         if (!currentProduct) return;
 
-        document.getElementById('modal-title').textContent = currentProduct.name;
-        document.getElementById('modal-price').innerHTML = '$' + currentProduct.price + '<small>/mo</small>';
-        document.getElementById('modal-description').textContent = currentProduct.description;
-        document.getElementById('main-image').textContent = currentProduct.icon;
+        // ① Welches Modal?
+        const modal = productId === 'diver'
+            ? document.getElementById('product-modal')
+            : document.getElementById('product-modal1');
 
-        const featuresList = document.getElementById('features-list');
+        // ② Innerhalb dieses Modals aktualisieren
+        modal.querySelector('.modal-title').textContent       = currentProduct.name;
+        modal.querySelector('.modal-price').innerHTML         = '$' + currentProduct.price + '<small>/mo</small>';
+        modal.querySelector('.modal-description').textContent = currentProduct.description;
+        modal.querySelector('.modal-main-image').textContent  = currentProduct.icon;
+
+        // Features
+        const featuresList = modal.querySelector('.features-list');
         featuresList.innerHTML = '';
         currentProduct.features.forEach(f => {
             const li = document.createElement('li');
@@ -1849,7 +1827,8 @@
             featuresList.appendChild(li);
         });
 
-        const specsGrid = document.getElementById('specs-grid');
+        // Specs
+        const specsGrid = modal.querySelector('.specs-grid');
         specsGrid.innerHTML = '';
         Object.entries(currentProduct.specs).forEach(([k, v]) => {
             const item = document.createElement('div');
@@ -1858,7 +1837,8 @@
             specsGrid.appendChild(item);
         });
 
-        const thumbs = document.querySelector('.image-thumbnails');
+        // Thumbnails
+        const thumbs = modal.querySelector('.image-thumbnails');
         thumbs.innerHTML = '';
         currentProduct.images.forEach((img, i) => {
             const t = document.createElement('div');
@@ -1868,19 +1848,15 @@
             thumbs.appendChild(t);
         });
 
-        document.getElementById('quantity').value = 1;
+        // Quantity zurücksetzen
+        modal.querySelector('.quantity-input').value = 1;
 
-        document.querySelectorAll('.product-modal, .product-modal1').forEach(m => {
-            m.classList.remove('active');
-        });
-
-        const modal = productId === 'diver'
-            ? document.getElementById('product-modal')
-            : document.getElementById('product-modal1');
-
+        // ③ Modal anzeigen
+        document.querySelectorAll('.product-modal, .product-modal1').forEach(m => m.classList.remove('active'));
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
+
 
     function closeProductModal() {
         document.querySelectorAll('.product-modal, .product-modal1').forEach(m => m.classList.remove('active'));
@@ -1888,18 +1864,23 @@
         currentProduct = null;
     }
 
-    function changeMainImage(imageIcon) {
-        document.getElementById('main-image').textContent = imageIcon;
-        document.querySelectorAll('.thumbnail').forEach(t => {
-            t.classList.toggle('active', t.textContent === imageIcon);
+    function changeMainImage(icon) {
+        const modal = document.querySelector('.product-modal.active, .product-modal1.active');
+        if (!modal) return;
+        modal.querySelector('.modal-main-image').textContent = icon;
+        modal.querySelectorAll('.thumbnail').forEach(t => {
+            t.classList.toggle('active', t.textContent === icon);
         });
     }
 
     function changeQuantity(delta) {
-        const input = document.getElementById('quantity');
+        const modal = document.querySelector('.product-modal.active, .product-modal1.active');
+        if (!modal) return;
+        const input = modal.querySelector('.quantity-input');
         let val = parseInt(input.value) + delta;
         input.value = Math.max(1, Math.min(10, val));
     }
+
 
     function addToCartFromModal(btn) {
         // 1. Sichtbares Modal ermitteln (Kopie beider Modal-Klassen)
@@ -1968,12 +1949,12 @@
         cart.forEach(product => {
             const item = document.createElement('div');
             item.className = 'cart-product-item';
-            item.innerHTML = `<span class="cart-product-name">${product.name}</span><span class="cart-product-price">€${product.price.toFixed(2)}</span>`;
+            item.innerHTML = `<span class="cart-product-name">${product.name}</span><span class="cart-product-price">$${product.price.toFixed(2)}/mo</span>`;
             list.appendChild(item);
         });
 
         const total = cart.reduce((sum, p) => sum + p.price, 0);
-        totalAmt.textContent = `$${total.toFixed(2)}`;
+        totalAmt.textContent = `$${total.toFixed(2)}/mo`;
 
         const hasDiver = cart.some(p => p.name === 'Diver');
         const hasOther = cart.some(p => p.name === 'Submarine' || p.name === 'Moses');
