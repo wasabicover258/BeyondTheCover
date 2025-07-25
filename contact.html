@@ -346,6 +346,24 @@
                 padding: 0.6rem 1.2rem;
                 font-size: 0.9rem;
             }
+
+            @media (min-width: 768px) {
+                /* Stelle sicher, dass html und body volle Höhe einnehmen */
+                html, body {
+                    height: 100%;
+                }
+
+                /* Body als Flex-Container anlegen */
+                body {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                /* Main-Bereich füllt den verbleibenden Raum zwischen Header und Footer */
+                main {
+                    flex: 1;
+                }
+            }
         }
     </style>
 </head>
