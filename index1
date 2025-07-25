@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>BTC</title>
     
     <link rel="icon" type="image/x-icon" href="images/favicons/Favicon.ico">
@@ -52,6 +54,8 @@
             line-height: 1.6;
             max-width: 100vw;
             overflow-x: hidden;
+            padding-top: env(safe-area-inset-top);
+            background-color: #0a0a0a;
         }
 
         .container {
@@ -533,18 +537,19 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: fadeInUp 1s ease forwards;
         }
 
         .hero p {
             font-size: 1vw;
             color: #005F4E;
             margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s forwards;
         }
 
         @media (max-width: 768px) {
             .hero p {
                 font-size: 3vw;
-                color: #005F4E;
                 margin-bottom: 2rem;
             }
         }
@@ -806,6 +811,10 @@
             background: linear-gradient(45deg, #555, #777);
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-text {
+            margin-bottom: 200px;
         }
 
         .pricing-text h3 {
@@ -1531,12 +1540,12 @@
             <div class="container">
                 <div class="pricing-text">
                     <h3>How our pricing works</h3>
-                    <p>We don’t believe in charging high prices for our products. Thanks to our system, we’re no longer dependent on inflated pricing to stay afloat.<br>Instead, we’ve chosen to reduce our costs to the absolute minimum — so that more people can afford to take their first successful steps into the world of financial markets.<br>Our pricing covers only the essentials:</p>
-                    <p>• Fair employee wages</p>
-                    <p>• Taxes and legal compliance</p>
-                    <p>• Office rent and operational costs</p>
-                    <p>• Basic infrastructure and maintainance</p>
-                    <p>That’s it. No inflated margins. No hidden fees. Just what’s necessary to keep things running — and accessible for everyone.</p>
+                    <p>We don’t believe in charging <span class="highlight">'high prices</span> for our products. Thanks to our system, we’re no longer dependent on <span class="highlight">inflated pricing</span> to stay afloat.<br>Instead, we’ve chosen to <span class="highlight">reduce</span> our costs to the <span class="highlight">absolute minimum</span> — so that <span class="highlight">more people</span> can afford to take their first successful steps into the world of financial markets.<br>Our pricing covers <span class="highlight">only the essentials</span>:</p>
+                    <p>   • Fair employee wages</p>
+                    <p>   • Taxes and legal compliance</p>
+                    <p>   • Office rent and operational costs</p>
+                    <p>   • Basic infrastructure and maintainance</p>
+                    <p><span class="highlight">That's it.</span> No inflated margins. No hidden fees. Just what’s necessary to keep things running — and accessible for <span class="highlight">everyone</span>.</p>
                 </div>
             </div>
         </section>
@@ -1598,7 +1607,13 @@
                 <!-- Buttons -->
                 <div class="cart-button-container">
                     <button id="cartButton1" class="cart-button cart-button1">Zur Kasse</button>
-                    <button id="cartButton2" class="cart-button cart-button2 hidden">Spezialbestellung</button>
+                    <button 
+                        id="cartButton2" 
+                        class="cart-button cart-button2 hidden"
+                        onclick="window.location.href='requestaccess.html';"
+                        >
+                        Spezialbestellung
+                    </button>
                 </div>
             </div>
         </div>
@@ -1643,7 +1658,8 @@
                         </div>
                     </div>
                     
-                    <button class="add-to-cart-modal" onclick="addToCartFromModal()">
+                    <button class="add-to-cart-modal"
+                        onclick="addToCartFromModal(this)">
                         Add to cart
                     </button>
                     
@@ -1711,7 +1727,8 @@
                         </div>
                     </div>
                     
-                    <button class="add-to-cart-modal" onclick="addToCartFromModal()">
+                    <button class="add-to-cart-modal"
+                        onclick="addToCartFromModal(this)">
                         Request access
                     </button>
                     
@@ -1748,33 +1765,72 @@
 
     const products = {
         'diver': {
-            name: 'Diver',
-            price: 2,
-            icon: '📱',
-            description: 'Neueste Technologie in elegantem Design...',
-            features: [ '6.7" OLED Display mit 120Hz', 'Triple-Kamera...', '5G...', 'Wasserdicht...', 'Wireless Charging' ],
-            specs: { 'Display': '6.7" OLED', 'Speicher': '256GB', 'RAM': '8GB', 'Akku': '4500mAh', 'Kamera': '108MP', 'OS': 'Android 14' },
-            images: ['📱', '📷', '🔋', '📡']
-        },
-        'submarine': {
-            name: 'Submarine',
-            price: 10,
-            icon: '🎧',
-            description: 'Kristallklarer Sound mit aktiver Geräuschunterdrückung...',
-            features: [ 'Noise Cancelling', '30h Akku', 'Hi-Res Audio', 'Schnellladung', 'Multipoint Bluetooth' ],
-            specs: { 'Akkulaufzeit': '30h', 'Ladezeit': '2h', 'Bluetooth': '5.2', 'Frequenz': '20Hz-40kHz', 'Gewicht': '250g', 'Noise Cancelling': 'Aktiv' },
-            images: ['🎧', '🔊', '🔋', '📶']
-        },
-        'moses': {
-            name: 'Moses',
-            price: 0,
-            icon: '⌚',
-            description: 'Fitness-Tracking und Smart-Features...',
-            features: [ 'GPS + Cellular', 'Gesundheitstracking', 'Wasserdicht 50m', '7 Tage Akku', 'Always-On Display' ],
-            specs: { 'Display': '1.9" AMOLED', 'Akkulaufzeit': '7 Tage', 'Wasserdicht': '50m', 'GPS': 'Integriert', 'Sensoren': 'Herz, SpO2', 'Kompatibilität': 'iOS & Android' },
-            images: ['⌚', '💓', '🏃', '💧']
-        }
-    };
+                name: 'Diver',
+                price: 2,
+                icon: '📱',
+                description: 'Neueste Technologie in elegantem Design. Perfekt für den modernen Lifestyle. Dieses Premium-Smartphone vereint innovative Features mit zeitlosem Design und bietet eine unvergleichliche Benutzererfahrung.',
+                features: [
+                    '6.7" OLED Display mit 120Hz',
+                    'Triple-Kamera System mit 108MP',
+                    '5G Konnektivität',
+                    'Wasserdicht nach IP68',
+                    'Wireless Charging & Reverse Charging'
+                ],
+                specs: {
+                    'Display': '6.7" OLED',
+                    'Speicher': '256GB',
+                    'RAM': '8GB',
+                    'Akku': '4500mAh',
+                    'Kamera': '108MP Triple',
+                    'OS': 'Android 14'
+                },
+                images: ['📱', '📷', '🔋', '📡']
+            },
+            'submarine': {
+                name: 'Submarine',
+                price: 10,
+                icon: '🎧',
+                description: 'Kristallklarer Sound mit aktiver Geräuschunterdrückung. Für das ultimative Hörerlebnis. Diese Premium-Kopfhörer bieten studioqualitativen Sound und modernste Noise-Cancelling-Technologie.',
+                features: [
+                    'Active Noise Cancelling',
+                    '30h Akkulaufzeit',
+                    'Hi-Res Audio Zertifizierung',
+                    'Schnellladung (15min = 3h)',
+                    'Multipoint Bluetooth Verbindung'
+                ],
+                specs: {
+                    'Akkulaufzeit': '30h',
+                    'Ladezeit': '2h',
+                    'Bluetooth': '5.2',
+                    'Frequenzbereich': '20Hz-40kHz',
+                    'Gewicht': '250g',
+                    'Noise Cancelling': 'Aktiv'
+                },
+                images: ['🎧', '🔊', '🔋', '📶']
+            },
+            'moses': {
+                name: 'Moses',
+                price: 0,
+                icon: '⌚',
+                description: 'Fitness-Tracking und Smart-Features in einem stilvollen, minimalistischen Design. Diese Smartwatch ist der perfekte Begleiter für Sport, Gesundheit und den digitalen Alltag.',
+                features: [
+                    'GPS + Cellular',
+                    'Gesundheits-Monitoring',
+                    'Wasserdicht bis 50m',
+                    '7 Tage Akkulaufzeit',
+                    'Always-On Display'
+                ],
+                specs: {
+                    'Display': '1.9" AMOLED',
+                    'Akkulaufzeit': '7 Tage',
+                    'Wasserdicht': '50m',
+                    'GPS': 'Integriert',
+                    'Sensoren': 'Herz, SpO2, Stress',
+                    'Kompatibilität': 'iOS & Android'
+                },
+                images: ['⌚', '💓', '🏃', '💧']
+            }
+        };
 
     function openProductModal(productId) {
         currentProduct = products[productId];
@@ -1845,28 +1901,31 @@
         input.value = Math.max(1, Math.min(10, val));
     }
 
-    function addToCartFromModal() {
-        if (!currentProduct) return;
-        const qty = parseInt(document.getElementById('quantity').value);
+    function addToCartFromModal(btn) {
+        // 1. Sichtbares Modal ermitteln (Kopie beider Modal-Klassen)
+        const modal = btn.closest('.product-modal, .product-modal1');
+        if (!modal || !currentProduct) return;
 
-        // Nur eine Produktsorte gleichzeitig
+        // 2. Quantity rein aus diesem Modal auslesen
+        const qtyInput = modal.querySelector('.quantity-input');
+        const qty = parseInt(qtyInput.value) || 1;
+
+        // 3. Warenkorb‑Logik wie gehabt...
         if (cart.length > 0 && cart[0].name !== currentProduct.name) {
             alert(`Nur ein Produkttyp pro Warenkorb erlaubt.\n\nBereits im Warenkorb: "${cart[0].name}".\nBitte zuerst leeren.`);
             return;
         }
-
         for (let i = 0; i < qty; i++) {
             cart.push({ name: currentProduct.name, price: currentProduct.price });
         }
-
         cartCount = cart.length;
         document.getElementById('cartCountBadge').textContent = cartCount;
         document.querySelector('.btn-cart').setAttribute('data-quantity', cartCount);
 
-        const btn = document.querySelector('.add-to-cart-modal');
-        const txt = btn.textContent;
+        // 4. Button‑Text nur für **diesen** Button ändern
+        const originalText = btn.textContent;
         btn.textContent = `${qty}× Added!`;
-        setTimeout(() => btn.textContent = txt, 1500);
+        setTimeout(() => btn.textContent = originalText, 1500);
 
         updateCart();
     }
@@ -1970,6 +2029,29 @@
             }
         });
     });
+
+    window.addEventListener('load', () => {
+        // Wenn die URL einen Hash enthält, manuell zum Ziel scrollen...
+        if (window.location.hash) {
+            const target = document.querySelector(window.location.hash);
+            if (target) {
+                // Höhe von Header + 18px Puffer
+                const offset = document.querySelector('header').offsetHeight + 18;
+                const topPos = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top: topPos, behavior: 'smooth' });
+            }
+        }
+        // Wenn kein Hash, ganz oben + 18px Puffer (optional)
+        else {
+            window.scrollTo({ top: 18, left: 0 });
+        }
+
+        // Verhindert, dass Back/Forward wieder automatisches Scroll-Restore macht
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+    });
+
 </script>
 
 </body>
