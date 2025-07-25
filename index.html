@@ -1625,7 +1625,7 @@
             <button class="modal-close" onclick="closeProductModal()">×</button>
             <div class="modal-body">
                 <div class="modal-images">
-                    <div class="main-image" id="main-image">📱</div>
+                    <div class="main-image modal-main-image">📱</div>
                     <div class="image-thumbnails">
                         <div class="thumbnail active" onclick="changeMainImage('📱')">📱</div>
                         <div class="thumbnail" onclick="changeMainImage('📷')">📷</div>
@@ -1859,18 +1859,23 @@
         currentProduct = null;
     }
 
-    function changeMainImage(imageIcon) {
-        document.getElementById('main-image').textContent = imageIcon;
-        document.querySelectorAll('.thumbnail').forEach(t => {
-            t.classList.toggle('active', t.textContent === imageIcon);
+    function changeMainImage(icon) {
+        const modal = document.querySelector('.product-modal.active, .product-modal1.active');
+        if (!modal) return;
+        modal.querySelector('.modal-main-image').textContent = icon;
+        modal.querySelectorAll('.thumbnail').forEach(t => {
+            t.classList.toggle('active', t.textContent === icon);
         });
     }
 
     function changeQuantity(delta) {
-        const input = document.getElementById('quantity');
+        const modal = document.querySelector('.product-modal.active, .product-modal1.active');
+        if (!modal) return;
+        const input = modal.querySelector('.quantity-input');
         let val = parseInt(input.value) + delta;
         input.value = Math.max(1, Math.min(10, val));
     }
+
 
     function addToCartFromModal(btn) {
         // 1. Sichtbares Modal ermitteln (Kopie beider Modal-Klassen)
