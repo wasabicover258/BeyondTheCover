@@ -1160,6 +1160,12 @@
             box-shadow: 0 8px 25px #004033;
         }
 
+        .btn-added {
+            background-color: #4caf50; /* Beispiel: sattes Grün */
+            color: white;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
         .product-specs {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
@@ -1906,8 +1912,12 @@
         // 4. Button‑Text nur für **diesen** Button ändern
         const originalText = btn.textContent;
         btn.textContent = `${qty}× Added!`;
-        setTimeout(() => btn.textContent = originalText, 1500);
-
+        btn.classList.add('btn-added');
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.classList.remove('btn-added');
+        }, 1500);
+            
         updateCart();
     }
 
