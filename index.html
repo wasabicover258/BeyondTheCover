@@ -1950,7 +1950,7 @@
         cart.forEach(product => {
             const item = document.createElement('div');
             item.className = 'cart-product-item';
-            item.innerHTML = `<span class="cart-product-name">${product.name}</span><span class="cart-product-price">€${product.price.toFixed(2)}</span>`;
+            item.innerHTML = `<span class="cart-product-name">${product.name}</span><span class="cart-product-price">$${product.price.toFixed(2)}</span>`;
             list.appendChild(item);
         });
 
