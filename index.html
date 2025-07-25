@@ -1955,7 +1955,7 @@
         });
 
         const total = cart.reduce((sum, p) => sum + p.price, 0);
-        totalAmt.textContent = `$${total.toFixed(2)}`;
+        totalAmt.textContent = `$${total.toFixed(2)}/mo`;
 
         const hasDiver = cart.some(p => p.name === 'Diver');
         const hasOther = cart.some(p => p.name === 'Submarine' || p.name === 'Moses');
