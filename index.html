@@ -2103,22 +2103,41 @@
         });
     }
 
-    // Für Mobile: Tilt per Scroll
     if (window.matchMedia("(max-width: 768px)").matches) {
         const image = document.querySelector('.preview-image picture img');
+
         if (image) {
-            window.addEventListener('scroll', () => {
-                const scrollY = window.scrollY || window.pageYOffset;
-                const maxTilt = 10;
-                const rotateY = Math.sin(scrollY / 300) * maxTilt;
+            const baseScale = 1.1;
+            const maxTilt = 10; // maximaler Neigungswinkel
 
-                image.style.transform = `rotateX(${baseRotateX}deg) rotateY(${rotateY}deg) scale(${baseScale})`;
-            });
+            let currentRotateX = 0;
+            let targetRotateX = 0;
 
-            // Initialzustand setzen
-            image.style.transform = `rotateX(${baseRotateX}deg) rotateY(0deg) scale(${baseScale})`;
+            const updateScrollTilt = () => {
+                const rect = image.getBoundingClientRect();
+                const viewportCenter = window.innerHeight / 2;
+                const imageCenter = rect.top + rect.height / 2;
+
+                // Differenz zwischen Bildzentrum und Bildschirmzentrum
+                const distance = imageCenter - viewportCenter;
+
+                // Skaliere diese Differenz auf max ±maxTilt
+                // Je näher das Bildzentrum der Mitte ist, desto flacher
+                targetRotateX = Math.max(Math.min(distance / 10, maxTilt), -maxTilt);
+
+                // Weiche Bewegung
+                currentRotateX += (targetRotateX - currentRotateX) * 0.1;
+
+                image.style.transform = `rotateX(${currentRotateX}deg) rotateY(0deg) scale(${baseScale})`;
+
+                requestAnimationFrame(updateScrollTilt);
+            };
+
+            // Starte Animation
+            requestAnimationFrame(updateScrollTilt);
         }
     }
+
 </script>
 
 </body>
