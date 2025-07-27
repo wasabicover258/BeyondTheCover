@@ -2087,7 +2087,7 @@
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
 
-            const rotateX = -(y - centerY) / 20 + baseRotateX;
+            const rotateX = -(centerY - y) / 20 + baseRotateX;
             const rotateY = (x - centerX) / 20;
 
             image.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${baseScale})`;
