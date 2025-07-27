@@ -696,7 +696,7 @@
         .preview-image {
             perspective: 1000px;
             width: 100%;
-            max-width: 600px; /* oder mehr, je nach Layout */
+            max-width: 600px;
             margin: 0 auto;
         }
 
@@ -709,7 +709,7 @@
         .preview-image picture img {
             width: 100%;
             height: auto;
-            border-radius: 12px;
+            border-radius: 10px;
             transition: transform 0.1s ease-out;
             transform-style: preserve-3d;
             will-change: transform;
@@ -1511,6 +1511,7 @@
                             <source media="(min-width: 769px)" srcset="images/SoftwarePreview.png">
                             <img src="images/SoftwarePreview.png" alt="Loading...">
                         </picture>
+                    </div>
                 </div>
             </div>
             
@@ -2072,34 +2073,52 @@
         }
     });
 
-    document.querySelectorAll('.preview-image').forEach(container => {
-        const image = container.querySelector('img');
+    const baseRotateX = 5;
+    const baseScale = 1.1;
 
-        const baseRotateX = 5;
-        const baseScale = 1.1;
+    // Für Desktop: Tilt per Maus
+    if (window.matchMedia("(min-width: 769px)").matches) {
+        document.querySelectorAll('.preview-image').forEach(container => {
+            const image = container.querySelector('img');
 
-        // Bild von Anfang an leicht neigen
-        image.style.transform = `rotateX(${baseRotateX}deg) rotateY(0deg) scale(${baseScale})`;
-
-        container.addEventListener('mousemove', (e) => {
-            const rect = container.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = -(centerY - y) / 20 + baseRotateX;
-            const rotateY = (x - centerX) / 20;
-
-            image.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${baseScale})`;
-        });
-
-        container.addEventListener('mouseleave', () => {
+            // Initialzustand
             image.style.transform = `rotateX(${baseRotateX}deg) rotateY(0deg) scale(${baseScale})`;
+
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (centerY - y) / 20 + baseRotateX;
+                const rotateY = (x - centerX) / 20;
+
+                image.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${baseScale})`;
+            });
+
+            container.addEventListener('mouseleave', () => {
+                image.style.transform = `rotateX(${baseRotateX}deg) rotateY(0deg) scale(${baseScale})`;
+            });
         });
-    });
+    }
 
+    // Für Mobile: Tilt per Scroll
+    if (window.matchMedia("(max-width: 768px)").matches) {
+        const image = document.querySelector('.preview-image picture img');
+        if (image) {
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY || window.pageYOffset;
+                const maxTilt = 10;
+                const rotateY = Math.sin(scrollY / 300) * maxTilt;
 
+                image.style.transform = `rotateX(${baseRotateX}deg) rotateY(${rotateY}deg) scale(${baseScale})`;
+            });
+
+            // Initialzustand setzen
+            image.style.transform = `rotateX(${baseRotateX}deg) rotateY(0deg) scale(${baseScale})`;
+        }
+    }
 </script>
 
 </body>
