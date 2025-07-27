@@ -713,7 +713,6 @@
             transition: transform 0.1s ease-out;
             transform-style: preserve-3d;
             will-change: transform;
-            transform: rotateX(5deg) scale(1.1); /* NEU */
             transform-origin: center center;
         }
 
@@ -2075,8 +2074,11 @@
     document.querySelectorAll('.preview-image').forEach(container => {
         const image = container.querySelector('img');
 
-        const baseRotateX = 5;      // konstante Rückneigung
-        const baseScale = 1.1;      // konstante Vergrößerung
+        const baseRotateX = 5;
+        const baseScale = 1.1;
+
+        // Bild von Anfang an leicht neigen
+        image.style.transform = `rotateX(${baseRotateX}deg) rotateY(0deg) scale(${baseScale})`;
 
         container.addEventListener('mousemove', (e) => {
             const rect = container.getBoundingClientRect();
@@ -2095,6 +2097,7 @@
             image.style.transform = `rotateX(${baseRotateX}deg) rotateY(0deg) scale(${baseScale})`;
         });
     });
+
 
 </script>
 
