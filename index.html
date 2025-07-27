@@ -692,6 +692,7 @@
             letter-spacing: 1px;
         }
         
+        /*Preview*/
         .preview-image {
             perspective: 1000px;
             width: 100%;
@@ -706,6 +707,8 @@
             transition: transform 0.1s ease-out;
             transform-style: preserve-3d;
             will-change: transform;
+            transform: rotateX(5deg) scale(1.1); /* NEU */
+            transform-origin: center center;
         }
 
         /* Products Section */
@@ -2064,7 +2067,10 @@
     });
 
     document.querySelectorAll('.preview-image').forEach(container => {
-        const image = container.querySelector('img'); // Das Bild im picture
+        const image = container.querySelector('img');
+
+        const baseRotateX = 5;      // konstante Rückneigung
+        const baseScale = 1.1;      // konstante Vergrößerung
 
         container.addEventListener('mousemove', (e) => {
             const rect = container.getBoundingClientRect();
@@ -2072,17 +2078,17 @@
             const y = e.clientY - rect.top;
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            const rotateX = -(y - centerY) / 10;
+
+            const rotateX = -(y - centerY) / 10 + baseRotateX;
             const rotateY = (x - centerX) / 10;
 
-            image.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            image.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${baseScale})`;
         });
 
         container.addEventListener('mouseleave', () => {
-            image.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            image.style.transform = `rotateX(${baseRotateX}deg) rotateY(0deg) scale(${baseScale})`;
         });
     });
-
 
 </script>
 
