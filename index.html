@@ -691,6 +691,24 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+        
+        /*Preview*/
+        .preview-image {
+            perspective: 1000px;
+            width: 300px;
+            height: auto;
+            display: inline-block;
+            margin: 20px;
+        }
+
+        .preview-image picture img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+            will-change: transform;
+            border-radius: 12px;
+        }
 
         /* Products Section */
         .products {
@@ -2046,6 +2064,27 @@
             history.scrollRestoration = 'manual';
         }
     });
+
+    document.querySelectorAll('.preview-image').forEach(container => {
+        const image = container.querySelector('img'); // Das Bild im picture
+
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = -(y - centerY) / 10;
+            const rotateY = (x - centerX) / 10;
+
+            image.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        container.addEventListener('mouseleave', () => {
+            image.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        });
+    });
+
 
 </script>
 
