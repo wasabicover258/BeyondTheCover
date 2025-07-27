@@ -692,22 +692,20 @@
             letter-spacing: 1px;
         }
         
-        /*Preview*/
         .preview-image {
             perspective: 1000px;
-            width: 300px;
-            height: auto;
-            display: inline-block;
-            margin: 20px;
+            width: 100%;
+            max-width: 600px; /* oder mehr, je nach Layout */
+            margin: 0 auto;
         }
-
+        
         .preview-image picture img {
             width: 100%;
             height: auto;
+            border-radius: 12px;
             transition: transform 0.1s ease-out;
             transform-style: preserve-3d;
             will-change: transform;
-            border-radius: 12px;
         }
 
         /* Products Section */
