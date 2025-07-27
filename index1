@@ -1160,6 +1160,12 @@
             box-shadow: 0 8px 25px #004033;
         }
 
+        .btn-added {
+            background-color: #4caf50 !important; /* Beispiel: sattes Grün */
+            color: white;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
         .product-specs {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
@@ -1545,7 +1551,7 @@
             <div class="container">
                 <div class="pricing-text">
                     <h3>How our pricing works</h3>
-                    <p>We don’t believe in charging <span class="highlight">'high prices</span> for our products. Thanks to our system, we’re no longer dependent on <span class="highlight">inflated pricing</span> to stay afloat.<br>Instead, we’ve chosen to <span class="highlight">reduce</span> our costs to the <span class="highlight">absolute minimum</span> — so that <span class="highlight">more people</span> can afford to take their first successful steps into the world of financial markets.<br>Our pricing covers <span class="highlight">only the essentials</span>:</p>
+                    <p>We don’t believe in charging <span class="highlight">high prices</span> for our products. Thanks to our system, we’re no longer dependent on <span class="highlight">inflated pricing</span> to stay afloat.<br>Instead, we’ve chosen to <span class="highlight">reduce</span> our costs to the <span class="highlight">absolute minimum</span> — so that <span class="highlight">more people</span> can afford to take their first successful steps into the world of financial markets.<br>Our pricing covers <span class="highlight">only the essentials</span>:</p>
                     <p>   • Fair employee wages</p>
                     <p>   • Taxes and legal compliance</p>
                     <p>   • Office rent and operational costs</p>
@@ -1906,8 +1912,12 @@
         // 4. Button‑Text nur für **diesen** Button ändern
         const originalText = btn.textContent;
         btn.textContent = `${qty}× Added!`;
-        setTimeout(() => btn.textContent = originalText, 1500);
-
+        btn.classList.add('btn-added');
+        setTimeout(() => {
+            btn.textContent = originalText;
+            btn.classList.remove('btn-added');
+        }, 1500);
+            
         updateCart();
     }
 
