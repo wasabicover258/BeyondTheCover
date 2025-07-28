@@ -725,6 +725,7 @@
             border-radius: 12px;
             pointer-events: none; /* wichtig: Mausinteraktion nur mit Container */
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
         }
 
         @media (max-width: 768px) {
@@ -2165,22 +2166,32 @@
     });
 
     if (window.matchMedia("(max-width: 768px)").matches) {
-        const targetImage = document.querySelector('.tilt-inner img');
+        const image = document.querySelector('.tilt-inner img');
 
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    targetImage.classList.add('fade-in');
-                    observer.unobserve(targetImage); // nur 1x animieren
-                }
-            });
-        }, {
-            threshold: 0.4 // nur wenn ca. 40% im Viewport
-                });
+        const updateScrollEffect = () => {
+            const rect = image.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
 
-        if (targetImage) {
-            observer.observe(targetImage);
-        }
+            const imageCenter = rect.top + rect.height / 2;
+            const viewportCenter = windowHeight / 2;
+
+            const distance = imageCenter - viewportCenter;
+
+            // Normierung: -1 (ganz oben) bis +1 (ganz unten)
+            const maxOffset = windowHeight / 1.5;
+            const factor = Math.max(-1, Math.min(1, distance / maxOffset));
+
+            // Sanfte Werte für Scale und Opacity
+            const scale = 0.8 + (1 - Math.abs(factor)) * 0.2;
+            const opacity = 0.4 + (1 - Math.abs(factor)) * 0.6;
+
+            image.style.transform = `scale(${scale})`;
+            image.style.opacity = opacity;
+
+            requestAnimationFrame(updateScrollEffect);
+        };
+
+        requestAnimationFrame(updateScrollEffect);
     }
 
 
