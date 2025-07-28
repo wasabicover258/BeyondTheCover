@@ -691,6 +691,31 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+        
+        /*Preview*/
+        .preview-image {
+            perspective: 1000px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 769px) {
+            .preview-image {
+                max-width: 90vw;
+            }
+        }
+        
+        .preview-image picture img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
+            will-change: transform;
+            transform-origin: center center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
 
         /* Products Section */
         .products {
@@ -1461,13 +1486,12 @@
                         <p>They care <span class="highlight">absolutely nothing</span> for your dreams, your family, or your wealth. And why would they? <br>Your orders fuel their game.</p>
                         <p>The stock market? <span class="highlight">Rigged!</span> <br>It's a grand charade, orchestrated to enrich the few while exploiting the hopes of the many.</p>
                     </div>
-                    <div class="info-image"</div>
+                    <div class="info-image">
                         <picture>
                             <source media="(max-width: 768px)" srcset="images/Image2.2.png">
-                            <source media="(max-width: 768px)" srcset="images/Image2.1.png">
+                            <source media="(min-width: 769px)" srcset="images/Image2.1.png">
                             <img src="images/Image2.1.png"> alt="Loading...">
                         </picture>
-    
                 </div>
             </div>
         </section>
@@ -1481,7 +1505,13 @@
                         <p>Unsere Philosophie basiert auf <span class="highlight">Minimalismus, Funktionalität und zeitlosem Design</span>. Weniger ist mehr – aber das Wenige muss perfekt sein.</p>
                         <p>Entdecken Sie, wie unsere Produkte Ihren Alltag bereichern und vereinfachen können.</p>
                     </div>
-                    <div class="info-image">✨</div>
+                    <div class="preview-image">
+                        <picture>
+                            <source media="(max-width: 768px)" srcset="images/AppPreview.png">
+                            <source media="(min-width: 769px)" srcset="images/SoftwarePreview.png">
+                            <img src="images/SoftwarePreview.png" alt="Loading...">
+                        </picture>
+                    </div>
                 </div>
             </div>
             
@@ -2042,6 +2072,71 @@
             history.scrollRestoration = 'manual';
         }
     });
+
+    const baseRotateX = 5;
+    const baseScale = 1.1;
+
+    // Für Desktop: Tilt per Maus
+    if (window.matchMedia("(min-width: 769px)").matches) {
+        document.querySelectorAll('.preview-image').forEach(container => {
+            const image = container.querySelector('img');
+
+            // Initialzustand
+            image.style.transform = `rotateX(${baseRotateX}deg) rotateY(0deg) scale(${baseScale})`;
+
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (centerY - y) / 20 + baseRotateX;
+                const rotateY = (x - centerX) / 20;
+
+                image.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${baseScale})`;
+            });
+
+            container.addEventListener('mouseleave', () => {
+                image.style.transform = `rotateX(${baseRotateX}deg) rotateY(0deg) scale(${baseScale})`;
+            });
+        });
+    }
+
+    if (window.matchMedia("(max-width: 768px)").matches) {
+        const image = document.querySelector('.preview-image picture img');
+
+        if (image) {
+            const baseScale = 1.1;
+            const maxTilt = 10; // maximaler Neigungswinkel
+
+            let currentRotateX = 0;
+            let targetRotateX = 0;
+
+            const updateScrollTilt = () => {
+                const rect = image.getBoundingClientRect();
+                const viewportCenter = window.innerHeight / 2;
+                const imageCenter = rect.top + rect.height / 2;
+
+                // Differenz zwischen Bildzentrum und Bildschirmzentrum
+                const distance = imageCenter - viewportCenter;
+
+                // Skaliere diese Differenz auf max ±maxTilt
+                // Je näher das Bildzentrum der Mitte ist, desto flacher
+                targetRotateX = Math.max(Math.min(distance / 10, maxTilt), -maxTilt);
+
+                // Weiche Bewegung
+                currentRotateX += (targetRotateX - currentRotateX) * 0.1;
+
+                image.style.transform = `rotateX(${currentRotateX}deg) rotateY(0deg) scale(${baseScale})`;
+
+                requestAnimationFrame(updateScrollTilt);
+            };
+
+            // Starte Animation
+            requestAnimationFrame(updateScrollTilt);
+        }
+    }
 
 </script>
 
