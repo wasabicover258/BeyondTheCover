@@ -693,29 +693,29 @@
         }
         
         /*Preview*/
-        .preview-image {
+        .tilt-wrapper {
             perspective: 1000px;
-            width: 80%;
+            width: 100%;
             max-width: 600px;
             margin: 0 auto;
         }
-
-        @media (min-width: 769px) {
-            .preview-image {
-                max-width: 70vw;
-            }
-        }
         
-        .preview-image picture img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            transition: transform 0.1s ease-out;
+        .tilt-inner {
+            transition: transform 0.2s ease;
             transform-style: preserve-3d;
             will-change: transform;
-            transform-origin: center center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
         }
+
+        .tilt-inner img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            pointer-events: none; /* wichtig: Mausinteraktion nur mit Container */
+        }
+
 
         /* Products Section */
         .products {
@@ -1508,12 +1508,10 @@
                 </div>
             </div>
 
-            <div class="preview-image">
-                <picture>
-                    <source media="(max-width: 768px)" srcset="images/AppPreview.png">
-                    <source media="(min-width: 769px)" srcset="images/SoftwarePreview.png">
-                    <img src="images/SoftwarePreview.png" alt="Loading...">
-                </picture>
+            <div class="tilt-wrapper">
+                <div class="tilt-inner">
+                    <img src="images/SoftwarePreview.png" alt="Preview">
+                </div>
             </div>
             
             <div class="stats-grid">
