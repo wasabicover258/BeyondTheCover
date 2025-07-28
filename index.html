@@ -2102,40 +2102,27 @@
         });
     }
 
-    if (window.matchMedia("(max-width: 768px)").matches) {
-        const image = document.querySelector('.preview-image picture img');
+    const wrapper = document.querySelector('.tilt-wrapper');
+    const inner = wrapper.querySelector('.tilt-inner');
 
-        if (image) {
-            const baseScale = 1.1;
-            const maxTilt = 10; // maximaler Neigungswinkel
+    wrapper.addEventListener('mousemove', (e) => {
+        const rect = wrapper.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-            let currentRotateX = 0;
-            let targetRotateX = 0;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
 
-            const updateScrollTilt = () => {
-                const rect = image.getBoundingClientRect();
-                const viewportCenter = window.innerHeight / 2;
-                const imageCenter = rect.top + rect.height / 2;
+        const rotateX = -(y - centerY) / 15;
+        const rotateY = (x - centerX) / 15;
 
-                // Differenz zwischen Bildzentrum und Bildschirmzentrum
-                const distance = imageCenter - viewportCenter;
+        inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
 
-                // Skaliere diese Differenz auf max ±maxTilt
-                // Je näher das Bildzentrum der Mitte ist, desto flacher
-                targetRotateX = Math.max(Math.min(distance / 10, maxTilt), -maxTilt);
+    wrapper.addEventListener('mouseleave', () => {
+    inner.style.transform = `rotateX(0deg) rotateY(0deg)`;
+    });
 
-                // Weiche Bewegung
-                currentRotateX += (targetRotateX - currentRotateX) * 0.1;
-
-                image.style.transform = `rotateX(${currentRotateX}deg) rotateY(0deg) scale(${baseScale})`;
-
-                requestAnimationFrame(updateScrollTilt);
-            };
-
-            // Starte Animation
-            requestAnimationFrame(updateScrollTilt);
-        }
-    }
 
 </script>
 
