@@ -727,18 +727,6 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
-        @media (max-width: 768px) {
-            .tilt-inner img {
-                animation: fade-in linear;
-                animation-timeline: view(100px);
-            }
-        }
-
-        @keyframes fade-in {
-            from {scale: .8; opacity: 0;}
-            to {scale: 1; opacity: 1;}
-        }
-
 
         /* Products Section */
         .products {
@@ -1435,6 +1423,26 @@
         .product-card {
             animation: fadeIn 0.6s ease forwards;
         }
+
+        /* 1. Die Animation selbst */
+        @keyframes fadeInMobile {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* 2. Nur auf Mobile aktivieren */
+        @media (max-width: 768px) {
+            .fade-in {
+                animation: fadeInMobile 0.6s ease-out forwards;
+            }
+        }
+
 
         .product-card:nth-child(1) { animation-delay: 0.1s; }
         .product-card:nth-child(2) { animation-delay: 0.2s; }
@@ -2149,6 +2157,26 @@
     wrapper.addEventListener('mouseleave', () => {
     inner.style.transform = `rotateX(0deg) rotateY(0deg)`;
     });
+
+    if (window.matchMedia("(max-width: 768px)").matches) {
+        const targetImage = document.querySelector('.tilt-inner img');
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    targetImage.classList.add('fade-in');
+                    observer.unobserve(targetImage); // nur 1x animieren
+                }
+            });
+        }, {
+            threshold: 0.4 // nur wenn ca. 40% im Viewport
+                });
+
+        if (targetImage) {
+            observer.observe(targetImage);
+        }
+    }
+
 
 
 </script>
