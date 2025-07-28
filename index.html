@@ -727,6 +727,20 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
+        @media (max-width: 768px) {
+            .tilt-inner img {
+                animation: fade-in linear;
+                animation-timeline: view(100px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            @keyframes fade-in {
+                from {scale: .8; opacity: 0;}
+                to {scale: 1; opacity: 1;}
+            }
+        }
+
 
         /* Products Section */
         .products {
