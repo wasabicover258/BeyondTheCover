@@ -730,6 +730,31 @@
             letter-spacing: 1px;
         }
 
+        @media (max-width: 768px) {
+            .stats-grid {
+                display: flex;
+                justify-content: space-between;
+                padding: 0;
+            }
+
+            .stat-card {
+                flex: 1 1 0;
+                min-width: 0;
+                margin: 0 0.5rem;
+            }
+
+            /* Schriftgröße skaliert mit der Viewport-Breite, aber bleibt zwischen 1.5rem und 2.5rem */
+            .stat-number {
+                font-size: clamp(1.5rem, 8vw, 2.5rem);
+            }
+  
+            /* Optional: Label auch etwas anpassen */
+            .stat-label {
+                font-size: clamp(0.75rem, 3vw, 1rem);
+            }
+        }
+
+
 
 
         
@@ -1427,11 +1452,6 @@
             .info-image {
                 height: 300px;
                 font-size: 4rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
             }
 
             .modal-body {
