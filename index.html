@@ -659,28 +659,24 @@
         }
 
         .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin-top: 1rem;
-            padding-left: 100px;
-            padding-right: 100px;
+            display: flex;
+            flex-wrap: nowrap; /* verhindert Zeilenumbruch */
+            gap: 2rem;
+            justify-content: center;
+            padding: 0 5vw;
+            overflow-x: auto; /* für mobile Fallbacks */
         }
-
-        @media (max-width: 768px) {
-            .stats-grid {
-                padding-left: 2rem;
-                padding-right: 2rem;
-            }
-        }
-
+        
         .stat-card {
+            flex: 1 0 20vw; /* wächst, Mindestbreite: 20% der Viewport-Breite */
+            aspect-ratio: 1 / 1.2; /* behält Verhältnis bei */
             text-align: center;
-            padding: 2rem;
+            padding: 2vw;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
+            min-width: 200px; /* optionaler Schutz gegen zu klein auf sehr kleinen Geräten */
         }
 
         .stat-card:hover {
@@ -689,18 +685,29 @@
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: clamp(1.5rem, 3vw, 3rem); /* schrumpft mit Bildschirmbreite */
             font-weight: 700;
             color: #005F4E;
-            margin-bottom: 0.5rem;
         }
-
+        
         .stat-label {
             color: #aaa;
-            font-size: 1rem;
+            font-size: clamp(0.75rem, 1.2vw, 1rem); /* skaliert sauber mit */
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                padding: 0 1rem;
+                gap: 1rem;
+            }
+
+            .stat-card {
+                flex: 1 0 45vw; /* kleiner auf schmalem Viewport */
+            }
+        }
+
         
         /*Preview*/
         .tilt-wrapper {
