@@ -659,21 +659,24 @@
         }
 
         .stats-grid {
-            display: flex;
-            flex-wrap: nowrap;        /* alles in eine Zeile */
-            gap: 1rem;
-            width: 100%;
-            overflow-x: auto;         /* Scrollbar bei Bedarf */
-            padding: 0 1rem;
-            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-top: 1rem;
+            padding-left: 100px;
+            padding-right: 100px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                padding-left: 0rem;
+                padding-right: 0rem;
+            }
         }
 
         .stat-card {
-            flex: 0 0 calc(100% / 3 - 1rem); /* exakt 3 Cards nebeneinander */
-            max-width: 100%;
-            aspect-ratio: 1 / 1.2;
             text-align: center;
-            padding: 1.5rem;
+            padding: 2rem;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -686,24 +689,17 @@
         }
 
         .stat-number {
-            font-size: clamp(1.5rem, 4vw, 3rem);
+            font-size: 3rem;
             font-weight: 700;
             color: #005F4E;
             margin-bottom: 0.5rem;
         }
-        
+
         .stat-label {
-            font-size: clamp(0.75rem, 1.5vw, 1rem);
             color: #aaa;
+            font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-        }
-
-        /* Mobile-Anpassung */
-        @media (max-width: 768px) {
-            .stat-card {
-                flex: 0 0 80%; /* Nur eine große Card sichtbar, Rest scrollbar */
-            }
         }
 
 
