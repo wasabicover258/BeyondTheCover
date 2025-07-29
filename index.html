@@ -670,19 +670,24 @@
         @media (max-width: 768px) {
             .stats-grid {
                 display: flex;
-                justify-content: space-between; /* Elemente verteilen */
+                justify-content: space-between;
                 padding: 0;
             }
 
             .stat-card {
-                flex: 1 1 0;      /* gleichmäßig wachsen & schrumpfen */
-                min-width: 0;     /* zwingt flex-items zum Einhalten der flex-Basis */
-                margin: 0 0.5rem; /* horizontaler Abstand */
+                flex: 1 1 0;
+                min-width: 0;
+                margin: 0 0.5rem;
             }
 
-            /* optional: etwas kleinere Zahlen auf kleinem Bildschirm */
+            /* Schriftgröße skaliert mit der Viewport-Breite, aber bleibt zwischen 1.5rem und 2.5rem */
             .stat-number {
-                font-size: 2.5rem;
+                font-size: clamp(1.5rem, 8vw, 2.5rem);
+            }
+  
+            /* Optional: Label auch etwas anpassen */
+            .stat-label {
+                font-size: clamp(0.75rem, 3vw, 1rem);
             }
         }
 
