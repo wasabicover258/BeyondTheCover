@@ -659,26 +659,25 @@
         }
 
         .stats-grid {
-            display: grid;
-            grid-auto-flow: column;         /* Cards in einer Zeile */
-            grid-auto-columns: minmax(150px, 1fr); /* Skalierbar */
-            gap: 1.5rem;
-            overflow-x: auto;               /* Scrollbar bei zu wenig Platz */
+            display: flex;
+            flex-wrap: nowrap;        /* alles in eine Zeile */
+            gap: 1rem;
+            width: 100%;
+            overflow-x: auto;         /* Scrollbar bei Bedarf */
             padding: 0 1rem;
-            scroll-snap-type: x mandatory;  /* optional für schönes Scrollen */
+            box-sizing: border-box;
         }
 
         .stat-card {
-            scroll-snap-align: start;       /* optional für Scrollverhalten */
-            width: 100%;
+            flex: 0 0 calc(100% / 3 - 1rem); /* exakt 3 Cards nebeneinander */
+            max-width: 100%;
             aspect-ratio: 1 / 1.2;
-            padding: 1.5rem;
             text-align: center;
+            padding: 1.5rem;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.3s ease;
-            flex-shrink: 1; /* sorgt für echtes Schrumpfen */
         }
 
         .stat-card:hover {
@@ -687,18 +686,26 @@
         }
 
         .stat-number {
-            font-size: clamp(1.5rem, 4vw, 3rem); /* responsive Größe */
+            font-size: clamp(1.5rem, 4vw, 3rem);
             font-weight: 700;
             color: #005F4E;
             margin-bottom: 0.5rem;
         }
-
+        
         .stat-label {
             font-size: clamp(0.75rem, 1.5vw, 1rem);
             color: #aaa;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
+
+        /* Mobile-Anpassung */
+        @media (max-width: 768px) {
+            .stat-card {
+                flex: 0 0 80%; /* Nur eine große Card sichtbar, Rest scrollbar */
+            }
+        }
+
 
 
         
