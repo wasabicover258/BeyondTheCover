@@ -670,18 +670,19 @@
         @media (max-width: 768px) {
             .stats-grid {
                 display: flex;
-                padding-left: 0rem;
-                padding-right: 0rem;
+                justify-content: space-between; /* Elemente verteilen */
+                padding: 0;
             }
 
             .stat-card {
-                width: auto;
-                height: auto;
+                flex: 1 1 0;      /* gleichmäßig wachsen & schrumpfen */
+                min-width: 0;     /* zwingt flex-items zum Einhalten der flex-Basis */
+                margin: 0 0.5rem; /* horizontaler Abstand */
             }
 
+            /* optional: etwas kleinere Zahlen auf kleinem Bildschirm */
             .stat-number {
-                width: auto;
-                height: auto;
+                font-size: 2.5rem;
             }
         }
 
