@@ -16,10 +16,6 @@
     
     <style>
 
-        html {
-            -webkit-text-size-adjust: 100%;
-        }
-
         @font-face {
            font-family: 'HeadlineFont';
            src: url('fonts/Bezmiar-Regular.otf') format('opentype');
@@ -669,6 +665,41 @@
             margin-top: 1rem;
             padding-left: 100px;
             padding-right: 100px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #005F4E;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #aaa;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                padding-left: 0rem;
+                padding-right: 0rem;
+            }
         }
 
         .stat-card {
@@ -1456,30 +1487,6 @@
                 animation: fadeInMobile 2s ease-out forwards;
             }
         }
-
-        @media (max-width: 768px) {
-            .stats-grid {
-                display: flex;
-                justify-content: space-between;
-                padding: 0;
-            }
-            .stat-card {
-                flex: 1 1 0;
-                min-width: 0;
-                margin: 0 0.5rem;
-            }
-            .stat-number {
-                /* 1) Fallback für alte Browser: relativ zur Viewport-Breite */
-                font-size: 8vw;
-                /* 2) „echte“ Resizing‑Regel für moderne Browser */
-                font-size: clamp(1.5rem, 8vw, 2.2rem);
-                line-height: 1.1;
-            }
-            .stat-label {
-                font-size: clamp(0.75rem, 3vw, 1rem);
-            }
-        }
-
 
 
         .product-card:nth-child(1) { animation-delay: 0.1s; }
