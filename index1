@@ -29,7 +29,7 @@
         }
 
         @font-face {
-            font-family: 'GoofyFont';
+            font-family: 'AltFont';
             src: url('fonts/Iceland-Regular.ttf') format('truetype');
             font-weight: 400;
         }
@@ -571,7 +571,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 6rem;
             align-items: center;
-            margin-bottom: 6rem;
+            margin-bottom: 4rem;
         }
 
         .info-content.centered {
@@ -663,15 +663,8 @@
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 3rem;
             margin-top: 1rem;
-            padding-left: 100px;
-            padding-right: 100px;
-        }
-
-        @media (max-width: 768px) {
-            .stats-grid {
-                padding-left: 0px;
-                padding-right: 0px;
-            }
+            place-content: center;   /* zusammengefasst für align-content + justify-content */
+            margin: 6rem 40rem;
         }
 
         .stat-card {
@@ -701,12 +694,18 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                display: none !important;
+            }
+        }
+ 
         /*Preview*/
         .tilt-wrapper {
             perspective: 1000px;
             width: 100%;
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto 5rem auto;
         }
         
@@ -725,6 +724,13 @@
             border-radius: 12px;
             pointer-events: none; /* wichtig: Mausinteraktion nur mit Container */
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .tilt-inner img {
+                width: 80%
+            }
         }
 
 
@@ -791,6 +797,13 @@
             color: #555;
             position: relative;
             overflow: hidden;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
         }
 
         .product-image::before {
@@ -1384,11 +1397,6 @@
                 font-size: 4rem;
             }
 
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
-            }
-
             .modal-body {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -1428,7 +1436,7 @@
         @keyframes fadeInMobile {
             from {
                 opacity: 0;
-                transform: scale(0.8);
+                transform: scale(0.1);
             }
             to {
                 opacity: 1;
@@ -1439,7 +1447,7 @@
         /* 2. Nur auf Mobile aktivieren */
         @media (max-width: 768px) {
             .fade-in {
-                animation: fadeInMobile 0.6s ease-out forwards;
+                animation: fadeInMobile 2s ease-out forwards;
             }
         }
 
@@ -1532,9 +1540,9 @@
                 <div class="info-content centered">
                     <div class="info-text">
                         <h3>Our service</h3>
-                        <p>Wir kuratieren nur die <span class="highlight">besten Produkte</span> für anspruchsvolle Kunden. Jedes Produkt wird sorgfältig ausgewählt und getestet, um höchste Qualitätsstandards zu gewährleisten.</p>
-                        <p>Unsere Philosophie basiert auf <span class="highlight">Minimalismus, Funktionalität und zeitlosem Design</span>. Weniger ist mehr – aber das Wenige muss perfekt sein.</p>
-                        <p>Entdecken Sie, wie unsere Produkte Ihren Alltag bereichern und vereinfachen können.</p>
+                        <p>We’ve developed a proprietary software that monitors and analyzes the trading activity of a curated <span class="highlight">group of 126+ individuals</span> — selected for their <span class="highlight">suspiciously</span> accurate or <span class="highlight">unusually successful</span> strategies.</p>
+                        <p>At its core is a <span class="highlight">custom-built AI system</span>, trained to identify the most promising trades from this group and allow users to <span class="highlight">copy</span> them in real time.</p>
+                        <p>The platform also includes several intuitive tools that help turn beginners into well-informed traders by combining insider knowledge with automation.<br><span class="highlight">There are insiders out there, and we’ll be shadowing their every move.</span></p>
                     </div>
                 </div>
             </div>
@@ -1562,10 +1570,6 @@
                         <div class="stat-number">24/7</div>
                         <div class="stat-label">Whale Tracking</div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-number">48h</div>
-                        <div class="stat-label">Delivery</div>
-                    </div>
                 </div>
         </section>
 
@@ -1574,19 +1578,19 @@
                 <h2>Our products</h2>
                 <div class="product-grid">
                     <div class="product-card">
-                    <div class="product-image">📱</div>
-                    <div class="product-info">
-                        <h3 class="product-name">Diver</h3>
-                        <p class="product-description">Dip your toe through the surface.</p>
-                        <div class="product-price">$2/mo</div>
-                        <button class="view-product" onclick="openProductModal('diver')">
-                            Show details
-                        </button>
-                    </div>
+                        <img src="images/Icons/DiverIcon.png" alt="Loading...">
+                        <div class="product-info">
+                            <h3 class="product-name">Diver</h3>
+                            <p class="product-description">Dip your toe through the surface.</p>
+                            <div class="product-price">$2/mo</div>
+                            <button class="view-product" onclick="openProductModal('diver')">
+                                Show details
+                            </button>
+                        </div>
                     </div>
 
                     <div class="product-card">
-                        <div class="product-image">🎧</div>
+                        <img src="images/Icons/SubmarineIcon.png" alt="Loading...">
                         <div class="product-info">
                             <h3 class="product-name">Submarine</h3>
                             <p class="product-description">Dive right in and follow the whales.</p>
@@ -1598,11 +1602,11 @@
                     </div>
 
                     <div class="product-card">
-                        <div class="product-image">⌚</div>
+                        <img src="images/Icons/MosesIcon.png" alt="Loading...">
                         <div class="product-info">
                             <h3 class="product-name">Moses</h3>
-                            <p class="product-description">Coming soon!</p>
-                            <div class="product-price">$ ~</div>
+                            <p class="product-description">More keys will be in stock soon!</p>
+                            <div class="product-price">Out of stock</div>
                             <button class="view-product" onclick="openProductModal('moses')">
                                 Show details
                             </button>
@@ -1851,7 +1855,7 @@
             },
             'moses': {
                 name: 'Moses',
-                price: 0,
+                price: 50,
                 icon: '⌚',
                 description: 'Fitness-Tracking und Smart-Features in einem stilvollen, minimalistischen Design. Diese Smartwatch ist der perfekte Begleiter für Sport, Gesundheit und den digitalen Alltag.',
                 features: [
@@ -2159,22 +2163,32 @@
     });
 
     if (window.matchMedia("(max-width: 768px)").matches) {
-        const targetImage = document.querySelector('.tilt-inner img');
+        const image = document.querySelector('.tilt-inner img');
 
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    targetImage.classList.add('fade-in');
-                    observer.unobserve(targetImage); // nur 1x animieren
-                }
-            });
-        }, {
-            threshold: 0.4 // nur wenn ca. 40% im Viewport
-                });
+        const updateScrollEffect = () => {
+            const rect = image.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
 
-        if (targetImage) {
-            observer.observe(targetImage);
-        }
+            const imageCenter = rect.top + rect.height / 2;
+            const viewportCenter = windowHeight / 2;
+
+            const distance = imageCenter - viewportCenter;
+
+            // Normierung: -1 (ganz oben) bis +1 (ganz unten)
+            const maxOffset = windowHeight / 1.5;
+            const factor = Math.max(-1, Math.min(1, distance / maxOffset));
+
+            // Sanfte Werte für Scale und Opacity
+            const scale = 0.8 + (1 - Math.abs(factor)) * 0.2;
+            const opacity = 0.4 + (1 - Math.abs(factor)) * 0.6;
+
+            image.style.transform = `scale(${scale})`;
+            image.style.opacity = opacity;
+
+            requestAnimationFrame(updateScrollEffect);
+        };
+
+        requestAnimationFrame(updateScrollEffect);
     }
 
 
