@@ -617,16 +617,6 @@
             font-weight: 600;
         }
 
-        @media (max-width: 768px) {
-            .info-text {
-                /* jetzt links außen starten */
-                transform: translateX(-100%);
-                will-change: transform;
-            }
-        }
-
-
-
         .info-image {
             height: 400px;
             background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
@@ -1461,6 +1451,13 @@
             }
         }
 
+        @media (max-width: 768px) {
+            .info-text {
+                transform: translateX(-100%); /* Ausgang links */
+                will-change: transform;
+            }
+        }
+
 
         .product-card:nth-child(1) { animation-delay: 0.1s; }
         .product-card:nth-child(2) { animation-delay: 0.2s; }
@@ -2202,40 +2199,40 @@
     }
 
     if (window.matchMedia('(max-width: 768px)').matches) {
-        const infoTexts = document.querySelectorAll('.info-text');
+        const texts = document.querySelectorAll('.info-text');
 
+        // Ease-In-Out-Quad
         function easeInOutQuad(t) {
             return t < 0.5
                 ? 2 * t * t
                 : -1 + (4 - 2 * t) * t;
         }
 
-        function update() {
+        function onScroll() {
             const vh = window.innerHeight;
 
-            infoTexts.forEach(el => {
+            texts.forEach(el => {
                 const section = el.closest('.info-section');
                 const rect = section.getBoundingClientRect();
 
-                const sectionCenter = rect.top + rect.height / 2;
-                const viewportCenter = vh / 2;
+                // rawProgress = 0, wenn Section-Mitte am unteren Viewport-Rand;
+                //            1, wenn Section-Mitte am oberen Viewport-Rand
+                const rawProgress = (vh - (rect.top + rect.height/2)) / (vh + rect.height);
+                const clamped = Math.max(0, Math.min(1, rawProgress));
 
-                const maxDist = vh / 2 + rect.height / 2;
-                let raw = (viewportCenter - sectionCenter) / maxDist;
-                raw = Math.max(-1, Math.min(1, raw));
+                // eased ∈ [0…1]
+                const eased = easeInOutQuad(clamped);
 
-                const t = (1 - raw) / 2;
-                const eased = easeInOutQuad(t);
-
-                // **Invertiertes Mapping**: eased=0 → -100%, eased=0.5 → 0%, eased=1 → +100%
-                const translateX = (eased * 2 - 1) * 100;
-                el.style.transform = `translateX(${translateX}%)`;
+                // Map → –100…+100
+                const x = -100 + eased * 200;
+                el.style.transform = `translateX(${x}%)`;
             });
-
-            requestAnimationFrame(update);
         }
 
-        requestAnimationFrame(update);
+        // Einmal initial setzen
+        onScroll();
+        // Auf Scroll reagieren
+        window.addEventListener('scroll', onScroll, { passive: true });
     }
 
 </script>
