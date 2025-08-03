@@ -617,15 +617,14 @@
             font-weight: 600;
         }
 
-        /* Nur auf mobil (max-width: 768px) */
         @media (max-width: 768px) {
             .info-text {
-                /* Start ganz rechts außen */
-                transform: translateX(100%);
-                /* Nur Transform animieren */
+                /* jetzt links außen starten */
+                transform: translateX(-100%);
                 will-change: transform;
             }
         }
+
 
 
         .info-image {
@@ -2202,45 +2201,42 @@
         requestAnimationFrame(updateScrollEffect);
     }
 
-    // Nur auf Mobilgeräten aktivieren
-        if (window.matchMedia('(max-width: 768px)').matches) {
-            const infoTexts = document.querySelectorAll('.info-text');
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        const infoTexts = document.querySelectorAll('.info-text');
 
-            // Ease-In-Out-Quad
-            function easeInOutQuad(t) {
-                return t < 0.5
-                    ? 2 * t * t
-                    : -1 + (4 - 2 * t) * t;
-            }
-
-            function onScrollFrame() {
-                const vh = window.innerHeight;
-
-                infoTexts.forEach(textEl => {
-                    // Wir holen uns die umschließende Section
-                    const section = textEl.closest('.info-section');
-                    const rect = section.getBoundingClientRect();
-                    const sectionHeight = rect.height;
-
-                    // Fortschritt: 0 → 1, wenn die Viewport-Mitte über die Section wandert
-                    const progress = (vh / 2 - rect.top) / sectionHeight;
-                    const t = Math.min(Math.max(progress, 0), 1);  // clamp 0…1
-
-                    // eased: 0 → 1 mit verlangsamter Mitte
-                    const eased = easeInOutQuad(t);
-
-                    // Mapping: eased=0 → translateX(100%), eased=0.5 → 0%, eased=1 → -100%
-                    const translateX = (1 - eased * 2) * 100;
-
-                    textEl.style.transform = `translateX(${translateX}%)`;
-                });
-
-                requestAnimationFrame(onScrollFrame);
-            }
-
-            // Starte die Schleife
-            requestAnimationFrame(onScrollFrame);
+        function easeInOutQuad(t) {
+            return t < 0.5
+                ? 2 * t * t
+                : -1 + (4 - 2 * t) * t;
         }
+
+        function update() {
+            const vh = window.innerHeight;
+
+            infoTexts.forEach(el => {
+                const section = el.closest('.info-section');
+                const rect = section.getBoundingClientRect();
+
+                const sectionCenter = rect.top + rect.height / 2;
+                const viewportCenter = vh / 2;
+
+                const maxDist = vh / 2 + rect.height / 2;
+                let raw = (viewportCenter - sectionCenter) / maxDist;
+                raw = Math.max(-1, Math.min(1, raw));
+
+                const t = (1 - raw) / 2;
+                const eased = easeInOutQuad(t);
+
+                // **Invertiertes Mapping**: eased=0 → -100%, eased=0.5 → 0%, eased=1 → +100%
+                const translateX = (eased * 2 - 1) * 100;
+                el.style.transform = `translateX(${translateX}%)`;
+            });
+
+            requestAnimationFrame(update);
+        }
+
+        requestAnimationFrame(update);
+    }
 
 </script>
 
