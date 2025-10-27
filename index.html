@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<body style="height:100vh; margin:0;" ontouchstart="getPos(event)">
+<script>
+function getPos(e){
+  let t = e.touches[0];
+  alert(`Tap bei X=${t.clientX}, Y=${t.clientY}`);
+}
+</script>
+</body>
+</html>
