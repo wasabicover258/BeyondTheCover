@@ -1,11 +1,84 @@
-<!DOCTYPE html>
-<html>
-<body style="height:100vh; margin:0;" ontouchstart="getPos(event)">
-<script>
-function getPos(e){
-  let t = e.touches[0];
-  alert(`Tap bei X=${t.clientX}, Y=${t.clientY}`);
-}
-</script>
+# Create the HTML file for the user
+html_content = """<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- iOS: Vollbild als Web-App vom Home-Bildschirm -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Klick-Markierung</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #f7f7f7;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      touch-action: manipulation;
+    }
+    .hint {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      padding: 10px 12px;
+      background: #ffffff;
+      border: 1px solid #e3e3e3;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.06);
+      font-size: 14px;
+    }
+    .dot {
+      position: fixed; /* viewport-basiert, damit Scrollen egal ist */
+      width: 22px;
+      height: 22px;
+      background: red;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25);
+      pointer-events: none; /* nie anklickbar */
+      transform: translate(-50%, -50%);
+      will-change: transform, top, left;
+    }
+  </style>
+</head>
+<body>
+  <div class="hint">Klicke oder tippe irgendwo auf die Seite. Ein roter Punkt markiert die Position.</div>
+
+  <script>
+    (function(){
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      document.body.appendChild(dot);
+      let shown = false;
+
+      function placeDot(x, y){
+        dot.style.left = x + 'px';
+        dot.style.top  = y + 'px';
+        if (!shown){
+          dot.style.display = 'block';
+          shown = true;
+        }
+      }
+
+      // Maus
+      window.addEventListener('click', function(ev){
+        placeDot(ev.clientX, ev.clientY);
+      }, {passive: true});
+
+      // Touch
+      window.addEventListener('touchstart', function(ev){
+        if (ev.touches && ev.touches.length){
+          const t = ev.touches[0];
+          placeDot(t.clientX, t.clientY);
+        }
+      }, {passive: true});
+    })();
+  </script>
 </body>
 </html>
+"""
+path = "/mnt/data/touch-marker.html"
+with open(path, "w", encoding="utf-8") as f:
+    f.write(html_content)
+path
